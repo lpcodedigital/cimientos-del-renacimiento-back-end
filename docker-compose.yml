@@ -1,0 +1,7 @@
+services:
+  cr-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment: 
+      SPRING_PROFILES_ACTIVE: default
