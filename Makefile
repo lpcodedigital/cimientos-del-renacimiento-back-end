@@ -49,14 +49,37 @@ prod: check-docker
 	docker compose -f $(COMPOSE_BASE) -f $(COMPOSE_PROD) up
 #	@docker compose -f $(COMPOSE_BASE) -f $(COMPOSE_PROD) up --build
 
-# 🧹 Detener contenedores
-down:
+# 🧹 Restaurar servicios y contenedores
+restart:
+	@echo "$(BLUE)🛑 Restaurando servicios y contenedores...$(RESET)"
+	@docker compose restart
+
+# 🧹 Detener servicios
+stop:
 	@echo "$(BLUE)🛑 Deteniendo servicios...$(RESET)"
+	@docker compose stop
+
+# 🧹 Detiene y elimina contenedores, servicios, redes, etc
+down:
+	@echo "$(BLUE)🛑 Deteniendo y eliminando contenedores, servicios, redes etc...$(RESET)"
 	@docker compose down
 
-# 🧼 Limpiar todo (contenedores, volúmenes, imágenes huérfanas)
+# 🧼 Limpiar todo (general) (contenedores, volúmenes, imágenes huérfanas) 
 clean:
-	@echo "$(YELLOW)🧹 Limpiando recursos...$(RESET)"
+	@echo "$(YELLOW)🧹 Iniciando Limpieza de los recursos del contenedor actual...$(RESET)"
+	@echo "$(RED)🧹  Deteniendo y eliminando los contenedores, volumenes asociados e imagenes construidas o descargadas que fueron definidos en el compose...$(RESET)"
+	@docker compose down -v --rmi all
+
+#	@echo "$(RED)🧹  Deteniendo y eliminando los contenedores, volumenes asociados e imagenes construidas que fueron definidos en el compose...$(RESET)"
+#	@docker compose down -v --rmi local
+
+#	@echo "$(RED)🧹  Deteniendo y eliminando los contenedores, imagenes construidas que fueron definidos en el compose...$(RESET)"
+#	@docker compose down --rmi local
+	@echo "$(GREEN)✅ Limpieza completa.$(RESET)"
+
+# 🧼 Limpiar todo (general) (contenedores, volúmenes, imágenes huérfanas) 
+clean-global:
+	@echo "$(YELLOW)🧹 Limpiando global de todos los recursos en docker compose...$(RESET)"
 	@docker compose down -v --remove-orphans
 	@docker system prune -f
 	@echo "$(GREEN)✅ Limpieza completa.$(RESET)"
@@ -87,7 +110,9 @@ help:
 	@echo ""
 	@echo "$(YELLOW)make dev$(RESET)       - Levanta entorno de desarrollo (hot reload)"
 	@echo "$(YELLOW)make prod$(RESET)      - Levanta entorno de producción (JAR)"
-	@echo "$(YELLOW)make down$(RESET)      - Detiene contenedores"
+	@echo "$(YELLOW)make restart$(RESET)   - Restaura servicios y contenedores"
+	@echo "$(YELLOW)make stop$(RESET)      - Detiene contenedores y servicios"
+	@echo "$(YELLOW)make down$(RESET)      - Detiene y elimina contenedores, servicios, redes, etc"
 	@echo "$(YELLOW)make clean$(RESET)     - Limpia todo (contenedores, volúmenes, red)"
 	@echo "$(YELLOW)make rebuild$(RESET)   - Recompila imágenes sin caché"
 	@echo "$(YELLOW)make logs$(RESET)      - Muestra logs del backend"
