@@ -1,4 +1,4 @@
-package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.controller;
+package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
