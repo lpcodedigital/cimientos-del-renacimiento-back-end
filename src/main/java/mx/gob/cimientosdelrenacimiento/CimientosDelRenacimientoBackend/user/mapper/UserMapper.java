@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.UserDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.role.model.RoleModel;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.BasicUserDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.RoleDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.UserRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.model.UserModel;
@@ -25,6 +26,7 @@ public class UserMapper {
         user.setPhone(dto.getPhone());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
+        user.setActive(dto.getActive());
         user.setIsFirstLogin(dto.getIsFirstLogin());
         user.setTwoFactorEnabled(dto.getTwoFactorEnabled());
         user.setTwoFactorSecret(dto.getTwoFactorSecret());
@@ -40,6 +42,7 @@ public class UserMapper {
         user.setSecondLastName(dto.getSecondLastName());
         user.setPhone(dto.getPhone());
         user.setEmail(dto.getEmail());
+        user.setActive(dto.getActive());
         if (role != null ) user.setRole(role);
     }
 
@@ -61,6 +64,7 @@ public class UserMapper {
         userDTO.setSecondLastName(user.getSecondLastName());
         userDTO.setPhone(user.getPhone());
         userDTO.setEmail(user.getEmail());
+        userDTO.setActive(user.getActive());
         userDTO.setIsFirstLogin(user.getIsFirstLogin());
         userDTO.setTwoFactorEnabled(user.getTwoFactorEnabled());
         userDTO.setTwoFactorSecret(user.getTwoFactorSecret());
@@ -72,6 +76,16 @@ public class UserMapper {
         userDTO.setDeleted(user.isDeleted());
         userDTO.setDeletedAT(user.getDeletedAt() != null ? dateTimeFormater.formatDateTime(user.getDeletedAt()) : null);
         return userDTO;
+    }
+
+    public BasicUserDTO toBasicUserDTO(UserModel user) {
+        return BasicUserDTO.builder()
+            .idUser(user.getIdUser())
+            .name(user.getName())
+            .email(user.getEmail())
+            .active(user.getActive())
+            .role(user.getRole().getName())
+            .build();
     }
 
 }

@@ -89,6 +89,26 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version> <!-- Contains the core API for working with JWTs. -->
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope> <!-- Provides the implementation classes, including DefaultJwtBuilder. -->
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId> <!-- or 'jjwt-gson' if you use Gson -->
+            <version>0.11.5</version>
+            <scope>runtime</scope> <!-- This module allows jjwt to work with Jackson for JSON processing. Alternatively, you could use jjwt-gson if you prefer Gson over Jackson. -->
+        </dependency>
+
 	</dependencies>
 
 	<build>

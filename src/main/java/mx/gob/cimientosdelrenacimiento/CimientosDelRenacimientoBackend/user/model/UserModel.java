@@ -57,6 +57,10 @@ public class UserModel extends Auditable {
 
     @Builder.Default
     @Column(nullable = false)
+    private Boolean active = false;
+
+    @Builder.Default
+    @Column(nullable = false)
     private Boolean isFirstLogin = true;
 
     @Builder.Default
