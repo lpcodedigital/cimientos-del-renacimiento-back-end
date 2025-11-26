@@ -12,6 +12,7 @@ public class UserRequestDTO {
     private String phone;
     private String email;
     private String password;
+    private Boolean active;
     private Boolean isFirstLogin;
     private Boolean twoFactorEnabled;    
     private String twoFactorSecret;    

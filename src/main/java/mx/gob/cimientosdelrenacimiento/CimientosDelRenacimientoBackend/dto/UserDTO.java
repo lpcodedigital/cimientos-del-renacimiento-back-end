@@ -12,6 +12,7 @@ public class UserDTO {
     private String secondLastName;
     private String phone;
     private String email;
+    private Boolean active;
     private Boolean isFirstLogin;
     private Boolean twoFactorEnabled;    
     private String twoFactorSecret;    
