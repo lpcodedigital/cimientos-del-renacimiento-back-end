@@ -1,11 +1,11 @@
-package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto;
+package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class BasicUserDTO {
+public class AuthBasicUserResponseDTO {
 
     private Long idUser;
 

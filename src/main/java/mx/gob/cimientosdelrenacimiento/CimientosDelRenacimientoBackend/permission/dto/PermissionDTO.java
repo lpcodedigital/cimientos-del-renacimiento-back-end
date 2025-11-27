@@ -1,4 +1,4 @@
-package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto;
+package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.permission.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

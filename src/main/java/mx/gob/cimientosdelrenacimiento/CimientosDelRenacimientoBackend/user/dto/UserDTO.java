@@ -1,22 +1,26 @@
-package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto;
+package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.dto;
 
 import lombok.Data;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.role.dto.RoleDTO;
 
 @Data
-public class UserRequestDTO {
+public class UserDTO {
 
+    private Long idUser;
     private String name;
     private String middleName;
     private String firstLastName;
     private String secondLastName;
     private String phone;
     private String email;
-    private String password;
     private Boolean active;
     private Boolean isFirstLogin;
     private Boolean twoFactorEnabled;    
     private String twoFactorSecret;    
     private Integer verificationCode;
-    private Long roleId;
-
+    private RoleDTO role;
+    private Boolean deleted;
+    private String createdAt;
+    private String updatedAt;
+    private String deletedAT;
 }
