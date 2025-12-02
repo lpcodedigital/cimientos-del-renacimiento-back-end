@@ -8,8 +8,9 @@ import lombok.RequiredArgsConstructor;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.Security.JwtUtils;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthResponseDTO;
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.BasicUserDTO;
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.mapper.UserMapper;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.mapper.AuthMapper;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthBasicUserResponseDTO;
+
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.repository.UserRespository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.util.PasswordEncoder;
 
@@ -27,7 +28,7 @@ public class AuthService {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private UserMapper userMapper;
+    private AuthMapper authMapper;
 
     public AuthResponseDTO autenticate(AuthRequestDTO authRequestDTO) throws Exception {
 
@@ -42,12 +43,12 @@ public class AuthService {
 
         String token = jwtUtils.generateJwtToken(user.getEmail(), user.getRole().getName(), expiresAt);
 
-        BasicUserDTO basicUserDTO = userMapper.toBasicUserDTO(user);
+        AuthBasicUserResponseDTO authBasicUserResponseDTO = authMapper.toAuthBasicUserDTO(user);
 
         return AuthResponseDTO.builder()
             .token(token)
             .expiresAt(expiresAt)
-            .user(basicUserDTO)
+            .user(authBasicUserResponseDTO)
             .build();
     }
 

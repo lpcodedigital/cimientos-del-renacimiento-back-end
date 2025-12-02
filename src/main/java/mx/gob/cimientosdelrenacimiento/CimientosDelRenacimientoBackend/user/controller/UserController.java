@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.UserDTO;
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.UserRequestDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.dto.UserDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.dto.UserRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.service.UserService;
 
 @RestController

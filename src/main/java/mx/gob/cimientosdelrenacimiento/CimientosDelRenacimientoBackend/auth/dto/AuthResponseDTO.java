@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.BasicUserDTO;
 
 @Data
 @Builder
@@ -18,6 +17,6 @@ public class AuthResponseDTO {
 
     private Date expiresAt;
 
-    private BasicUserDTO user;
+    private AuthBasicUserResponseDTO user;
 
 }

@@ -3,11 +3,10 @@ package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.map
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.UserDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.role.dto.RoleDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.role.model.RoleModel;
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.BasicUserDTO;
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.RoleDTO;
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dto.UserRequestDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.dto.UserDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.dto.UserRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.model.UserModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.util.DateFormatter;
 
@@ -76,16 +75,6 @@ public class UserMapper {
         userDTO.setDeleted(user.isDeleted());
         userDTO.setDeletedAT(user.getDeletedAt() != null ? dateTimeFormater.formatDateTime(user.getDeletedAt()) : null);
         return userDTO;
-    }
-
-    public BasicUserDTO toBasicUserDTO(UserModel user) {
-        return BasicUserDTO.builder()
-            .idUser(user.getIdUser())
-            .name(user.getName())
-            .email(user.getEmail())
-            .active(user.getActive())
-            .role(user.getRole().getName())
-            .build();
     }
 
 }
