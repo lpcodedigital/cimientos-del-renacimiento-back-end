@@ -8,15 +8,22 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.JwtAccessDeniedHandler;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.JwtAuthEntryPoint;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true) // Habilitar anotaciones @PreAuthorize y @PostAuthorize
 public class SecurityConfig {
 
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
+    private final JwtAuthEntryPoint jwtAuthEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-    public SecurityConfig(JwtAuthorizationFilter jwtAuthorizationFilter) {
+    public SecurityConfig(JwtAuthorizationFilter jwtAuthorizationFilter, JwtAuthEntryPoint jwtAuthEntryPoint, JwtAccessDeniedHandler jwtAccessDeniedHandler) {
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
+        this.jwtAuthEntryPoint = jwtAuthEntryPoint;
+        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
     }
 
     @Bean
@@ -30,6 +37,14 @@ public class SecurityConfig {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
 
+            .exceptionHandling(exception -> exception
+                // Manejar errores de autenticación y autorización
+                .authenticationEntryPoint(jwtAuthEntryPoint)
+
+                // Manejar accesos denegados
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+            )
+
             // Configurar las reglas de autorización
             .authorizeHttpRequests(auth -> auth
                 
@@ -41,7 +56,7 @@ public class SecurityConfig {
                 
                 // Requerir autenticación para cualquier otra solicitud
                 .anyRequest().authenticated()
-            )   
+            )  
             .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class) // Agregar el filtro de autorización JWT antes del filtro de autenticación por defecto
             .formLogin(form -> form.disable()) // Deshabilitar el formulario de login por defecto
             .httpBasic(httpBasic -> httpBasic.disable()); // Deshabilitar la autenticación HTTP Basic

@@ -39,7 +39,7 @@ public class JwtUtils {
             Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(authToken);
             return true;
         } catch (Exception e) {
-            System.out.println("Invalid JWT token: " + authToken);
+            //System.out.println("Invalid JWT token: " + authToken);
             return false;
         }
     }
@@ -49,12 +49,20 @@ public class JwtUtils {
     }
 
     public String getEmailFromJwtToken(String token){
-        Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
-        return claims.getSubject();
+        try {
+            Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
+            return claims.getSubject();
+        } catch (Exception e) {
+            return null;
+        } 
     }
 
     public String getRoleFromJwtToken(String token){
-        Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
+        try {
+            Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
         return claims.get("role", String.class);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
