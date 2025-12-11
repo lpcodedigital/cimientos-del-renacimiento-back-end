@@ -9,6 +9,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.Security.
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthResponseDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.mapper.AuthMapper;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.UnauthorizedException;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthBasicUserResponseDTO;
 
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.repository.UserRespository;
@@ -30,18 +31,22 @@ public class AuthService {
     @Autowired
     private AuthMapper authMapper;
 
-    public AuthResponseDTO autenticate(AuthRequestDTO authRequestDTO) throws Exception {
+    public AuthResponseDTO autenticate(AuthRequestDTO authRequestDTO) {
 
     var user = userRespository.findByEmail(authRequestDTO.getEmail())
-        .orElseThrow(() -> new Exception("Email invalido"));
+        .orElseThrow(() -> new UnauthorizedException("Credenciales inválidas"));
 
         if( !passwordEncoder.matches(authRequestDTO.getPassword(), user.getPassword()) ) {
-            throw new Exception("Password invalida");
+            throw new UnauthorizedException("Credenciales inválidas");
         }
 
         Date expiresAt = jwtUtils.generateExpirationDate();
 
-        String token = jwtUtils.generateJwtToken(user.getEmail(), user.getRole().getName(), expiresAt);
+        String token = jwtUtils.generateJwtToken(
+            user.getEmail(),
+             user.getRole().getName(), 
+             expiresAt
+            );
 
         AuthBasicUserResponseDTO authBasicUserResponseDTO = authMapper.toAuthBasicUserDTO(user);
 

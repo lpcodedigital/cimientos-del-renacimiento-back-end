@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,26 +49,22 @@ public class UserController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/email/{email}")
     public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
-        return userService.getUserByEmail(email)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+        UserDTO user = userService.getUserByEmail(email);
+        return ResponseEntity.ok(user);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/create")
-    public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserRequestDTO userRequestDTO) throws Exception {
+    public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserRequestDTO userRequestDTO) {
         UserDTO registeredUser = userService.create(userRequestDTO);
         return ResponseEntity.ok(registeredUser);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/update/{id}")
-    ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody @Valid UserRequestDTO userRequestDTO) throws Exception {
-        
-       return userService.updateUser(id, userRequestDTO)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
-        
+    ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody @Valid UserRequestDTO userRequestDTO) {
+        UserDTO user = userService.updateUser(id, userRequestDTO);
+        return ResponseEntity.ok(user);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -78,12 +73,9 @@ public class UserController {
 
         Map<String, String> response = new HashMap<>();
         
-        boolean deleted = userService.deleteUserById(id);
-        if(!deleted) {
-            response.put("message","Usuario con ID " + id + " no encontrado.");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }   
-        response.put("message","Usuario con ID " + id + " eliminado correctamente.");
+        userService.deleteUserById(id);
+
+        response.put("message","Usuario con ID:  " + id + " eliminado correctamente.");
         return ResponseEntity.ok(response);
     }
 
