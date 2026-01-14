@@ -53,6 +53,9 @@ public class SecurityConfig {
 
                 // Permitir acceso con un JWT valido a las rutas de usuarios
                 .requestMatchers("/api/v1/user/**").authenticated()
+
+                // Permitir acceso con un JWT valido a las rutas de obras
+                .requestMatchers("/api/v1/obra/**").authenticated()
                 
                 // Requerir autenticación para cualquier otra solicitud
                 .anyRequest().authenticated()
