@@ -1,0 +1,27 @@
+package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraModel;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraMapaProjection;
+
+public interface ObraRespository extends JpaRepository<ObraModel, Long> {
+
+    // Verificar si existe una obra con el nombre dado, incluyendo las eliminadas por soft delete
+    @Query(value = "SELECT * FROM obras WHERE name = ?1", nativeQuery = true)
+    Optional<ObraModel> findAnyByNombre(String name);
+
+    // Consulta para optimizar el mapa
+   @Query("SELECT o.id as id, o.name as name, o.latitude as latitude, " +
+       "o.longitude as longitude, o.municipality as municipality " +
+       "FROM ObraModel o") 
+    List<ObraMapaProjection> findAllForMap();
+
+    // Consulta para el detalle: Carga optimizada de imagnes (evitando N+1)
+    @Query("SELECT o FROM ObraModel o LEFT JOIN FETCH o.images WHERE o.id = ?1")
+    Optional<ObraModel> findByIdWithImages(Long id);
+}
