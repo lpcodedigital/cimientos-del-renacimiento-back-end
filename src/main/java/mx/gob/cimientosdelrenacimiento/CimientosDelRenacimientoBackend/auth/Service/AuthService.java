@@ -43,6 +43,7 @@ public class AuthService {
         Date expiresAt = jwtUtils.generateExpirationDate();
 
         String token = jwtUtils.generateJwtToken(
+            user.getIdUser(),
             user.getEmail(),
              user.getRole().getName(), 
              expiresAt

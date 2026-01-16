@@ -2,6 +2,7 @@ package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.config;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,19 +12,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.Security.JwtUtils;
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.repository.UserRespository;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.Security.details.UserPrincipal;
 
 
 @Component
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtUtils jwtUtils;
-    public JwtAuthorizationFilter(JwtUtils jwtUtils, UserRespository userRespository) {
+
+    public JwtAuthorizationFilter(JwtUtils jwtUtils) {
         this.jwtUtils = jwtUtils;
     }
 
@@ -40,42 +43,48 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         String token = autHeader.substring(7);
 
-        // Token invalido o expirado
+        // 1- Validar el token JWT
         if (!jwtUtils.validateJwtToken(token)) {
-            throw new BadCredentialsException("Token inválido o expirado");
+            //throw new BadCredentialsException("Token inválido o expirado");
+            filterChain.doFilter(request, response);
+            return;
         }
         
-        //if(!jwtUtils.validateJwtToken(token)){
-        //    //throw new BadCredentialsException("Token inválido o expirado");
-        //    filterChain.doFilter(request, response);  // <— NO SE LANZA EXCEPCIÓN
-        //    return;
-        //}
+        try {
+            // 2. Extraer Claims (Obtenemos tod de una vez)
+            Claims claims = jwtUtils.getClaimsFromToken(token);
+            String email = claims.getSubject();
+            String role = claims.get("role", String.class);
+            Long userId = claims.get("userId", Long.class);
 
-        String email = jwtUtils.getEmailFromJwtToken(token);
+            if (email == null || userId == null){
+                filterChain.doFilter(request, response);
+                return;
+            }
 
-        if (email == null){
-            throw new BadCredentialsException("Token invalido");
+            // 3. Crear el UserPrincipal (nuevo objeto ligero)
+            List<GrantedAuthority> authorities = List.of( new SimpleGrantedAuthority(role));
+
+            UserPrincipal userPrincipal = new UserPrincipal( 
+                userId,
+                email, 
+                authorities
+            );
+
+            // 4. Establecer la autenticación
+            // passamos el userPrincipal como principal en lugar del email
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                userPrincipal, 
+                null, 
+                authorities
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        } catch (Exception e) {
+            // Si algo falla en el parseo (ej. UUID inválido), limpiamos el contexto
+            SecurityContextHolder.clearContext();
         }
-
-        String role = jwtUtils.getRoleFromJwtToken(token);
-
-        //UserModel user = userRespository.findByEmail(email).orElse(null);
-
-        //if (user == null || user.isDeleted()) {
-        //    filterChain.doFilter(request, response);
-        //    return;
-        //}
-
-        // Convertir permisos/roles a GrantedAuthorities
-        List<GrantedAuthority> authorities = List.of(
-            new SimpleGrantedAuthority(role)
-        );
-
-        //System.out.println("Authorities del usuario: " + authorities);
-
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, null, authorities);
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         filterChain.doFilter(request, response);
     }

@@ -2,7 +2,6 @@ package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.config;
 
 import java.util.Optional;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -11,44 +10,17 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.Security.details.UserPrincipal;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.model.UserModel;
 
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 public class PersistenceConfig {
 
-    private final ApplicationContext context;
-
-    // Inyectamos el ApplicationContext en lugar del repositorio directamente
-    public PersistenceConfig(ApplicationContext context) {
-        this.context = context;
-    }
-
-    //@Bean
-    //public AuditorAware<UserModel> auditorProvider() {
-    //    return () -> {
-    //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    //    
-    //        if (authentication == null || !authentication.isAuthenticated() || 
-    //            authentication instanceof AnonymousAuthenticationToken) {
-    //            return Optional.empty();
-    //        }
-    //    
-    //        // Si tu JwtAuthorizationFilter guarda al usuario como objeto:
-    //        if (authentication.getPrincipal() instanceof UserModel) {
-    //            return Optional.of((UserModel) authentication.getPrincipal());
-    //        }
-    //    
-    //        // Si lo guarda como String (email), lo buscamos una sola vez de forma perezosa
-    //        String email = (String) authentication.getPrincipal();
-    //        return context.getBean(UserRespository.class).findByEmail(email);
-    //        //try {
-    //        //    return context.getBean(UserRespository.class).findByEmail(email);
-    //        //} catch (Exception e) {
-    //        //    return Optional.empty(); // Evita que el error rompa la petición
-    //        //}
-    //    };
-    //}
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Bean
     public AuditorAware<UserModel> auditorProvider() {
@@ -59,8 +31,19 @@ public class PersistenceConfig {
                 authentication instanceof AnonymousAuthenticationToken) {
                 return Optional.empty();
             }
-        
-            return Optional.empty(); 
+
+                
+            // Recuperamos nuestro Userprincipal desde el contexto de seguridad
+            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();  
+            
+            // Usamos getReference
+            // Esto crea un Proxy de Hinernate con el ID.
+            // No ejecuta un select en la base de datos.
+            // Al no haber un select, no se dispara el flujo de auditoría para el UserModel.
+            UserModel userModelProxy = entityManager.getReference(UserModel.class, userPrincipal.id());
+
+            return Optional.of(userModelProxy);
+
         };
     }
 

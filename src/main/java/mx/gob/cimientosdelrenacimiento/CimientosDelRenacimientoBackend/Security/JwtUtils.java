@@ -3,7 +3,6 @@ package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.Security
 import java.time.Duration;
 import java.util.Base64;
 import java.util.Date;
-
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -24,15 +23,25 @@ public class JwtUtils {
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateJwtToken(String email, String role, Date expiration) {
+    public String generateJwtToken(Long userId, String email, String role, Date expiration) {
         return Jwts.builder()
             .setSubject(email)
+            .claim("userId", userId)
             .claim("role", role)
             .setIssuedAt(new Date())
             .setExpiration(expiration)
             .signWith(secretKey)
             .compact();
     }
+
+    // Metodo optimizado para extraer todo el cuerpo del token
+     public  Claims getClaimsFromToken(String token){
+        return Jwts.parserBuilder()
+            .setSigningKey(secretKey)
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
+     }
 
     public Boolean validateJwtToken(String authToken) {
         try {
