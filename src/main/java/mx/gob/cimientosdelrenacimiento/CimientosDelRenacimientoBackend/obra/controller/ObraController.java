@@ -7,12 +7,14 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.Security.details.UserPrincipal;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraMapaDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraResponseDTO;
@@ -32,7 +34,7 @@ public class ObraController {
 
     private final IObraService obraService;
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")
     @GetMapping("/mapa")
     public ResponseEntity<List<ObraMapaDTO>> getAllForMap() {
         return ResponseEntity.ok(obraService.findAllForObraMapa());
@@ -46,7 +48,11 @@ public class ObraController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/create")
-    public ResponseEntity<ObraResponseDTO> create(@Valid @RequestBody ObraRequestDTO request) {
+    public ResponseEntity<ObraResponseDTO> create(
+        @Valid @RequestBody ObraRequestDTO request,
+        @AuthenticationPrincipal UserPrincipal userPrincipal // Injectamos el usuario autenticado
+    ) {
+        System.out.println("El usuario autenticado ID: " + userPrincipal.id() + ", Email: " + userPrincipal.email() + " está creando una obra.");
         return new ResponseEntity<>(obraService.create(request), HttpStatus.CREATED);
     }
 
