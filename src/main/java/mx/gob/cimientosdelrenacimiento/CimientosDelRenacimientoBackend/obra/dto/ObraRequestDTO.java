@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.EstadoObraEnum;
 
@@ -46,6 +45,6 @@ public class ObraRequestDTO {
     @NotNull(message = "El estado de la obra es obligatorio")
     private EstadoObraEnum status;
 
-    @Size(max = 10, message = "No se pueden subir más de 10 imágenes")
-    private List<String> imagesUrls; // Lista de URL que devuelve Cloudflare
+    private List<Long> keepImageIds;
+
 }

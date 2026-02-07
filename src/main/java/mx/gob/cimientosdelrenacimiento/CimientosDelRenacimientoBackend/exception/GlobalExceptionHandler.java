@@ -175,4 +175,17 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
+
+    // 500 - StorageException
+    @ExceptionHandler(StorageException.class)
+    public ResponseEntity<ErrorResponse> handleStorageException(StorageException ex, HttpServletRequest request) {
+        ErrorResponse error = new ErrorResponse(
+                dateTimeFormater.formatDateTime(LocalDateTime.now()),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Storage Error",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    }
 }

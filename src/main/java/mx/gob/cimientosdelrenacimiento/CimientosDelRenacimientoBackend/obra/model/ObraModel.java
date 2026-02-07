@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 import jakarta.persistence.CascadeType;
@@ -26,6 +27,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.common.Au
 @Entity
 @Data
 @Table(name = "obras")
+@SQLDelete(sql = "UPDATE obras SET deleted = true, deleted_at = NOW() WHERE id = ?")
 @SQLRestriction("deleted = false")
 @NoArgsConstructor
 @AllArgsConstructor
