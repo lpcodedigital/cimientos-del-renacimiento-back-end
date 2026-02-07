@@ -8,9 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -49,20 +50,25 @@ public class ObraController {
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PostMapping("/create")
     public ResponseEntity<ObraResponseDTO> create(
-        @Valid @RequestBody ObraRequestDTO request,
+        @RequestPart @Valid ObraRequestDTO request,
+        @RequestPart(value = "files", required = false) List<MultipartFile> files,
         @AuthenticationPrincipal UserPrincipal userPrincipal // Injectamos el usuario autenticado
     ) {
         System.out.println("El usuario autenticado ID: " + userPrincipal.id() + ", Email: " + userPrincipal.email() + " está creando una obra.");
-        return new ResponseEntity<>(obraService.create(request), HttpStatus.CREATED);
+        return new ResponseEntity<>(obraService.create(request, files), HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @PutMapping("/update/{id}")
-    public ResponseEntity<ObraResponseDTO> update(@PathVariable Long id, @Valid @RequestBody ObraRequestDTO request) {
-        return ResponseEntity.ok(obraService.update(id, request));
+    public ResponseEntity<ObraResponseDTO> update(
+        @PathVariable Long id, 
+        @Valid @RequestPart ObraRequestDTO request,
+        @RequestPart(value = "files", required = false) List<MultipartFile> files
+    ) {
+        return ResponseEntity.ok(obraService.update(id, request, files));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Map<String, String>> delete(@PathVariable Long id) {
         obraService.delete(id);

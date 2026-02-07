@@ -37,7 +37,7 @@ public interface ObraMapper {
     @Mapping(target = "deletedAt", ignore = true) 
     @Mapping(target = "updatedAt", ignore = true) 
     @Mapping(target = "updatedBy", ignore = true) 
-    @Mapping(target = "images", source = "imagesUrls", qualifiedByName = "mapUrlsToImages") // Con qualifiedByName MapStruct busca en el mismo archivo un metodod que tenga la anotacion @Named("mapUrlsToImages")
+    @Mapping(target = "images", ignore = true) 
     ObraModel toObraModel(ObraRequestDTO obraRequestDTO);
 
     // -- ENTIDAD A IMAGEN DTO -- //

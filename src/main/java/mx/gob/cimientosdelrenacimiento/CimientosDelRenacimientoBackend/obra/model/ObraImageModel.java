@@ -1,4 +1,5 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
 import jakarta.persistence.Column;
@@ -20,6 +21,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.common.Au
 @Entity
 @Data
 @Table(name = "obra_images")
+@SQLDelete(sql = "UPDATE obra_images SET deleted = true, deleted_at = NOW() WHERE id = ?")
 @SQLRestriction("deleted = false")   
 @NoArgsConstructor
 @AllArgsConstructor

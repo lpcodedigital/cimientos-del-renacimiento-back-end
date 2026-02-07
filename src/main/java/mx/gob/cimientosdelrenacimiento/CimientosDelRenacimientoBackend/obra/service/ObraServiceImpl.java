@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.ConflictException;
@@ -19,6 +20,8 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.mode
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.ObraRespository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraMapaProjection;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.storage.dto.ImageStorageResponse;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.storage.service.IImageStorageService;
 
 @Service
 @RequiredArgsConstructor
@@ -27,36 +30,48 @@ public class ObraServiceImpl implements IObraService {
 
     private final ObraRespository obraRespository;
     private final ObraMapper obraMapper;
+    private final IImageStorageService imageStorageService;
     @Override
-    public ObraResponseDTO create(ObraRequestDTO request) {
+    public ObraResponseDTO create(ObraRequestDTO request, List<MultipartFile> files) {
        
-        // Validar si la obra ya existe por nombre
+        // 1. Validar si la obra ya existe por nombre
 
         obraRespository.findAnyByNombre(request.getName()).ifPresent(o -> {
             throw new ConflictException("Ya existe una obra con el nombre: " + request.getName());
         });
 
-        // Mapear el request a la entidad
+        // 2. Mapear el request DTO a la entidad
         // Gracias al @Named del mapper, aquí ya tenemos la lista de ObraImageModel
         ObraModel obra = obraMapper.toObraModel(request);
 
-        // !IMPORTANTE! Establecer la relación bidireccional entre ObraModel y ObraImageModel
-        if (obra.getImages() != null) {
-
-            // Crea una copia de las imagenes que traia el objeto mapeado
-            List<ObraImageModel> images = new ArrayList<>(obra.getImages());
-            
-            // Limpiar la lista original de la entidad para evitar problemas de persistencia
-            obra.getImages().clear(); 
-            
-            // Version larga usando forEach
-            // Ejemplo: images.forEach(image -> obra.addImage(image));
-
-            // Version corta usando forEach
-            images.forEach(obra::addImage); // Volvemos a agregar las imagenes usando el método addImage que establece la relación correctamente
+        // 3. Validar la cantidad de imágenes subidas
+        if (files.size() > 10) {
+            throw new IllegalArgumentException("No se pueden subir más de 10 imágenes por obra.");
         }
 
-        // Guardar la obra en la base de datos
+        // 4. Procesar y subir cada imagen usando el servicio de almacenamiento
+        if (files != null && !files.isEmpty()) {
+
+            files.forEach(file -> {
+                 // 1. Subir al proveedor
+                 ImageStorageResponse response = imageStorageService.upload(file);
+
+                 // 2. Crear modelo de imagen con los datos del proveedor
+                 ObraImageModel imgModel = new ObraImageModel();
+                 imgModel.setUrl(response.url());
+                 imgModel.setProviderId(response.providerId());
+                 imgModel.setThumbUrl(response.thumbUrl());
+                 imgModel.setMimeType(response.mimeType());
+                 imgModel.setSize(response.size());
+                 imgModel.setPosition(null);
+
+                 // 3. Agregar la imagen a la obra (establece la relación bidireccional)
+                 obra.addImage(imgModel); 
+                 
+            });
+        }
+
+        // 5. Guardar la obra en la base de datos
         ObraModel obraSaved = obraRespository.save(obra);
         
         return obraMapper.toObraResponseDTO(obraSaved);
@@ -93,13 +108,14 @@ public class ObraServiceImpl implements IObraService {
     }
 
     @Override
-    public ObraResponseDTO update(Long id, ObraRequestDTO request) {
+    public ObraResponseDTO update(Long id, ObraRequestDTO request, List<MultipartFile> newFiles) {
        
+        // 1. Obtener la obra existente
         ObraModel obra = obraRespository.findByIdWithImages(id).orElseThrow( () ->
             new ResourceNotFoundException("No se encontró la obra con ID: " + id)
         );
 
-        // Validar si el nombre (si cambió, verificar que no este duplicado)
+        // 2. Validar si el nombre (si cambió, verificar que no este duplicado)
         if (!obra.getName().equalsIgnoreCase(request.getName())){
 
             obraRespository.findAnyByNombre(request.getName()).ifPresent( o -> {
@@ -107,7 +123,7 @@ public class ObraServiceImpl implements IObraService {
             });
         }
 
-        // Actualizar los campos básicos de la obra
+        // 3. Actualizar los campos básicos de la obra
         obra.setName(request.getName());
         obra.setAgency(request.getAgency());
         obra.setMunicipality(request.getMunicipality());
@@ -118,42 +134,52 @@ public class ObraServiceImpl implements IObraService {
         obra.setLongitude(request.getLongitude());
         obra.setStatus(request.getStatus());
 
-        /* Este es un ejemplo de control manual de las imagenes */
-        /*
+        // 4. Gestion de imagenes existentes
+        List<Long> keepImageIds = request.getKeepImageIds() != null ? request.getKeepImageIds() : new ArrayList<>();
 
-        // Sincronizar las imágenes (Logica: Reemplazo total de las imágenes)
-        // Borramos las imagenes anteriores agregamos las nuevas del DTO
-        obra.getImages().clear();
-        if(request.getImagesUrls() != null) {
-            
-        request.getImagesUrls().forEach( url -> {
-            ObraImageModel newImage = new ObraImageModel();
-            newImage.setUrl(url);
-            obra.addImage(newImage);
+        // 5. Identificar cules se deben eliminar
+        List<ObraImageModel> imagesToRemove = obra.getImages().stream()
+            .filter(img -> !keepImageIds.contains(img.getId()))
+            .collect(Collectors.toList());
+
+        // 6. Eliminar las imagenes
+        imagesToRemove.forEach(img -> {
+            // Borrado fisico en el proveedor
+            try {
+                imageStorageService.delete(img.getProviderId());
+            } catch (Exception e) {
+                // Loguear el error pero continuar con la eliminación si es critico mantener la coherencia
+                System.err.println("Error al eliminar la imagen en storage: " + img.getProviderId() + " - " + e.getMessage());
+            }
+            // Eliminar de la colección de la obra
+            obra.getImages().remove(img); 
         });
-    }
 
-        // Guardar los cambios en la base de datos
-        ObraModel updatedObra = obraRespository.save(obra);
-        
-        return obraMapper.toObraResponseDTO(updatedObra);
+        // 7. Procesar las nuevas imagenes a agregar
+        if (newFiles != null && !newFiles.isEmpty()) {
+             
+            // Validar la cantidad total de imagenes despues de agregar las nuevas
+            if (obra.getImages().size() + newFiles.size() > 10){
+                throw new IllegalStateException("No se pueden agregar más de 10 imágenes a una obra.");
+            }
 
-        */
+            newFiles.forEach(file -> {
+                
+                ImageStorageResponse response = imageStorageService.upload(file);
+                ObraImageModel imgModel = new ObraImageModel();
 
-        /* Este es un ejemplo de control automático de las imagenes */
-        // MANEJO DE IMAGENES USANDO EL MAPPER
+                imgModel.setUrl(response.url());
+                imgModel.setProviderId(response.providerId());
+                imgModel.setThumbUrl(response.thumbUrl());
+                imgModel.setMimeType(response.mimeType());
+                imgModel.setSize(response.size());
+                imgModel.setPosition(null);
 
-        // Delgamos la conversion de String -> ObraImageModel al mapper usando el metodo calificador @Named("mapUrlsToImages")
-        List<ObraImageModel> newImages = obraMapper.mapUrlsToImages(request.getImagesUrls());
-
-        // Borramos las imagenes anteriores
-        obra.getImages().clear();
-
-        // Agregamos las nuevas imagenes usando el metodo addImage que establece la relación bidireccional correctamente
-        if(newImages != null) {
-            newImages.forEach(obra::addImage);
+                obra.addImage(imgModel);
+            });
         }
-         return obraMapper.toObraResponseDTO(obraRespository.save(obra));
+       
+        return obraMapper.toObraResponseDTO(obraRespository.save(obra));
 
     }
 
@@ -161,14 +187,56 @@ public class ObraServiceImpl implements IObraService {
     @Transactional
     public void delete(Long id) {
         
+        // 1.- Obtener la obra con sus imágenes para poder eliminarlas también
         ObraModel obra = obraRespository.findById(id).orElseThrow(() ->
              new ResourceNotFoundException("No se puede eliminar: Obra no encontrada")
             );
         
         // Soft delete
+        /*
+            1. Marcar la obra como borrada para que JPA Auditing detecte 
+            el cambio en la entidad y llene 'updated_at' y 'deleted_by'
+        */ 
         obra.setDeleted(true);
         obra.setDeletedAt(LocalDateTime.now());
+
+        // 2. Al guardar, JPA Auditing pondra al usuario actual en 'updated_by'
+        //obraRespository.save(obra);
+
+        /*
+            3. Las imagenes tambien se mantienen con el 'updated_by' y 'deleted_at' 
+            del que borra la obra, hay que recorrerlas y marcarlas como borradas
+        */
+        obra.getImages().forEach(img -> {
+            img.setDeleted(true);
+            img.setDeletedAt(LocalDateTime.now());
+
+            // Intentar borrar en Cloudflare mientras recorremos las imágenes, así evitamos tener que hacer un segundo recorrido solo para eso
+            //try {
+            //    imageStorageService.delete(img.getProviderId());
+            //} catch (Exception e) {
+            //    // Loguear el error pero continuar con la eliminación si es critico mantener la coherencia
+            //    System.err.println("Error al eliminar la imagen en storage: " + img.getProviderId() + " - " + e.getMessage());
+            //}
+        });
+
+        // 4. ¡PASO CLAVE!: Sincronizar cambios de auditoría
+        // Esto obliga a JPA a ejecutar los UPDATES de auditoría (updated_by) AHORA.
+        obraRespository.saveAndFlush(obra);
         
+        // 5. Ejecutar el Soft Delete final
+        // Ahora que la auditoría ya se guardó, procedemos al borrado lógico
+        /* Nota: Al ejecutar el delete de la obra automaticamente se marca deleted = true 
+            no se elimina fisicamente de la base de datos gracias a la anotación @SQLDelete
+            en la entidad ObraModel y las imagnes se marcan como deleted = true pero no se puede 
+            tener una audtioria para saber quien hizo ese cambio en el estado de las imagenes.
+        */
+        obraRespository.delete(obra);
+    
+        // Al ejecutar delete(obra):
+        // - Se dispara el SQL de @SQLDelete de la Obra.
+        // - Se dispara el SQL de @SQLDelete de cada Imagen (por el Cascade).
+        //   siempre y cuando el contexto de seguridad tenga al usuario.
     }
 
 }
