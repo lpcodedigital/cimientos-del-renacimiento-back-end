@@ -1,5 +1,8 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.config;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -7,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.JwtAccessDeniedHandler;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.JwtAuthEntryPoint;
@@ -29,6 +35,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(org.springframework.security.config.annotation.web.builders.HttpSecurity http) throws Exception {
         http
+            // Habilitar CORS con la configuración definida en corsConfigurationSource()
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+
             // Deshabilitar CSRF por que no vamos a usar formularios y usamos api rest
             .csrf(csrf -> csrf.disable())
 
@@ -48,6 +57,9 @@ public class SecurityConfig {
             // Configurar las reglas de autorización
             .authorizeHttpRequests(auth -> auth
                 
+                // Permitir todas las peticiones OPTIONS (Preflight)
+                .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                
                 // Permitir acceso sin autenticación a las rutas de autenticación (signup, signin, etc)
                 .requestMatchers("/api/v1/auth/**").permitAll()
 
@@ -65,5 +77,40 @@ public class SecurityConfig {
             .httpBasic(httpBasic -> httpBasic.disable()); // Deshabilitar la autenticación HTTP Basic
         return http.build();
     }
+
+    
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        // 1. Definir los orígenes permitidos (puedes ajustar esto según tus necesidades)
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+
+        // 2. Definir los metodos HTTP permitidos
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+
+        // 3. Definir los headers permitidos. Headers que el Front (Refine) necesita enviar y recibir
+        configuration.setAllowedHeaders(Arrays.asList(
+            "Authorization", 
+            "Content-Type",
+            "Accept", 
+            "X-Requested-With",
+            "Cache-Control"
+        ));
+
+        // 4. Exponer headers (Si el front necesita leer algún header especial del back)
+        //configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+
+        // 5. Permitir credenciales (cookies, tokens, etc)
+        configuration.setAllowCredentials(true);
+
+        // 6. Tiempo de vida de la configuración CORS (en segundos)
+        configuration.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration); // Aplicar esta configuración a todas las rutas
+        return source;
+    }
+    
 
 }
