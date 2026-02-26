@@ -2,11 +2,13 @@ package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.ser
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraMapaDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraResponseDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraResponseListDTO;
 
 public interface IObraService {
 
@@ -24,4 +26,7 @@ public interface IObraService {
 
     // Para eliminar una obra por su ID
     void delete(Long id);
+
+    // Para obtener una lista paginada de obras usando la proyección personalizada
+    Page<ObraResponseListDTO> findAllPaginated(int page, int size);
 }
