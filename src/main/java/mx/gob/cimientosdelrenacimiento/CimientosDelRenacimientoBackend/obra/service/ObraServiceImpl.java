@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,11 +19,13 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraMapaDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraResponseDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraResponseListDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.mapper.ObraMapper;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraImageModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.ObraRespository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraMapaProjection;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraPaginationProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.storage.dto.ImageStorageResponse;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.storage.service.IImageStorageService;
 
@@ -237,6 +243,32 @@ public class ObraServiceImpl implements IObraService {
         // - Se dispara el SQL de @SQLDelete de la Obra.
         // - Se dispara el SQL de @SQLDelete de cada Imagen (por el Cascade).
         //   siempre y cuando el contexto de seguridad tenga al usuario.
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ObraResponseListDTO> findAllPaginated(int page, int size) {
+        
+        // Definimos paginación y ordenamiento por fecha de creación descendente
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+
+       Page<ObraPaginationProjection> projections = obraRespository.findAllPaginated(pageable);
+
+        // Convertimos la página de proyecciones a página de DTOs
+        // Como no queremos imágenes, el campo 'images' en ObraResponseListDTO quedará como null, lo cual es correcto para esta vista de paginación
+    
+        return projections.map(p -> {
+            ObraResponseListDTO dto = new ObraResponseListDTO();
+            dto.setId(p.getId());
+            dto.setName(p.getName());
+            dto.setMunicipality(p.getMunicipality());
+            dto.setDescription(p.getDescription());
+            dto.setStatus(p.getStatus().toString());
+            dto.setProgress(p.getProgress());
+            dto.setCreatedAt(p.getCreatedAt());
+            return dto;
+        });
+        
     }
 
 }
