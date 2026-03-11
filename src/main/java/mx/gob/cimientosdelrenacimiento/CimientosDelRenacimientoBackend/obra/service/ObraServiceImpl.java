@@ -59,20 +59,25 @@ public class ObraServiceImpl implements IObraService {
         if (files != null && !files.isEmpty()) {
 
             files.forEach(file -> {
-                 // 1. Subir al proveedor
-                 ImageStorageResponse response = imageStorageService.upload(file);
 
-                 // 2. Crear modelo de imagen con los datos del proveedor
-                 ObraImageModel imgModel = new ObraImageModel();
-                 imgModel.setUrl(response.url());
-                 imgModel.setProviderId(response.providerId());
-                 imgModel.setThumbUrl(response.thumbUrl());
-                 imgModel.setMimeType(response.mimeType());
-                 imgModel.setSize(response.size());
-                 imgModel.setPosition(null);
-
-                 // 3. Agregar la imagen a la obra (establece la relación bidireccional)
-                 obra.addImage(imgModel); 
+                // Solo procesar la imagen si no está vacía y tiene contenido
+                if (!file.isEmpty() && file.getSize() > 0) {
+                    
+                    // 1. Subir al proveedor
+                    ImageStorageResponse response = imageStorageService.upload(file);
+   
+                    // 2. Crear modelo de imagen con los datos del proveedor
+                    ObraImageModel imgModel = new ObraImageModel();
+                    imgModel.setUrl(response.url());
+                    imgModel.setProviderId(response.providerId());
+                    imgModel.setThumbUrl(response.thumbUrl());
+                    imgModel.setMimeType(response.mimeType());
+                    imgModel.setSize(response.size());
+                    imgModel.setPosition(null);
+   
+                    // 3. Agregar la imagen a la obra (establece la relación bidireccional)
+                    obra.addImage(imgModel); 
+                }
                  
             });
         }
