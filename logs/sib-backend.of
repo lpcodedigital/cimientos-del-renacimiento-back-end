@@ -1,0 +1,804 @@
+2026-03-17T20:57:38.091Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Starting CimientosDelRenacimientoBackendApplication using Java 17.0.11 with PID 62 (/app/target/classes started by root in /app)
+2026-03-17T20:57:38.103Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : The following 1 profile is active: "staging"
+2026-03-17T20:57:38.349Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-17T20:57:38.352Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-17T20:57:42.415Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-17T20:57:42.894Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 436 ms. Found 4 JPA repository interfaces.
+2026-03-17T20:57:45.441Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-17T20:57:45.494Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-17T20:57:45.497Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-03-17T20:57:45.619Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-17T20:57:45.621Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7259 ms
+2026-03-17T20:57:46.399Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-17T20:57:46.678Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-03-17T20:57:46.832Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-17T20:57:48.004Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-17T20:57:48.137Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-17T20:57:48.628Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@d5bbdc7
+2026-03-17T20:57:48.638Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-17T20:57:48.941Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-17T20:57:52.930Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-17T20:57:53.275Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-17T20:57:54.272Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-17T20:57:57.586Z  WARN 62 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: bc1916d6-27db-4b9a-9792-bd3cf61dd79a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-17T20:57:57.621Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-17T20:57:58.763Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-17T20:57:58.872Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-17T20:57:58.903Z  INFO 62 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Started CimientosDelRenacimientoBackendApplication in 22.574 seconds (process running for 23.948)
+2026-03-17T20:57:59.093Z DEBUG 62 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.SQL                        : 
+    select
+        count(*) 
+    from
+        roles rm1_0
+2026-03-17T21:00:49.756Z  INFO 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-17T21:00:49.758Z  INFO 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-17T21:00:49.764Z  INFO 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2026-03-17T21:01:07.694Z DEBUG 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        um1_0.id_user,
+        um1_0.active,
+        um1_0.created_at,
+        um1_0.created_by_id,
+        um1_0.deleted,
+        um1_0.deleted_at,
+        um1_0.email,
+        um1_0.first_last_name,
+        um1_0.is_first_login,
+        um1_0.middle_name,
+        um1_0.name,
+        um1_0.password,
+        um1_0.phone,
+        um1_0.role_id,
+        um1_0.second_last_name,
+        um1_0.two_factor_enabled,
+        um1_0.two_factor_secret,
+        um1_0.updated_at,
+        um1_0.updated_by_id,
+        um1_0.verification_code 
+    from
+        users um1_0 
+    where
+        (
+            um1_0.deleted = false
+        ) 
+        and um1_0.email=?
+2026-03-17T21:01:07.698Z TRACE 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [admin@cimientosdelrenacimiento.gob.mx]
+2026-03-17T21:01:07.739Z DEBUG 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        rm1_0.id_role,
+        rm1_0.description,
+        rm1_0.name 
+    from
+        roles rm1_0 
+    where
+        rm1_0.id_role=?
+2026-03-17T21:01:07.740Z TRACE 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-17T21:01:08.447Z DEBUG 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+    select
+        om1_0.id,
+        om1_0.name,
+        om1_0.municipality,
+        om1_0.description,
+        om1_0.status,
+        om1_0.progress,
+        om1_0.created_at 
+    from
+        obras om1_0 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.deleted=false 
+    order by
+        7 desc 
+    fetch
+        first ? rows only
+2026-03-17T21:01:08.450Z TRACE 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
+2026-03-17T21:01:08.477Z DEBUG 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+    select
+        count(om1_0.id) 
+    from
+        obras om1_0 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.deleted=false
+2026-03-17T21:01:08.528Z  WARN 62 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-03-17T21:01:36.241Z  INFO 62 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-17T21:01:36.247Z  INFO 62 --- [CimientosDelRenacimientoBackend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-03-17T21:01:36.257Z  INFO 62 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-17T21:01:36.263Z  INFO 62 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-17T21:01:36.270Z  INFO 62 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-03-17T21:02:02.320Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Starting CimientosDelRenacimientoBackendApplication using Java 17.0.11 with PID 57 (/app/target/classes started by root in /app)
+2026-03-17T21:02:02.325Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : The following 1 profile is active: "staging"
+2026-03-17T21:02:02.464Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-17T21:02:02.465Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-17T21:02:04.793Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-17T21:02:05.019Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 207 ms. Found 4 JPA repository interfaces.
+2026-03-17T21:02:06.697Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-17T21:02:06.722Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-17T21:02:06.723Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-03-17T21:02:06.814Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-17T21:02:06.816Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4348 ms
+2026-03-17T21:02:07.211Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-17T21:02:07.373Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-03-17T21:02:07.459Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-17T21:02:08.098Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-17T21:02:08.180Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-17T21:02:08.502Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@318fa2c8
+2026-03-17T21:02:08.506Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-17T21:02:08.735Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-17T21:02:11.128Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-17T21:02:11.334Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-17T21:02:11.915Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-17T21:02:13.860Z  WARN 57 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 78b67c54-d58c-42de-9330-25a105d715d6
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-17T21:02:13.877Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-17T21:02:14.533Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-17T21:02:14.583Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-17T21:02:14.602Z  INFO 57 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Started CimientosDelRenacimientoBackendApplication in 13.331 seconds (process running for 14.201)
+2026-03-17T21:02:14.735Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.SQL                        : 
+    select
+        count(*) 
+    from
+        roles rm1_0
+2026-03-17T21:29:59.553Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m50s508ms420µs252ns).
+2026-03-17T21:42:07.910Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m7s564ms389µs173ns).
+2026-03-17T21:43:23.130Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m15s963ms60µs579ns).
+2026-03-17T21:48:29.955Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m6s821ms835µs361ns).
+2026-03-17T21:51:26.254Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m56s291ms653µs737ns).
+2026-03-17T22:06:09.947Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m3s941ms94µs392ns).
+2026-03-17T22:09:45.650Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m35s648ms208µs770ns).
+2026-03-17T22:12:41.078Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m55s411ms15µs702ns).
+2026-03-17T22:21:19.747Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m38s665ms874µs451ns).
+2026-03-17T22:31:40.735Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m20s949ms567µs119ns).
+2026-03-17T22:33:36.253Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m55s494ms198µs625ns).
+2026-03-17T22:36:59.336Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m23s84ms167µs325ns).
+2026-03-17T22:39:48.180Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m48s845ms703µs80ns).
+2026-03-17T22:42:43.508Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m55s319ms487µs497ns).
+2026-03-17T22:44:01.818Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m18s315ms279µs281ns).
+2026-03-17T22:53:28.447Z  WARN 57 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m52s387ms930µs713ns).
+2026-03-17T22:55:04.955Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-17T22:55:04.957Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-17T22:55:04.961Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-03-17T22:55:05.427Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        om1_0.id,
+        om1_0.name,
+        om1_0.municipality,
+        om1_0.description,
+        om1_0.status,
+        om1_0.progress,
+        om1_0.created_at 
+    from
+        obras om1_0 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.deleted=false 
+    order by
+        7 desc 
+    fetch
+        first ? rows only
+2026-03-17T22:55:05.431Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
+2026-03-17T22:55:05.458Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        count(om1_0.id) 
+    from
+        obras om1_0 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.deleted=false
+2026-03-17T22:55:05.570Z  WARN 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-03-17T22:55:17.092Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        om1_0.id,
+        om1_0.name,
+        om1_0.municipality,
+        om1_0.description,
+        om1_0.status,
+        om1_0.progress,
+        om1_0.created_at 
+    from
+        obras om1_0 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.deleted=false 
+    order by
+        7 desc 
+    fetch
+        first ? rows only
+2026-03-17T22:55:17.094Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
+2026-03-17T22:55:17.105Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        count(om1_0.id) 
+    from
+        obras om1_0 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.deleted=false
+2026-03-17T22:57:17.695Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    SELECT
+        * 
+    FROM
+        obras 
+    WHERE
+        name = ?
+2026-03-17T22:57:17.696Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [obra #25 ]
+2026-03-17T22:57:17.736Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] m.g.c.C.s.s.CloudflareStorageServiceImp  : Iniciando subida de imagen a CloudFlare: foto5.jpg
+2026-03-17T22:57:19.069Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] m.g.c.C.s.s.CloudflareStorageServiceImp  : Imagen subida exitosamente. ID: c7ba4e8f-118d-4c4d-7f03-7331019a7f00
+2026-03-17T22:57:19.071Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] m.g.c.C.s.s.CloudflareStorageServiceImp  : Iniciando subida de imagen a CloudFlare: foto4.jpg
+2026-03-17T22:57:19.998Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] m.g.c.C.s.s.CloudflareStorageServiceImp  : Imagen subida exitosamente. ID: 3b37710f-06bc-4f67-2d6a-8ac87ae83c00
+2026-03-17T22:57:20.001Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] m.g.c.C.s.s.CloudflareStorageServiceImp  : Iniciando subida de imagen a CloudFlare: foto3.jpg
+2026-03-17T22:57:20.711Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] m.g.c.C.s.s.CloudflareStorageServiceImp  : Imagen subida exitosamente. ID: 2b6315ee-a86c-439d-80f0-fe551a2aef00
+2026-03-17T22:57:20.795Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    insert 
+    into
+        obras
+        (agency, created_at, created_by_id, deleted, deleted_at, description, investment, latitude, longitude, municipality, name, progress, status, updated_at, updated_by_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-03-17T22:57:20.799Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Ivey]
+2026-03-17T22:57:20.800Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (2:TIMESTAMP) <- [2026-03-17T22:57:20.755828712]
+2026-03-17T22:57:20.802Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (3:BIGINT) <- [1]
+2026-03-17T22:57:20.803Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (4:BOOLEAN) <- [false]
+2026-03-17T22:57:20.803Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (5:TIMESTAMP) <- [null]
+2026-03-17T22:57:20.804Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (6:VARCHAR) <- [pureba obra #25 ]
+2026-03-17T22:57:20.805Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (7:NUMERIC) <- [377777777]
+2026-03-17T22:57:20.806Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (8:DOUBLE) <- [20.205259559687736]
+2026-03-17T22:57:20.806Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (9:DOUBLE) <- [-89.28726196289064]
+2026-03-17T22:57:20.807Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [tekax]
+2026-03-17T22:57:20.808Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (11:VARCHAR) <- [obra #25 ]
+2026-03-17T22:57:20.809Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (12:INTEGER) <- [3]
+2026-03-17T22:57:20.810Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [PLANEACION]
+2026-03-17T22:57:20.810Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (14:TIMESTAMP) <- [2026-03-17T22:57:20.755828712]
+2026-03-17T22:57:20.811Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (15:BIGINT) <- [1]
+2026-03-17T22:57:20.834Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    insert 
+    into
+        obra_images
+        (created_at, created_by_id, deleted, deleted_at, mime_type, obra_id, position, provider_id, size, thumb_url, updated_at, updated_by_id, url) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-03-17T22:57:20.835Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:TIMESTAMP) <- [2026-03-17T22:57:20.832999552]
+2026-03-17T22:57:20.836Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [1]
+2026-03-17T22:57:20.837Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (3:BOOLEAN) <- [false]
+2026-03-17T22:57:20.838Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [null]
+2026-03-17T22:57:20.839Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [image/jpeg]
+2026-03-17T22:57:20.839Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (6:BIGINT) <- [27]
+2026-03-17T22:57:20.840Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (7:INTEGER) <- [null]
+2026-03-17T22:57:20.841Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [c7ba4e8f-118d-4c4d-7f03-7331019a7f00]
+2026-03-17T22:57:20.842Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [497895]
+2026-03-17T22:57:20.843Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [https://imagedelivery.net/oeZ15vnHiyqFn27EXyeqcw/c7ba4e8f-118d-4c4d-7f03-7331019a7f00/public]
+2026-03-17T22:57:20.844Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (11:TIMESTAMP) <- [2026-03-17T22:57:20.832999552]
+2026-03-17T22:57:20.845Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (12:BIGINT) <- [1]
+2026-03-17T22:57:20.846Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [https://imagedelivery.net/oeZ15vnHiyqFn27EXyeqcw/c7ba4e8f-118d-4c4d-7f03-7331019a7f00/public]
+2026-03-17T22:57:20.852Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    insert 
+    into
+        obra_images
+        (created_at, created_by_id, deleted, deleted_at, mime_type, obra_id, position, provider_id, size, thumb_url, updated_at, updated_by_id, url) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-03-17T22:57:20.853Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:TIMESTAMP) <- [2026-03-17T22:57:20.852238928]
+2026-03-17T22:57:20.855Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [1]
+2026-03-17T22:57:20.856Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (3:BOOLEAN) <- [false]
+2026-03-17T22:57:20.857Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [null]
+2026-03-17T22:57:20.858Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [image/jpeg]
+2026-03-17T22:57:20.859Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (6:BIGINT) <- [27]
+2026-03-17T22:57:20.861Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (7:INTEGER) <- [null]
+2026-03-17T22:57:20.864Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [3b37710f-06bc-4f67-2d6a-8ac87ae83c00]
+2026-03-17T22:57:20.866Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [199614]
+2026-03-17T22:57:20.867Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [https://imagedelivery.net/oeZ15vnHiyqFn27EXyeqcw/3b37710f-06bc-4f67-2d6a-8ac87ae83c00/thumbnail]
+2026-03-17T22:57:20.868Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (11:TIMESTAMP) <- [2026-03-17T22:57:20.852238928]
+2026-03-17T22:57:20.869Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (12:BIGINT) <- [1]
+2026-03-17T22:57:20.870Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [https://imagedelivery.net/oeZ15vnHiyqFn27EXyeqcw/3b37710f-06bc-4f67-2d6a-8ac87ae83c00/thumbnail]
+2026-03-17T22:57:20.874Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    insert 
+    into
+        obra_images
+        (created_at, created_by_id, deleted, deleted_at, mime_type, obra_id, position, provider_id, size, thumb_url, updated_at, updated_by_id, url) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-03-17T22:57:20.875Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:TIMESTAMP) <- [2026-03-17T22:57:20.873101889]
+2026-03-17T22:57:20.877Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [1]
+2026-03-17T22:57:20.878Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (3:BOOLEAN) <- [false]
+2026-03-17T22:57:20.880Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [null]
+2026-03-17T22:57:20.881Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [image/jpeg]
+2026-03-17T22:57:20.882Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (6:BIGINT) <- [27]
+2026-03-17T22:57:20.883Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (7:INTEGER) <- [null]
+2026-03-17T22:57:20.884Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [2b6315ee-a86c-439d-80f0-fe551a2aef00]
+2026-03-17T22:57:20.885Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [308808]
+2026-03-17T22:57:20.886Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [https://imagedelivery.net/oeZ15vnHiyqFn27EXyeqcw/2b6315ee-a86c-439d-80f0-fe551a2aef00/thumbnail]
+2026-03-17T22:57:20.888Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (11:TIMESTAMP) <- [2026-03-17T22:57:20.873101889]
+2026-03-17T22:57:20.889Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (12:BIGINT) <- [1]
+2026-03-17T22:57:20.891Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [https://imagedelivery.net/oeZ15vnHiyqFn27EXyeqcw/2b6315ee-a86c-439d-80f0-fe551a2aef00/thumbnail]
+2026-03-17T22:57:20.904Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
+    select
+        um1_0.id_user,
+        um1_0.active,
+        um1_0.created_at,
+        um1_0.created_by_id,
+        um1_0.deleted,
+        um1_0.deleted_at,
+        um1_0.email,
+        um1_0.first_last_name,
+        um1_0.is_first_login,
+        um1_0.middle_name,
+        um1_0.name,
+        um1_0.password,
+        um1_0.phone,
+        um1_0.role_id,
+        r1_0.id_role,
+        r1_0.description,
+        r1_0.name,
+        um1_0.second_last_name,
+        um1_0.two_factor_enabled,
+        um1_0.two_factor_secret,
+        um1_0.updated_at,
+        um1_0.updated_by_id,
+        um1_0.verification_code 
+    from
+        users um1_0 
+    join
+        roles r1_0 
+            on r1_0.id_role=um1_0.role_id 
+    where
+        um1_0.id_user=? 
+        and (
+            um1_0.deleted = false
+        )
+2026-03-17T22:57:20.905Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-17T22:57:21.299Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        om1_0.id,
+        om1_0.name,
+        om1_0.municipality,
+        om1_0.description,
+        om1_0.status,
+        om1_0.progress,
+        om1_0.created_at 
+    from
+        obras om1_0 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.deleted=false 
+    order by
+        7 desc 
+    fetch
+        first ? rows only
+2026-03-17T22:57:21.300Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
+2026-03-17T22:57:21.306Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        count(om1_0.id) 
+    from
+        obras om1_0 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.deleted=false
+2026-03-17T22:59:02.463Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        om1_0.id,
+        om1_0.agency,
+        om1_0.created_at,
+        om1_0.created_by_id,
+        om1_0.deleted,
+        om1_0.deleted_at,
+        om1_0.description,
+        i1_0.obra_id,
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.created_by_id,
+        i1_0.deleted,
+        i1_0.deleted_at,
+        i1_0.mime_type,
+        i1_0.position,
+        i1_0.provider_id,
+        i1_0.size,
+        i1_0.thumb_url,
+        i1_0.updated_at,
+        i1_0.updated_by_id,
+        i1_0.url,
+        om1_0.investment,
+        om1_0.latitude,
+        om1_0.longitude,
+        om1_0.municipality,
+        om1_0.name,
+        om1_0.progress,
+        om1_0.status,
+        om1_0.updated_at,
+        om1_0.updated_by_id 
+    from
+        obras om1_0 
+    left join
+        obra_images i1_0 
+            on om1_0.id=i1_0.obra_id 
+            and (i1_0.deleted = false) 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.id=?
+2026-03-17T22:59:02.466Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [27]
+2026-03-17T22:59:02.522Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+    select
+        um1_0.id_user,
+        um1_0.active,
+        um1_0.created_at,
+        um1_0.created_by_id,
+        um1_0.deleted,
+        um1_0.deleted_at,
+        um1_0.email,
+        um1_0.first_last_name,
+        um1_0.is_first_login,
+        um1_0.middle_name,
+        um1_0.name,
+        um1_0.password,
+        um1_0.phone,
+        um1_0.role_id,
+        r1_0.id_role,
+        r1_0.description,
+        r1_0.name,
+        um1_0.second_last_name,
+        um1_0.two_factor_enabled,
+        um1_0.two_factor_secret,
+        um1_0.updated_at,
+        um1_0.updated_by_id,
+        um1_0.verification_code 
+    from
+        users um1_0 
+    join
+        roles r1_0 
+            on r1_0.id_role=um1_0.role_id 
+    where
+        um1_0.id_user=? 
+        and (
+            um1_0.deleted = false
+        )
+2026-03-17T22:59:02.531Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-17T22:59:35.977Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        om1_0.id,
+        om1_0.agency,
+        om1_0.created_at,
+        om1_0.created_by_id,
+        om1_0.deleted,
+        om1_0.deleted_at,
+        om1_0.description,
+        i1_0.obra_id,
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.created_by_id,
+        i1_0.deleted,
+        i1_0.deleted_at,
+        i1_0.mime_type,
+        i1_0.position,
+        i1_0.provider_id,
+        i1_0.size,
+        i1_0.thumb_url,
+        i1_0.updated_at,
+        i1_0.updated_by_id,
+        i1_0.url,
+        om1_0.investment,
+        om1_0.latitude,
+        om1_0.longitude,
+        om1_0.municipality,
+        om1_0.name,
+        om1_0.progress,
+        om1_0.status,
+        om1_0.updated_at,
+        om1_0.updated_by_id 
+    from
+        obras om1_0 
+    left join
+        obra_images i1_0 
+            on om1_0.id=i1_0.obra_id 
+            and (i1_0.deleted = false) 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.id=?
+2026-03-17T22:59:35.978Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [27]
+2026-03-17T22:59:35.986Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] m.g.c.C.s.s.CloudflareStorageServiceImp  : Intentando eliminar imagen en Cloudflare: c7ba4e8f-118d-4c4d-7f03-7331019a7f00
+2026-03-17T22:59:36.700Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] m.g.c.C.s.s.CloudflareStorageServiceImp  : Iniciando subida de imagen a CloudFlare: foto1.jpg
+2026-03-17T22:59:37.616Z  INFO 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] m.g.c.C.s.s.CloudflareStorageServiceImp  : Imagen subida exitosamente. ID: ace2c439-cebb-4d7b-5fc3-06fb4fd35500
+2026-03-17T22:59:37.626Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    insert 
+    into
+        obra_images
+        (created_at, created_by_id, deleted, deleted_at, mime_type, obra_id, position, provider_id, size, thumb_url, updated_at, updated_by_id, url) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2026-03-17T22:59:37.628Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:TIMESTAMP) <- [2026-03-17T22:59:37.625003949]
+2026-03-17T22:59:37.630Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [1]
+2026-03-17T22:59:37.631Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (3:BOOLEAN) <- [false]
+2026-03-17T22:59:37.631Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (4:TIMESTAMP) <- [null]
+2026-03-17T22:59:37.633Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (5:VARCHAR) <- [image/jpeg]
+2026-03-17T22:59:37.633Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (6:BIGINT) <- [27]
+2026-03-17T22:59:37.635Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (7:INTEGER) <- [null]
+2026-03-17T22:59:37.636Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [ace2c439-cebb-4d7b-5fc3-06fb4fd35500]
+2026-03-17T22:59:37.637Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [419705]
+2026-03-17T22:59:37.638Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (10:VARCHAR) <- [https://imagedelivery.net/oeZ15vnHiyqFn27EXyeqcw/ace2c439-cebb-4d7b-5fc3-06fb4fd35500/public]
+2026-03-17T22:59:37.639Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (11:TIMESTAMP) <- [2026-03-17T22:59:37.625003949]
+2026-03-17T22:59:37.640Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (12:BIGINT) <- [1]
+2026-03-17T22:59:37.642Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (13:VARCHAR) <- [https://imagedelivery.net/oeZ15vnHiyqFn27EXyeqcw/ace2c439-cebb-4d7b-5fc3-06fb4fd35500/public]
+2026-03-17T22:59:37.652Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        um1_0.id_user,
+        um1_0.active,
+        um1_0.created_at,
+        um1_0.created_by_id,
+        um1_0.deleted,
+        um1_0.deleted_at,
+        um1_0.email,
+        um1_0.first_last_name,
+        um1_0.is_first_login,
+        um1_0.middle_name,
+        um1_0.name,
+        um1_0.password,
+        um1_0.phone,
+        um1_0.role_id,
+        r1_0.id_role,
+        r1_0.description,
+        r1_0.name,
+        um1_0.second_last_name,
+        um1_0.two_factor_enabled,
+        um1_0.two_factor_secret,
+        um1_0.updated_at,
+        um1_0.updated_by_id,
+        um1_0.verification_code 
+    from
+        users um1_0 
+    join
+        roles r1_0 
+            on r1_0.id_role=um1_0.role_id 
+    where
+        um1_0.id_user=? 
+        and (
+            um1_0.deleted = false
+        )
+2026-03-17T22:59:37.653Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-17T22:59:37.682Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    update
+        obras 
+    set
+        agency=?,
+        deleted=?,
+        deleted_at=?,
+        description=?,
+        investment=?,
+        latitude=?,
+        longitude=?,
+        municipality=?,
+        name=?,
+        progress=?,
+        status=?,
+        updated_at=?,
+        updated_by_id=? 
+    where
+        id=?
+2026-03-17T22:59:37.683Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Japan]
+2026-03-17T22:59:37.685Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (2:BOOLEAN) <- [false]
+2026-03-17T22:59:37.685Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (3:TIMESTAMP) <- [null]
+2026-03-17T22:59:37.686Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [pureba obra #25 ]
+2026-03-17T22:59:37.687Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (5:NUMERIC) <- [377777777]
+2026-03-17T22:59:37.687Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (6:DOUBLE) <- [20.205259559687736]
+2026-03-17T22:59:37.688Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (7:DOUBLE) <- [-89.28726196289064]
+2026-03-17T22:59:37.689Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [tekax]
+2026-03-17T22:59:37.690Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [obra #25 ]
+2026-03-17T22:59:37.690Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (10:INTEGER) <- [3]
+2026-03-17T22:59:37.691Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (11:VARCHAR) <- [PLANEACION]
+2026-03-17T22:59:37.692Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (12:TIMESTAMP) <- [2026-03-17T22:59:37.668796760]
+2026-03-17T22:59:37.693Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (13:BIGINT) <- [1]
+2026-03-17T22:59:37.693Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (14:BIGINT) <- [27]
+2026-03-17T22:59:37.701Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    UPDATE
+        obra_images 
+    SET
+        deleted = true,
+        deleted_at = NOW() 
+    WHERE
+        id = ?
+2026-03-17T22:59:37.702Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [63]
+2026-03-17T22:59:37.731Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        om1_0.id,
+        om1_0.agency,
+        om1_0.created_at,
+        om1_0.created_by_id,
+        om1_0.deleted,
+        om1_0.deleted_at,
+        om1_0.description,
+        i1_0.obra_id,
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.created_by_id,
+        i1_0.deleted,
+        i1_0.deleted_at,
+        i1_0.mime_type,
+        i1_0.position,
+        i1_0.provider_id,
+        i1_0.size,
+        i1_0.thumb_url,
+        i1_0.updated_at,
+        i1_0.updated_by_id,
+        i1_0.url,
+        om1_0.investment,
+        om1_0.latitude,
+        om1_0.longitude,
+        om1_0.municipality,
+        om1_0.name,
+        om1_0.progress,
+        om1_0.status,
+        om1_0.updated_at,
+        om1_0.updated_by_id 
+    from
+        obras om1_0 
+    left join
+        obra_images i1_0 
+            on om1_0.id=i1_0.obra_id 
+            and (i1_0.deleted = false) 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.id=?
+2026-03-17T22:59:37.731Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [27]
+2026-03-17T22:59:37.736Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        um1_0.id_user,
+        um1_0.active,
+        um1_0.created_at,
+        um1_0.created_by_id,
+        um1_0.deleted,
+        um1_0.deleted_at,
+        um1_0.email,
+        um1_0.first_last_name,
+        um1_0.is_first_login,
+        um1_0.middle_name,
+        um1_0.name,
+        um1_0.password,
+        um1_0.phone,
+        um1_0.role_id,
+        r1_0.id_role,
+        r1_0.description,
+        r1_0.name,
+        um1_0.second_last_name,
+        um1_0.two_factor_enabled,
+        um1_0.two_factor_secret,
+        um1_0.updated_at,
+        um1_0.updated_by_id,
+        um1_0.verification_code 
+    from
+        users um1_0 
+    join
+        roles r1_0 
+            on r1_0.id_role=um1_0.role_id 
+    where
+        um1_0.id_user=? 
+        and (
+            um1_0.deleted = false
+        )
+2026-03-17T22:59:37.737Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-17T22:59:38.120Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
+    select
+        om1_0.id,
+        om1_0.name,
+        om1_0.municipality,
+        om1_0.description,
+        om1_0.status,
+        om1_0.progress,
+        om1_0.created_at 
+    from
+        obras om1_0 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.deleted=false 
+    order by
+        7 desc 
+    fetch
+        first ? rows only
+2026-03-17T22:59:38.122Z TRACE 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
+2026-03-17T22:59:38.128Z DEBUG 57 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
+    select
+        count(om1_0.id) 
+    from
+        obras om1_0 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.deleted=false
+2026-03-17T23:01:50.946Z  INFO 57 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-17T23:01:50.957Z  INFO 57 --- [CimientosDelRenacimientoBackend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-03-17T23:01:51.003Z  INFO 57 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-17T23:01:51.016Z  INFO 57 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-17T23:01:51.033Z  INFO 57 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-03-17T23:02:48.845Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Starting CimientosDelRenacimientoBackendApplication using Java 17.0.11 with PID 64 (/app/target/classes started by root in /app)
+2026-03-17T23:02:48.856Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : The following 1 profile is active: "staging"
+2026-03-17T23:02:49.161Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-17T23:02:49.164Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-17T23:02:53.894Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-17T23:02:54.381Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 435 ms. Found 4 JPA repository interfaces.
+2026-03-17T23:02:57.214Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-17T23:02:57.271Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-17T23:02:57.275Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-03-17T23:02:57.421Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-17T23:02:57.424Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 8251 ms
+2026-03-17T23:02:58.267Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-17T23:02:58.565Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-03-17T23:02:58.764Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-17T23:03:00.149Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-17T23:03:00.292Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-17T23:03:00.717Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3b3e85f7
+2026-03-17T23:03:00.724Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-17T23:03:01.031Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-17T23:03:06.003Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-17T23:03:06.377Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-17T23:03:07.511Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-17T23:03:10.943Z  WARN 64 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 3e7304c1-5750-44bc-a770-d2ffe8c62ec5
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-17T23:03:10.976Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-17T23:03:12.242Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-17T23:03:12.334Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-17T23:03:12.363Z  INFO 64 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Started CimientosDelRenacimientoBackendApplication in 25.524 seconds (process running for 26.948)
+2026-03-17T23:03:12.575Z DEBUG 64 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.SQL                        : 
+    select
+        count(*) 
+    from
+        roles rm1_0

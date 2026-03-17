@@ -22,6 +22,9 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 
+# [CLEAN CODE] Creamos la carpeta de logs explícitamente
+RUN mkdir -p logs && chmod 777 logs
+
 # Copiamos el .jar generado desde el build stage
 COPY --from=build /app/target/*.jar app.jar
 
