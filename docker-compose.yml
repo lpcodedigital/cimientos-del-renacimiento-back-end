@@ -7,3 +7,5 @@ services:
       SPRING_PROFILES_ACTIVE: default
     env_file:
       - .env
+    volumes:
+      - ./logs:/app/logs # <-- Sincroniza la carpeta local con el contenedor
