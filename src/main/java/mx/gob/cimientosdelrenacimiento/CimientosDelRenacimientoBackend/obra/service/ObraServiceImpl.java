@@ -168,26 +168,35 @@ public class ObraServiceImpl implements IObraService {
 
         // 7. Procesar las nuevas imagenes a agregar
         if (newFiles != null && !newFiles.isEmpty()) {
-             
-            // Validar la cantidad total de imagenes despues de agregar las nuevas
-            if (obra.getImages().size() + newFiles.size() > 10){
-                throw new IllegalStateException("No se pueden agregar más de 10 imágenes a una obra.");
+
+            // FILTRO CRITICO: Validar solo archivos realies (no vacios)
+            List<MultipartFile> validFiles = newFiles.stream().filter(
+                file -> !file.isEmpty() && file.getSize() > 0).collect(
+                    Collectors.toList());
+            
+            if (!validFiles.isEmpty()) {
+
+                // Validar la cantidad total de imagenes despues de agregar las nuevas
+                if (obra.getImages().size() + validFiles.size() > 10){
+                    throw new IllegalStateException("No se pueden agregar más de 10 imágenes a una obra.");
+                }
+    
+                validFiles.forEach(file -> {
+                    
+                    ImageStorageResponse response = imageStorageService.upload(file);
+                    ObraImageModel imgModel = new ObraImageModel();
+    
+                    imgModel.setUrl(response.url());
+                    imgModel.setProviderId(response.providerId());
+                    imgModel.setThumbUrl(response.thumbUrl());
+                    imgModel.setMimeType(response.mimeType());
+                    imgModel.setSize(response.size());
+                    imgModel.setPosition(null);
+    
+                    obra.addImage(imgModel);
+                });
             }
-
-            newFiles.forEach(file -> {
-                
-                ImageStorageResponse response = imageStorageService.upload(file);
-                ObraImageModel imgModel = new ObraImageModel();
-
-                imgModel.setUrl(response.url());
-                imgModel.setProviderId(response.providerId());
-                imgModel.setThumbUrl(response.thumbUrl());
-                imgModel.setMimeType(response.mimeType());
-                imgModel.setSize(response.size());
-                imgModel.setPosition(null);
-
-                obra.addImage(imgModel);
-            });
+             
         }
        
         return obraMapper.toObraResponseDTO(obraRespository.save(obra));
