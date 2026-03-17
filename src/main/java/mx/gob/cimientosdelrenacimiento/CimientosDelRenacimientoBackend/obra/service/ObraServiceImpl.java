@@ -160,7 +160,8 @@ public class ObraServiceImpl implements IObraService {
                 imageStorageService.delete(img.getProviderId());
             } catch (Exception e) {
                 // Loguear el error pero continuar con la eliminación si es critico mantener la coherencia
-                System.err.println("Error al eliminar la imagen en storage: " + img.getProviderId() + " - " + e.getMessage());
+                // Si Cloudflare falla por red o API, solo avisamos en consola
+                System.err.println("Inconsistencia: No se borró en la nube, pero se quitará de la DB: " + img.getProviderId() + " - " + e.getMessage());
             }
             // Eliminar de la colección de la obra
             obra.getImages().remove(img); 
