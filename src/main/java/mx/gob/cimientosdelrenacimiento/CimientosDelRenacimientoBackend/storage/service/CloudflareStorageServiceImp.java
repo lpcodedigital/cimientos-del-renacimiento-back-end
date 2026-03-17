@@ -93,11 +93,18 @@ public class CloudflareStorageServiceImp implements IImageStorageService{
             .header("Authorization", "Bearer " + cloudflareConfig.getApiToken())
             .retrieve()
             .onStatus(status -> status.equals(HttpStatus.NOT_FOUND), (req, res) -> {
-                // Si la imagen no existe, no hacemos nada
-                throw new StorageException("La imagen no existe en el servicio de almacenamiento externo cloudflare.");
+                /*
+                Esto excepcion rompe con la arquitectura de software (Clean code + solid),ya que no hace que sea un metodo resiliente y 
+                tenga una responsavilidad unica por lo que devuelve fragil la arquitectura de software.
+                 */
+                //throw new StorageException("La imagen no existe en el servicio de almacenamiento externo cloudflare.");
+                
+                //LOGICA CLEAN: Si no existe, imprimimos un aviso, pero no lanzamos una excepción.
+                // El objetivo de borrar se considera "exitoso" porque ya no está
+                System.out.println("Aviso: la imagen " + providerId + " ya no existe en el servicio de almacenamiento externo.");
             })
             .onStatus(HttpStatusCode::isError, (req, res) ->{
-                throw new StorageException("Error al eliminar la imagen en el servicio de almacenamiento externo cloudflare.");  
+                throw new StorageException("Error de comunicación con el servicio de almacenamiento externo al intentar borrar la imagen.");  
             })
             .toBodilessEntity();
         } catch (Exception e) {
