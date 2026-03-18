@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.ConflictException;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.ResourceNotFoundException;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraMapaDTO;
@@ -30,6 +31,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.storage.d
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.storage.service.IImageStorageService;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 @Transactional
 public class ObraServiceImpl implements IObraService {
@@ -224,6 +226,8 @@ public class ObraServiceImpl implements IObraService {
         // 2. Al guardar, JPA Auditing pondra al usuario actual en 'updated_by'
         //obraRespository.save(obra);
 
+        log.info("Iniciando proceso de borrado (soft delete) para la obra: {}", obra.getName());
+
         /*
             3. Las imagenes tambien se mantienen con el 'updated_by' y 'deleted_at' 
             del que borra la obra, hay que recorrerlas y marcarlas como borradas
@@ -233,12 +237,13 @@ public class ObraServiceImpl implements IObraService {
             img.setDeletedAt(LocalDateTime.now());
 
             // Intentar borrar en Cloudflare mientras recorremos las imágenes, así evitamos tener que hacer un segundo recorrido solo para eso
-            //try {
-            //    imageStorageService.delete(img.getProviderId());
-            //} catch (Exception e) {
-            //    // Loguear el error pero continuar con la eliminación si es critico mantener la coherencia
-            //    System.err.println("Error al eliminar la imagen en storage: " + img.getProviderId() + " - " + e.getMessage());
-            //}
+            try {
+                imageStorageService.delete(img.getProviderId());
+                log.info("Imagen eliminado de CloudFlare exitosamente: {}", img.getProviderId());
+            } catch (Exception e) {
+                // Loguear el error pero continuar con la eliminación si es critico mantener la coherencia
+                log.error("Error al eliminar la imagen del storage remoto {}: {}", img.getProviderId() , e.getMessage());
+            }
         });
 
         // 4. ¡PASO CLAVE!: Sincronizar cambios de auditoría
