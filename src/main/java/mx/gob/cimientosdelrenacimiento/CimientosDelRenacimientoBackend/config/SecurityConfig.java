@@ -63,6 +63,9 @@ public class SecurityConfig {
                 // Permitir acceso sin autenticación a las rutas de autenticación (signup, signin, etc)
                 .requestMatchers("/api/v1/auth/**").permitAll()
 
+                // Permitir acceso sin autenticación a las rutas public 
+                .requestMatchers("/api/v1/public/**").permitAll()
+
                 // Permitir acceso con un JWT valido a las rutas de usuarios
                 .requestMatchers("/api/v1/user/**").authenticated()
 
