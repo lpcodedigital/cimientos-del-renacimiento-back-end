@@ -1,22 +1,77 @@
-2026-03-21T17:04:02.314Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Starting CimientosDelRenacimientoBackendApplication using Java 17.0.11 with PID 71 (/app/target/classes started by root in /app)
-2026-03-21T17:04:02.338Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : The following 1 profile is active: "staging"
-2026-03-21T17:04:02.673Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-03-21T17:04:02.676Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-03-21T17:04:05.765Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-03-21T17:04:06.067Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 279 ms. Found 4 JPA repository interfaces.
-2026-03-21T17:04:08.182Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2026-03-21T17:04:08.222Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-03-21T17:04:08.224Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
-2026-03-21T17:04:08.346Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-03-21T17:04:08.348Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5663 ms
-2026-03-21T17:04:08.849Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-03-21T17:04:09.041Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
-2026-03-21T17:04:09.157Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-03-21T17:04:09.987Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-03-21T17:04:10.076Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-03-21T17:04:10.443Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@53175023
-2026-03-21T17:04:10.448Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-03-21T17:04:10.692Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-03-25T03:38:36.361Z  INFO 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-25T03:38:36.443Z  INFO 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-25T03:38:36.748Z  INFO 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 301 ms
+2026-03-25T03:43:09.275Z  INFO 70 --- [CimientosDelRenacimientoBackend] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-25T03:43:09.560Z  INFO 70 --- [CimientosDelRenacimientoBackend] [Thread-5] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-25T03:43:09.711Z  INFO 70 --- [CimientosDelRenacimientoBackend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-03-25T03:43:09.909Z  INFO 70 --- [CimientosDelRenacimientoBackend] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-25T03:43:10.283Z  INFO 70 --- [CimientosDelRenacimientoBackend] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-25T03:43:10.457Z  INFO 70 --- [CimientosDelRenacimientoBackend] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-03-25T03:43:14.649Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Starting CimientosDelRenacimientoBackendApplication using Java 17.0.11 with PID 70 (/app/target/classes started by root in /app)
+2026-03-25T03:43:14.657Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : The following 1 profile is active: "staging"
+2026-03-25T03:43:17.377Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-25T03:43:17.835Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 452 ms. Found 4 JPA repository interfaces.
+2026-03-25T03:43:19.207Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-25T03:43:19.224Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-25T03:43:19.228Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-03-25T03:43:19.517Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-25T03:43:19.520Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4819 ms
+2026-03-25T03:43:20.347Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-25T03:43:20.412Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-25T03:43:20.534Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-25T03:43:20.548Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-03-25T03:43:20.667Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@db8a3a0
+2026-03-25T03:43:20.673Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-03-25T03:43:20.750Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 16.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-25T03:43:22.096Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-25T03:43:22.562Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-25T03:43:24.260Z  WARN 70 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 0d0d54c1-a6fa-4920-9fbe-ed0669f98f29
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-25T03:43:24.266Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-25T03:43:24.687Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-25T03:43:24.729Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-25T03:43:24.746Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Started CimientosDelRenacimientoBackendApplication in 10.701 seconds (process running for 14810.643)
+2026-03-25T03:43:24.764Z DEBUG 70 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.SQL                        : 
+    select
+        count(*) 
+    from
+        roles rm1_0
+2026-03-25T03:43:24.784Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-25T03:43:27.946Z  INFO 70 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-25T03:43:27.959Z  INFO 70 --- [CimientosDelRenacimientoBackend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-03-25T03:43:28.009Z  INFO 70 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-25T03:43:28.020Z  INFO 70 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2026-03-25T03:43:28.055Z  INFO 70 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2026-03-25T03:44:20.886Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Starting CimientosDelRenacimientoBackendApplication using Java 17.0.11 with PID 74 (/app/target/classes started by root in /app)
+2026-03-25T03:44:20.906Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : The following 1 profile is active: "staging"
+2026-03-25T03:44:21.174Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-03-25T03:44:21.175Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-03-25T03:44:27.133Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-25T03:44:28.747Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 1558 ms. Found 4 JPA repository interfaces.
+2026-03-25T03:44:33.001Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-25T03:44:33.054Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-25T03:44:33.057Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-03-25T03:44:33.202Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-25T03:44:33.203Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 12022 ms
+2026-03-25T03:44:34.085Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-25T03:44:34.687Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
+2026-03-25T03:44:35.014Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-25T03:44:36.410Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-25T03:44:36.588Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-25T03:44:37.293Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@67d486e2
+2026-03-25T03:44:37.302Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-25T03:44:38.483Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 16.13
@@ -24,28 +79,28 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-03-21T17:04:13.771Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-21T17:04:14.154Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-03-21T17:04:14.921Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-03-21T17:04:18.473Z  WARN 71 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+2026-03-25T03:44:46.465Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-25T03:44:47.129Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-25T03:44:49.469Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-25T03:44:54.332Z  WARN 74 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: 6f58d696-67fb-40ab-a8cf-63e27e856aca
+Using generated security password: a73463f4-29e0-46a7-a1b4-683ba1c25db6
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2026-03-21T17:04:18.491Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-03-21T17:04:19.360Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2026-03-21T17:04:19.426Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2026-03-21T17:04:19.448Z  INFO 71 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Started CimientosDelRenacimientoBackendApplication in 18.52 seconds (process running for 19.654)
-2026-03-21T17:04:19.609Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.SQL                        : 
+2026-03-25T03:44:54.356Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-25T03:44:55.750Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-25T03:44:55.902Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-25T03:44:55.949Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Started CimientosDelRenacimientoBackendApplication in 39.527 seconds (process running for 42.587)
+2026-03-25T03:44:56.191Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.SQL                        : 
     select
         count(*) 
     from
         roles rm1_0
-2026-03-21T17:04:55.705Z  INFO 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-21T17:04:55.709Z  INFO 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-03-21T17:04:55.717Z  INFO 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
-2026-03-21T17:05:15.899Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+2026-03-25T03:44:59.631Z  INFO 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-25T03:44:59.632Z  INFO 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-25T03:44:59.636Z  INFO 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-03-25T03:45:00.549Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
     select
         um1_0.id_user,
         um1_0.active,
@@ -74,8 +129,8 @@ This generated password is for development use only. Your security configuration
             um1_0.deleted = false
         ) 
         and um1_0.email=?
-2026-03-21T17:05:15.908Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [admin@cimientosdelrenacimiento.gob.mx]
-2026-03-21T17:05:15.961Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+2026-03-25T03:45:00.554Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [admin@cimientosdelrenacimiento.gob.mx]
+2026-03-25T03:45:00.767Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
     select
         rm1_0.id_role,
         rm1_0.description,
@@ -84,8 +139,8 @@ This generated password is for development use only. Your security configuration
         roles rm1_0 
     where
         rm1_0.id_role=?
-2026-03-21T17:05:15.963Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-03-21T17:05:16.526Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-03-25T03:45:00.770Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-25T03:45:02.505Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
     select
         upper(om1_0.municipality),
         count(om1_0.id) 
@@ -98,7 +153,7 @@ This generated password is for development use only. Your security configuration
         and om1_0.deleted=false 
     group by
         upper(om1_0.municipality)
-2026-03-21T17:05:16.551Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-03-25T03:45:02.571Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
     select
         count(*) 
     from
@@ -107,7 +162,7 @@ This generated password is for development use only. Your security configuration
         (
             om1_0.deleted = false
         )
-2026-03-21T17:05:16.559Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-03-25T03:45:02.587Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
     select
         sum(om1_0.investment) 
     from
@@ -117,7 +172,7 @@ This generated password is for development use only. Your security configuration
             om1_0.deleted = false
         ) 
         and om1_0.deleted=false
-2026-03-21T17:05:16.571Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-03-25T03:45:02.615Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
     select
         avg(om1_0.progress) 
     from
@@ -127,7 +182,7 @@ This generated password is for development use only. Your security configuration
             om1_0.deleted = false
         ) 
         and om1_0.deleted=false
-2026-03-21T17:05:16.579Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-03-25T03:45:02.636Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
     select
         avg(om1_0.progress) 
     from
@@ -137,7 +192,7 @@ This generated password is for development use only. Your security configuration
             om1_0.deleted = false
         ) 
         and om1_0.deleted=false
-2026-03-21T17:05:16.592Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-03-25T03:45:02.664Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
     select
         om1_0.status,
         count(om1_0.id) 
@@ -150,1308 +205,7 @@ This generated password is for development use only. Your security configuration
         and om1_0.deleted=false 
     group by
         om1_0.status
-2026-03-21T17:05:49.072Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:05:49.085Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:05:49.096Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:05:49.108Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:05:49.116Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:05:49.130Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:05:54.914Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:05:54.925Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:05:54.932Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:05:54.941Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:05:54.948Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:05:54.955Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:07:05.181Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:07:05.189Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:07:05.194Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:07:05.200Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:07:05.206Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:07:05.211Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:07:12.479Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:07:12.490Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:07:12.499Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:07:12.506Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:07:12.513Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:07:12.524Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:10:16.314Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:10:16.321Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:10:16.327Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:10:16.332Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:10:16.340Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:10:16.347Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:12:43.953Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:12:43.963Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:12:43.972Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:12:43.985Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:12:43.990Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:12:43.994Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:12:52.051Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:12:52.061Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:12:52.068Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:12:52.077Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:12:52.094Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:12:52.106Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:13:28.553Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:13:28.557Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:13:28.560Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:13:28.563Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:13:28.566Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:13:28.570Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:25:16.054Z  WARN 71 --- [CimientosDelRenacimientoBackend] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m1s139ms407µs599ns).
-2026-03-21T17:26:51.025Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:26:51.032Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:26:51.038Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:26:51.043Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:26:51.048Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:26:51.052Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:27:12.079Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:27:12.085Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:27:12.090Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:27:12.094Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:27:12.099Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:27:12.104Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:32:53.629Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:32:53.642Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:32:53.654Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:32:53.670Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:32:53.687Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:32:53.701Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:33:45.500Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:33:45.511Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:33:45.518Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:33:45.526Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:33:45.533Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:33:45.543Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:35:30.514Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:35:30.529Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:35:30.535Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:35:30.542Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:35:30.550Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:35:30.558Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:36:07.854Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:36:07.865Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:36:07.874Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:36:07.885Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:36:07.893Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:36:07.903Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:40:52.917Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:40:52.924Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:40:52.929Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:40:52.933Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:40:52.938Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:40:52.946Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:42:28.841Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:42:28.850Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:42:28.858Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:42:28.865Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:42:28.880Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:42:28.896Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:43:02.605Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:43:02.625Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:43:02.652Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:43:02.660Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:43:02.668Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:43:02.699Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:43:09.274Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:43:09.278Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:43:09.283Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:43:09.288Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:43:09.292Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:43:09.296Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:45:55.034Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:45:55.043Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:45:55.047Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:45:55.054Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:45:55.060Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:45:55.067Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:51:44.531Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:51:44.543Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:51:44.560Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:51:44.574Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:51:44.593Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:51:44.621Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:52:35.535Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+2026-03-25T03:45:10.586Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
     select
         om1_0.id,
         om1_0.name,
@@ -1471,8 +225,8 @@ This generated password is for development use only. Your security configuration
         7 desc 
     fetch
         first ? rows only
-2026-03-21T17:52:35.537Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
-2026-03-21T17:52:35.570Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+2026-03-25T03:45:10.590Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
+2026-03-25T03:45:10.652Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
     select
         count(om1_0.id) 
     from
@@ -1482,395 +236,11 @@ This generated password is for development use only. Your security configuration
             om1_0.deleted = false
         ) 
         and om1_0.deleted=false
-2026-03-21T17:52:35.625Z  WARN 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+2026-03-25T03:45:10.805Z  WARN 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
 	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
 	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
 
-2026-03-21T17:52:40.747Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:52:40.757Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:52:40.763Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:52:40.769Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:52:40.777Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:52:40.786Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T17:54:59.144Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        om1_0.id,
-        om1_0.name,
-        om1_0.municipality,
-        om1_0.description,
-        om1_0.status,
-        om1_0.progress,
-        om1_0.created_at 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    order by
-        7 desc 
-    fetch
-        first ? rows only
-2026-03-21T17:54:59.146Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
-2026-03-21T17:54:59.154Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:55:01.920Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T17:55:01.932Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T17:55:01.941Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:55:01.946Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:55:01.953Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T17:55:01.959Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T18:03:27.534Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        om1_0.id,
-        om1_0.name,
-        om1_0.municipality,
-        om1_0.description,
-        om1_0.status,
-        om1_0.progress,
-        om1_0.created_at 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    order by
-        7 desc 
-    fetch
-        first ? rows only
-2026-03-21T18:03:27.537Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
-2026-03-21T18:03:27.547Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:05:28.458Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T18:05:28.464Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T18:05:28.471Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:05:28.476Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:05:28.482Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:05:28.489Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T18:15:57.775Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T18:15:57.782Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T18:15:57.788Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:15:57.795Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:15:57.803Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:15:57.818Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T18:16:02.343Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        om1_0.id,
-        om1_0.name,
-        om1_0.municipality,
-        om1_0.description,
-        om1_0.status,
-        om1_0.progress,
-        om1_0.created_at 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    order by
-        7 desc 
-    fetch
-        first ? rows only
-2026-03-21T18:16:02.344Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
-2026-03-21T18:16:02.351Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:16:14.784Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
-    select
-        om1_0.id,
-        om1_0.name,
-        om1_0.municipality,
-        om1_0.description,
-        om1_0.status,
-        om1_0.progress,
-        om1_0.created_at 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    order by
-        7 desc 
-    fetch
-        first ? rows only
-2026-03-21T18:16:14.786Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
-2026-03-21T18:16:14.791Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-6] org.hibernate.SQL                        : 
-    select
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:16:17.813Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+2026-03-25T03:45:19.421Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
     select
         om1_0.id,
         om1_0.agency,
@@ -1913,8 +283,8 @@ This generated password is for development use only. Your security configuration
             om1_0.deleted = false
         ) 
         and om1_0.id=?
-2026-03-21T18:16:17.815Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [26]
-2026-03-21T18:16:17.861Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+2026-03-25T03:45:19.423Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [26]
+2026-03-25T03:45:19.476Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
     select
         um1_0.id_user,
         um1_0.active,
@@ -1949,8 +319,8 @@ This generated password is for development use only. Your security configuration
         and (
             um1_0.deleted = false
         )
-2026-03-21T18:16:17.864Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-03-21T18:16:21.422Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-03-25T03:45:19.478Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-25T03:45:22.169Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
     select
         om1_0.id,
         om1_0.agency,
@@ -1993,8 +363,8 @@ This generated password is for development use only. Your security configuration
             om1_0.deleted = false
         ) 
         and om1_0.id=?
-2026-03-21T18:16:21.423Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [26]
-2026-03-21T18:16:21.427Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
+2026-03-25T03:45:22.171Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [26]
+2026-03-25T03:45:22.179Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
     select
         um1_0.id_user,
         um1_0.active,
@@ -2029,8 +399,201 @@ This generated password is for development use only. Your security configuration
         and (
             um1_0.deleted = false
         )
-2026-03-21T18:16:21.429Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-03-21T18:16:26.510Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+2026-03-25T03:45:22.182Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-25T03:45:28.482Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        om1_0.id,
+        om1_0.agency,
+        om1_0.created_at,
+        om1_0.created_by_id,
+        om1_0.deleted,
+        om1_0.deleted_at,
+        om1_0.description,
+        i1_0.obra_id,
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.created_by_id,
+        i1_0.deleted,
+        i1_0.deleted_at,
+        i1_0.mime_type,
+        i1_0.position,
+        i1_0.provider_id,
+        i1_0.size,
+        i1_0.thumb_url,
+        i1_0.updated_at,
+        i1_0.updated_by_id,
+        i1_0.url,
+        om1_0.investment,
+        om1_0.latitude,
+        om1_0.longitude,
+        om1_0.municipality,
+        om1_0.name,
+        om1_0.progress,
+        om1_0.status,
+        om1_0.updated_at,
+        om1_0.updated_by_id 
+    from
+        obras om1_0 
+    left join
+        obra_images i1_0 
+            on om1_0.id=i1_0.obra_id 
+            and (i1_0.deleted = false) 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.id=?
+2026-03-25T03:45:28.485Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [26]
+2026-03-25T03:45:28.512Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        um1_0.id_user,
+        um1_0.active,
+        um1_0.created_at,
+        um1_0.created_by_id,
+        um1_0.deleted,
+        um1_0.deleted_at,
+        um1_0.email,
+        um1_0.first_last_name,
+        um1_0.is_first_login,
+        um1_0.middle_name,
+        um1_0.name,
+        um1_0.password,
+        um1_0.phone,
+        um1_0.role_id,
+        r1_0.id_role,
+        r1_0.description,
+        r1_0.name,
+        um1_0.second_last_name,
+        um1_0.two_factor_enabled,
+        um1_0.two_factor_secret,
+        um1_0.updated_at,
+        um1_0.updated_by_id,
+        um1_0.verification_code 
+    from
+        users um1_0 
+    join
+        roles r1_0 
+            on r1_0.id_role=um1_0.role_id 
+    where
+        um1_0.id_user=? 
+        and (
+            um1_0.deleted = false
+        )
+2026-03-25T03:45:28.514Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-25T03:45:28.689Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    update
+        obras 
+    set
+        agency=?,
+        deleted=?,
+        deleted_at=?,
+        description=?,
+        investment=?,
+        latitude=?,
+        longitude=?,
+        municipality=?,
+        name=?,
+        progress=?,
+        status=?,
+        updated_at=?,
+        updated_by_id=? 
+    where
+        id=?
+2026-03-25T03:45:28.698Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [Japan]
+2026-03-25T03:45:28.699Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (2:BOOLEAN) <- [false]
+2026-03-25T03:45:28.700Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (3:TIMESTAMP) <- [null]
+2026-03-25T03:45:28.701Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (4:VARCHAR) <- [obra 24]
+2026-03-25T03:45:28.702Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (5:NUMERIC) <- [23454536]
+2026-03-25T03:45:28.704Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (6:DOUBLE) <- [21.150755135700315]
+2026-03-25T03:45:28.706Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (7:DOUBLE) <- [-88.9396905899048]
+2026-03-25T03:45:28.708Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (8:VARCHAR) <- [Temax]
+2026-03-25T03:45:28.711Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (9:VARCHAR) <- [prueba #24]
+2026-03-25T03:45:28.713Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (10:INTEGER) <- [0]
+2026-03-25T03:45:28.716Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (11:VARCHAR) <- [PLANEACION]
+2026-03-25T03:45:28.717Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (12:TIMESTAMP) <- [2026-03-25T03:45:28.640475352]
+2026-03-25T03:45:28.721Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (13:BIGINT) <- [1]
+2026-03-25T03:45:28.722Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (14:BIGINT) <- [26]
+2026-03-25T03:45:28.805Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        om1_0.id,
+        om1_0.agency,
+        om1_0.created_at,
+        om1_0.created_by_id,
+        om1_0.deleted,
+        om1_0.deleted_at,
+        om1_0.description,
+        i1_0.obra_id,
+        i1_0.id,
+        i1_0.created_at,
+        i1_0.created_by_id,
+        i1_0.deleted,
+        i1_0.deleted_at,
+        i1_0.mime_type,
+        i1_0.position,
+        i1_0.provider_id,
+        i1_0.size,
+        i1_0.thumb_url,
+        i1_0.updated_at,
+        i1_0.updated_by_id,
+        i1_0.url,
+        om1_0.investment,
+        om1_0.latitude,
+        om1_0.longitude,
+        om1_0.municipality,
+        om1_0.name,
+        om1_0.progress,
+        om1_0.status,
+        om1_0.updated_at,
+        om1_0.updated_by_id 
+    from
+        obras om1_0 
+    left join
+        obra_images i1_0 
+            on om1_0.id=i1_0.obra_id 
+            and (i1_0.deleted = false) 
+    where
+        (
+            om1_0.deleted = false
+        ) 
+        and om1_0.id=?
+2026-03-25T03:45:28.807Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [26]
+2026-03-25T03:45:28.814Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        um1_0.id_user,
+        um1_0.active,
+        um1_0.created_at,
+        um1_0.created_by_id,
+        um1_0.deleted,
+        um1_0.deleted_at,
+        um1_0.email,
+        um1_0.first_last_name,
+        um1_0.is_first_login,
+        um1_0.middle_name,
+        um1_0.name,
+        um1_0.password,
+        um1_0.phone,
+        um1_0.role_id,
+        r1_0.id_role,
+        r1_0.description,
+        r1_0.name,
+        um1_0.second_last_name,
+        um1_0.two_factor_enabled,
+        um1_0.two_factor_secret,
+        um1_0.updated_at,
+        um1_0.updated_by_id,
+        um1_0.verification_code 
+    from
+        users um1_0 
+    join
+        roles r1_0 
+            on r1_0.id_role=um1_0.role_id 
+    where
+        um1_0.id_user=? 
+        and (
+            um1_0.deleted = false
+        )
+2026-03-25T03:45:28.819Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-25T03:45:29.191Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
     select
         om1_0.id,
         om1_0.name,
@@ -2050,8 +613,8 @@ This generated password is for development use only. Your security configuration
         7 desc 
     fetch
         first ? rows only
-2026-03-21T18:16:26.512Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
-2026-03-21T18:16:26.519Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
+2026-03-25T03:45:29.193Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
+2026-03-25T03:45:29.203Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
     select
         count(om1_0.id) 
     from
@@ -2061,620 +624,97 @@ This generated password is for development use only. Your security configuration
             om1_0.deleted = false
         ) 
         and om1_0.deleted=false
-2026-03-21T18:24:26.614Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        om1_0.id,
-        om1_0.name,
-        om1_0.municipality,
-        om1_0.description,
-        om1_0.status,
-        om1_0.progress,
-        om1_0.created_at 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    order by
-        7 desc 
-    fetch
-        first ? rows only
-2026-03-21T18:24:26.617Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
-2026-03-21T18:24:26.623Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:24:30.358Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        om1_0.id,
-        om1_0.name,
-        om1_0.municipality,
-        om1_0.description,
-        om1_0.status,
-        om1_0.progress,
-        om1_0.created_at 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    order by
-        7 desc 
-    fetch
-        first ? rows only
-2026-03-21T18:24:30.359Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
-2026-03-21T18:24:30.363Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:25:57.888Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        om1_0.id,
-        om1_0.name,
-        om1_0.municipality,
-        om1_0.description,
-        om1_0.status,
-        om1_0.progress,
-        om1_0.created_at 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    order by
-        7 desc 
-    fetch
-        first ? rows only
-2026-03-21T18:25:57.891Z TRACE 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
-2026-03-21T18:25:57.903Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
-    select
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:26:06.737Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T18:26:06.741Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T18:26:06.743Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:26:06.745Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:26:06.747Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:26:06.750Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T18:31:19.618Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T18:31:19.629Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T18:31:19.637Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:31:19.642Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:31:19.654Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:31:19.663Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T18:31:54.985Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T18:31:54.992Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T18:31:55.000Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:31:55.007Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:31:55.018Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:31:55.023Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T18:33:50.774Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T18:33:50.780Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T18:33:50.787Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:33:50.793Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:33:50.798Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:33:50.806Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-3] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T18:33:57.298Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T18:33:57.305Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T18:33:57.312Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:33:57.325Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:33:57.340Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:33:57.351Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T18:36:49.086Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T18:36:49.090Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T18:36:49.096Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:36:49.102Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:36:49.106Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:36:49.112Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T18:37:23.100Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        upper(om1_0.municipality),
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        upper(om1_0.municipality)
-2026-03-21T18:37:23.109Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        count(*) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-21T18:37:23.117Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        sum(om1_0.investment) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:37:23.122Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:37:23.130Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        avg(om1_0.progress) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false
-2026-03-21T18:37:23.135Z DEBUG 71 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-9] org.hibernate.SQL                        : 
-    select
-        om1_0.status,
-        count(om1_0.id) 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        ) 
-        and om1_0.deleted=false 
-    group by
-        om1_0.status
-2026-03-21T18:39:04.685Z  INFO 71 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2026-03-21T18:39:04.690Z  INFO 71 --- [CimientosDelRenacimientoBackend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2026-03-21T18:39:04.699Z  INFO 71 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-03-21T18:39:04.704Z  INFO 71 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2026-03-21T18:39:04.714Z  INFO 71 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2026-03-24T02:42:28.200Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Starting CimientosDelRenacimientoBackendApplication using Java 17.0.11 with PID 70 (/app/target/classes started by root in /app)
-2026-03-24T02:42:28.211Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : The following 1 profile is active: "staging"
-2026-03-24T02:42:28.411Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2026-03-24T02:42:28.413Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2026-03-24T02:42:34.824Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-03-24T02:42:35.690Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 806 ms. Found 4 JPA repository interfaces.
-2026-03-24T02:42:39.915Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2026-03-24T02:42:40.033Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-03-24T02:42:40.039Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
-2026-03-24T02:42:40.292Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-03-24T02:42:40.296Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 11878 ms
-2026-03-24T02:42:41.690Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-03-24T02:42:41.936Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
-2026-03-24T02:42:42.074Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-03-24T02:42:43.350Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-03-24T02:42:43.514Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-03-24T02:42:44.289Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4592480c
-2026-03-24T02:42:44.297Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-03-24T02:42:45.058Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+2026-03-25T03:47:05.004Z  INFO 74 --- [CimientosDelRenacimientoBackend] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2026-03-25T03:47:05.026Z  INFO 74 --- [CimientosDelRenacimientoBackend] [Thread-5] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-25T03:47:05.044Z  INFO 74 --- [CimientosDelRenacimientoBackend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-03-25T03:47:05.082Z  INFO 74 --- [CimientosDelRenacimientoBackend] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-25T03:47:05.102Z  INFO 74 --- [CimientosDelRenacimientoBackend] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-03-25T03:47:05.125Z  INFO 74 --- [CimientosDelRenacimientoBackend] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-03-25T03:47:05.813Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Starting CimientosDelRenacimientoBackendApplication using Java 17.0.11 with PID 74 (/app/target/classes started by root in /app)
+2026-03-25T03:47:05.816Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : The following 1 profile is active: "staging"
+2026-03-25T03:47:08.194Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-25T03:47:08.455Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 256 ms. Found 4 JPA repository interfaces.
+2026-03-25T03:47:09.149Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-25T03:47:09.153Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-25T03:47:09.155Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-03-25T03:47:09.199Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-25T03:47:09.206Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3371 ms
+2026-03-25T03:47:09.613Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-25T03:47:09.748Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-03-25T03:47:09.873Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-25T03:47:09.902Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-03-25T03:47:10.030Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@2fc8e61a
+2026-03-25T03:47:10.033Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-03-25T03:47:10.051Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
 	Database driver: undefined/unknown
 	Database version: 16.13
 	Autocommit mode: undefined/unknown
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-03-24T02:42:51.301Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-24T02:42:51.647Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-03-24T02:42:52.473Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-03-24T02:42:56.135Z  WARN 70 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+2026-03-25T03:47:10.869Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-25T03:47:11.112Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-25T03:47:13.679Z  WARN 74 --- [CimientosDelRenacimientoBackend] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: f48e20ba-562e-4109-a647-58707ab7e56e
+Using generated security password: 8cd0fca1-4f2c-4705-888e-5631a5abebd1
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2026-03-24T02:42:56.177Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2026-03-24T02:42:58.349Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2026-03-24T02:42:58.520Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2026-03-24T02:42:58.577Z  INFO 70 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Started CimientosDelRenacimientoBackendApplication in 31.77 seconds (process running for 32.887)
-2026-03-24T02:42:59.201Z DEBUG 70 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.SQL                        : 
+2026-03-25T03:47:13.690Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-25T03:47:14.305Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-03-25T03:47:14.348Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-25T03:47:14.363Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] mientosDelRenacimientoBackendApplication : Started CimientosDelRenacimientoBackendApplication in 8.76 seconds (process running for 180.987)
+2026-03-25T03:47:14.378Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [restartedMain] org.hibernate.SQL                        : 
     select
         count(*) 
     from
         roles rm1_0
-2026-03-24T02:45:13.708Z  INFO 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-24T02:45:13.709Z  INFO 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-03-24T02:45:13.713Z  INFO 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
-2026-03-24T02:47:02.872Z DEBUG 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+2026-03-25T03:47:14.396Z  INFO 74 --- [CimientosDelRenacimientoBackend] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2026-03-25T03:52:32.883Z  INFO 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-25T03:52:32.889Z  INFO 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-03-25T03:52:32.914Z  INFO 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 23 ms
+2026-03-25T03:52:44.068Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
     select
-        om1_0.id,
-        om1_0.name,
-        om1_0.latitude,
-        om1_0.longitude,
-        om1_0.municipality 
+        um1_0.id_user,
+        um1_0.active,
+        um1_0.created_at,
+        um1_0.created_by_id,
+        um1_0.deleted,
+        um1_0.deleted_at,
+        um1_0.email,
+        um1_0.first_last_name,
+        um1_0.is_first_login,
+        um1_0.middle_name,
+        um1_0.name,
+        um1_0.password,
+        um1_0.phone,
+        um1_0.role_id,
+        um1_0.second_last_name,
+        um1_0.two_factor_enabled,
+        um1_0.two_factor_secret,
+        um1_0.updated_at,
+        um1_0.updated_by_id,
+        um1_0.verification_code 
     from
-        obras om1_0 
+        users um1_0 
     where
         (
-            om1_0.deleted = false
-        )
-2026-03-24T02:50:07.012Z DEBUG 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+            um1_0.deleted = false
+        ) 
+        and um1_0.email=?
+2026-03-25T03:52:44.072Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [admin@cimientosdelrenacimiento.gob.mx]
+2026-03-25T03:52:44.085Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        rm1_0.id_role,
+        rm1_0.description,
+        rm1_0.name 
+    from
+        roles rm1_0 
+    where
+        rm1_0.id_role=?
+2026-03-25T03:52:44.088Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-25T03:52:44.669Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
     select
         om1_0.id,
         om1_0.agency,
@@ -2717,8 +757,8 @@ This generated password is for development use only. Your security configuration
             om1_0.deleted = false
         ) 
         and om1_0.id=?
-2026-03-24T02:50:07.019Z TRACE 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [17]
-2026-03-24T02:50:07.112Z DEBUG 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+2026-03-25T03:52:44.671Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [20]
+2026-03-25T03:52:44.709Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.SQL                        : 
     select
         um1_0.id_user,
         um1_0.active,
@@ -2753,123 +793,44 @@ This generated password is for development use only. Your security configuration
         and (
             um1_0.deleted = false
         )
-2026-03-24T02:50:07.113Z TRACE 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-03-24T02:50:57.298Z DEBUG 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+2026-03-25T03:52:44.714Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-03-25T03:52:47.395Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
     select
         om1_0.id,
         om1_0.name,
-        om1_0.latitude,
-        om1_0.longitude,
-        om1_0.municipality 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-24T02:51:26.857Z DEBUG 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-10] org.hibernate.SQL                        : 
-    select
-        om1_0.id,
-        om1_0.name,
-        om1_0.latitude,
-        om1_0.longitude,
-        om1_0.municipality 
-    from
-        obras om1_0 
-    where
-        (
-            om1_0.deleted = false
-        )
-2026-03-24T02:51:43.000Z DEBUG 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
-    select
-        om1_0.id,
-        om1_0.agency,
-        om1_0.created_at,
-        om1_0.created_by_id,
-        om1_0.deleted,
-        om1_0.deleted_at,
-        om1_0.description,
-        i1_0.obra_id,
-        i1_0.id,
-        i1_0.created_at,
-        i1_0.created_by_id,
-        i1_0.deleted,
-        i1_0.deleted_at,
-        i1_0.mime_type,
-        i1_0.position,
-        i1_0.provider_id,
-        i1_0.size,
-        i1_0.thumb_url,
-        i1_0.updated_at,
-        i1_0.updated_by_id,
-        i1_0.url,
-        om1_0.investment,
-        om1_0.latitude,
-        om1_0.longitude,
         om1_0.municipality,
-        om1_0.name,
-        om1_0.progress,
+        om1_0.description,
         om1_0.status,
-        om1_0.updated_at,
-        om1_0.updated_by_id 
+        om1_0.progress,
+        om1_0.created_at 
     from
         obras om1_0 
-    left join
-        obra_images i1_0 
-            on om1_0.id=i1_0.obra_id 
-            and (i1_0.deleted = false) 
     where
         (
             om1_0.deleted = false
         ) 
-        and om1_0.id=?
-2026-03-24T02:51:43.003Z TRACE 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [17]
-2026-03-24T02:51:43.011Z DEBUG 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+        and om1_0.deleted=false 
+    order by
+        7 desc 
+    fetch
+        first ? rows only
+2026-03-25T03:52:47.401Z TRACE 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:INTEGER) <- [10]
+2026-03-25T03:52:47.422Z DEBUG 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] org.hibernate.SQL                        : 
     select
-        um1_0.id_user,
-        um1_0.active,
-        um1_0.created_at,
-        um1_0.created_by_id,
-        um1_0.deleted,
-        um1_0.deleted_at,
-        um1_0.email,
-        um1_0.first_last_name,
-        um1_0.is_first_login,
-        um1_0.middle_name,
-        um1_0.name,
-        um1_0.password,
-        um1_0.phone,
-        um1_0.role_id,
-        r1_0.id_role,
-        r1_0.description,
-        r1_0.name,
-        um1_0.second_last_name,
-        um1_0.two_factor_enabled,
-        um1_0.two_factor_secret,
-        um1_0.updated_at,
-        um1_0.updated_by_id,
-        um1_0.verification_code 
-    from
-        users um1_0 
-    join
-        roles r1_0 
-            on r1_0.id_role=um1_0.role_id 
-    where
-        um1_0.id_user=? 
-        and (
-            um1_0.deleted = false
-        )
-2026-03-24T02:51:43.014Z TRACE 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
-2026-03-24T02:51:47.415Z DEBUG 70 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-2] org.hibernate.SQL                        : 
-    select
-        om1_0.id,
-        om1_0.name,
-        om1_0.latitude,
-        om1_0.longitude,
-        om1_0.municipality 
+        count(om1_0.id) 
     from
         obras om1_0 
     where
         (
             om1_0.deleted = false
-        )
+        ) 
+        and om1_0.deleted=false
+2026-03-25T03:52:47.518Z  WARN 74 --- [CimientosDelRenacimientoBackend] [http-nio-8080-exec-8] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-03-25T03:55:35.529Z  INFO 74 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-25T03:55:35.539Z  INFO 74 --- [CimientosDelRenacimientoBackend] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-03-25T03:55:35.557Z  INFO 74 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-25T03:55:35.566Z  INFO 74 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2026-03-25T03:55:35.577Z  INFO 74 --- [CimientosDelRenacimientoBackend] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.

@@ -87,7 +87,15 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // 1. Definir los orígenes permitidos (puedes ajustar esto según tus necesidades)
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+        configuration.setAllowedOrigins(Arrays.asList(
+        "http://localhost:5173", // Front Público (Vite Dev)
+            "http://localhost:5174", // Front Admin (Refine Dev)
+            "http://127.0.0.1:5173", // Front Público (Vite Dev)
+            "http://127.0.0.1:5174", // Front Admin (Refine Dev)
+            "http://localhost:3000", // Front Público (Docker Prod)
+            "http://localhost:3001"  // Front Admin (Docker Prod) 
+
+        ));
 
         // 2. Definir los metodos HTTP permitidos
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
