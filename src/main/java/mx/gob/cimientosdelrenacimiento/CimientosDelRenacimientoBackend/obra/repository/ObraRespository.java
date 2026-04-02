@@ -8,8 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraModel;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraLinkProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraMapaProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraPaginationProjection;
 
@@ -64,4 +66,8 @@ public interface ObraRespository extends JpaRepository<ObraModel, Long> {
      */
     @Query("SELECT o.municipality, COUNT(o) FROM ObraModel o WHERE o.deleted = false GROUP BY o.municipality")
     List<Object[]> countObrasByMunicipalityForPublicTable();
+
+    // Consulta para obtener solo id y nombre de obras por municipio, optimizada para la tabla pública
+    @Query("SELECT o.id as id, o.name as name FROM ObraModel o WHERE o.deleted = false AND o.municipality = :municipio")
+    List<ObraLinkProjection> findObrasByMunicipalityLight(@Param("municipio") String municipio);
 }
