@@ -25,6 +25,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.mapp
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraImageModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.ObraRespository;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraLinkProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraMapaProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraPaginationProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.storage.dto.ImageStorageResponse;
@@ -289,6 +290,11 @@ public class ObraServiceImpl implements IObraService {
             return dto;
         });
         
+    }
+
+    @Override
+    public List<ObraLinkProjection> getObrasByMunicipioPublic(String municipio) {
+        return obraRespository.findObrasByMunicipalityLight(municipio);
     }
 
 }

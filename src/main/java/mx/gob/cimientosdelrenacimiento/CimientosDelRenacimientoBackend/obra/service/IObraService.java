@@ -9,6 +9,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraResponseDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraResponseListDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraLinkProjection;
 
 public interface IObraService {
 
@@ -29,4 +30,7 @@ public interface IObraService {
 
     // Para obtener una lista paginada de obras usando la proyección personalizada
     Page<ObraResponseListDTO> findAllPaginated(int page, int size);
+
+    // Para obtener obras por municipio optimizadas para la tabla pública
+    List<ObraLinkProjection> getObrasByMunicipioPublic(String municipio);
 }
