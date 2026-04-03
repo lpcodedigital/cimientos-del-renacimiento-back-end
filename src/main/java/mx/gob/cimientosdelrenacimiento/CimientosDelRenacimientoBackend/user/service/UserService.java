@@ -48,8 +48,14 @@ public class UserService {
         return userPage.map(userMapper::toUserDTO);
     }
 
-    public Optional<UserDTO> getUserById(Long id){
-        return userRespository.findById(id).map(userMapper::toUserDTO);
+    public UserDTO getUserById(Long id){
+
+        UserModel user = userRespository.findById(id).orElseThrow(() -> 
+            new ResourceNotFoundException("Usuario con ID: " + id + " no encontrado.")
+        );
+
+        return userMapper.toUserDTO(user);
+        //return userRespository.findById(id).map(userMapper::toUserDTO);
     }
 
     public UserDTO getUserByEmail(String email) {
