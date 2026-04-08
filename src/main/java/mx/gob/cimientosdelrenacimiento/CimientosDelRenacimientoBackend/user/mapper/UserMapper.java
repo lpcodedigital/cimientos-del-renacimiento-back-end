@@ -25,9 +25,9 @@ public class UserMapper {
         user.setPhone(dto.getPhone());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
-        user.setActive(dto.getActive());
-        user.setIsFirstLogin(dto.getIsFirstLogin());
-        user.setTwoFactorEnabled(dto.getTwoFactorEnabled());
+        user.setActive(dto.getActive() != null ? dto.getActive() : false);
+        user.setIsFirstLogin(dto.getIsFirstLogin() != null ? dto.getIsFirstLogin() : true);
+        user.setTwoFactorEnabled(dto.getTwoFactorEnabled() != null ? dto.getTwoFactorEnabled() : false);
         user.setTwoFactorSecret(dto.getTwoFactorSecret());
         user.setVerificationCode(dto.getVerificationCode());
         user.setRole(role);
