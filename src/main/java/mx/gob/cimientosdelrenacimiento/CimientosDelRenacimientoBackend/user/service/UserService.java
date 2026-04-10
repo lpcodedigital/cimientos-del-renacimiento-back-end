@@ -1,6 +1,9 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.email.service.IEmailService;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.ConflictException;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.ResourceNotFoundException;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.role.model.RoleModel;
@@ -20,6 +25,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.repo
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.util.PasswordEncoder;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserService {
 
@@ -34,6 +40,8 @@ public class UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    private final IEmailService emailService;
 
 
     public Page<UserDTO> getAllUsers(Integer page, Integer size) {
@@ -97,6 +105,24 @@ public class UserService {
 
         // Guardar el usuario en la base de datos
         UserModel savedUser = userRespository.save(newUser);
+
+        // 3. ENVIAR CORREO (Fase B)
+        Map<String, Object> emailVariables = new HashMap<>();
+        emailVariables.put("name", savedUser.getName());
+        emailVariables.put("email", savedUser.getEmail());
+        emailVariables.put("password", userRequestDTO.getPassword()); // Enviar la contraseña original sin encriptar para que el usuario pueda iniciar sesión
+        
+        try {
+            emailService.sendHtmlEmail(
+                savedUser.getEmail(), 
+                "Bienvenido al SIB - Tus Credenciales de Acceso", 
+                "welcome-email", 
+                emailVariables
+            );
+        } catch (Exception e) {
+            // Logueamos el error pero no detenemos la creación del usuario
+            log.error("No se pudo enviar el correo de bienvenida: {}", e.getMessage());
+        }
 
         // Mapear modelo a DTO
         return userMapper.toUserDTO(savedUser);
