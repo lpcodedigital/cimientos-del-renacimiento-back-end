@@ -15,6 +15,7 @@ public class AuthMapper {
             .email(user.getEmail())
             .active(user.getActive())
             .role(user.getRole().getName())
+            .isFirstLogin(user.getIsFirstLogin())
             .build();
     }
 

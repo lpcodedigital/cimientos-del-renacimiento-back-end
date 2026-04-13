@@ -85,4 +85,15 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'GUEST')")
+    @PutMapping("/update-password/{id}")
+    public ResponseEntity<Map<String, String>> updatePassword(@PathVariable Long id, @RequestBody Map<String, String> request) {
+        String newPassword = request.get("password");
+        userService.updateInitialPassword(id, newPassword);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Contraseña actualizada correctamente para el usuario con ID: " + id);
+        return ResponseEntity.ok(response);
+    }
+
 }
