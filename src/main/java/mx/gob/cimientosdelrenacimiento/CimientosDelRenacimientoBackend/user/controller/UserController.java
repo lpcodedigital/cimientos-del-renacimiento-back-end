@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER', 'ROLE_GUEST')")
     @GetMapping("/list")
     public ResponseEntity<Map<String, Object>> getAllUsers(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "20") Integer size) {
         Page<UserDTO> users = userService.getAllUsers(page, size);
@@ -46,13 +46,13 @@ public class UserController {
        return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'GUEST')")
     @GetMapping("/detail/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'GUEST')")
     @GetMapping("/email/{email}")
     public ResponseEntity<UserDTO> getUserByEmail(@PathVariable String email) {
         UserDTO user = userService.getUserByEmail(email);
