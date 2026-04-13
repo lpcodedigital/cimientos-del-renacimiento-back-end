@@ -17,4 +17,6 @@ public class AuthBasicUserResponseDTO {
 
     private String role;
 
+    private Boolean isFirstLogin;
+
 }

@@ -163,4 +163,34 @@ public class UserService {
         userRespository.save(user);
     
     }
+
+    public void updateInitialPassword(Long id, String newPassword) {
+        UserModel user = userRespository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("El usuario con ID: " + id + " no fue encontrado."));
+
+        // 1. Actualizar seguridad y estado del usuario
+        user.setPassword( passwordEncoder.encodePassword(newPassword) );
+
+        user.setIsFirstLogin(false);
+
+        userRespository.save(user);
+
+        // 2. Preparar variables para el correo de confirmación
+        Map<String, Object> emailVariables = new HashMap<>();
+        emailVariables.put("name", user.getName());
+
+        // 3. Enviar notificación
+        try {
+            emailService.sendHtmlEmail(
+                user.getEmail(),
+                "Confirmación: Tu contraseña ha sido actualizada",
+                "password-changed-email",
+                emailVariables
+            );
+            log.info("Correo de confirmación de cambio de contraseña enviado a: {}", user.getEmail());
+        } catch (Exception e) {
+            // Logueamos el error pero no revertimos el cambio de password
+            log.error("Error al enviar notificación de cambio de password: {}", e.getMessage());
+        }
+    }
 }
