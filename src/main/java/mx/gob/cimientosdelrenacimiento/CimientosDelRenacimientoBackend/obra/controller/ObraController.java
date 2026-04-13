@@ -44,7 +44,7 @@ public class ObraController {
         return ResponseEntity.ok(obraService.findAllForObraMapa());
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'GUEST')")
     @GetMapping("detail/{id}")
     public ResponseEntity<ObraResponseDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(obraService.findById(id));
@@ -80,7 +80,7 @@ public class ObraController {
         return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'GUEST')")
     @GetMapping("/list")
     public ResponseEntity<Page<ObraResponseListDTO>> getAllPaginated(
         @RequestParam(defaultValue = "0") int page,
