@@ -1,5 +1,7 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 @Data
@@ -17,6 +19,7 @@ public class UserRequestDTO {
     private Boolean twoFactorEnabled;    
     private String twoFactorSecret;    
     private Integer verificationCode;
+    private LocalDateTime codeExpiration;
     private Long roleId;
 
 }

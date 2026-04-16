@@ -30,6 +30,7 @@ public class UserMapper {
         user.setTwoFactorEnabled(dto.getTwoFactorEnabled() != null ? dto.getTwoFactorEnabled() : false);
         user.setTwoFactorSecret(dto.getTwoFactorSecret());
         user.setVerificationCode(dto.getVerificationCode());
+        user.setCodeExpiration(dto.getCodeExpiration());
         user.setRole(role);
         return user;
     }
@@ -68,6 +69,7 @@ public class UserMapper {
         userDTO.setTwoFactorEnabled(user.getTwoFactorEnabled());
         userDTO.setTwoFactorSecret(user.getTwoFactorSecret());
         userDTO.setVerificationCode(user.getVerificationCode());
+        userDTO.setCodeExpiration(user.getCodeExpiration());
         userDTO.setRole(roleDTO);
 
         userDTO.setCreatedAt(user.getCreatedAt() != null ? dateTimeFormater.formatDateTime(user.getCreatedAt()) : null);

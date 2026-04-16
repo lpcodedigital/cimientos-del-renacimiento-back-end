@@ -19,4 +19,7 @@ public class AuthResponseDTO {
 
     private AuthBasicUserResponseDTO user;
 
+    @Builder.Default
+    private boolean mfaRequired = false; // Indica si se requiere MFA para el usuario
+
 }

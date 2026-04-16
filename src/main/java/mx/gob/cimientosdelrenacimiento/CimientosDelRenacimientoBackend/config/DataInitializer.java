@@ -98,6 +98,7 @@ public class DataInitializer implements CommandLineRunner {
                 .twoFactorEnabled(false)
                 .twoFactorSecret(null)
                 .verificationCode(null)
+                .codeExpiration(null)
                 .role(adminRole)
                 .build());
 
@@ -114,6 +115,7 @@ public class DataInitializer implements CommandLineRunner {
                 .twoFactorEnabled(false)
                 .twoFactorSecret(null)
                 .verificationCode(null)
+                .codeExpiration(null)
                 .role(userRole)
                 .build());
 
@@ -130,6 +132,7 @@ public class DataInitializer implements CommandLineRunner {
                 .twoFactorEnabled(false)
                 .twoFactorSecret(null)
                 .verificationCode(null)
+                .codeExpiration(null)
                 .role(guestRole)
                 .build());
 

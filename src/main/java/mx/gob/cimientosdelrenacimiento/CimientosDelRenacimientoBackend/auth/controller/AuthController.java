@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.Service.AuthService;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthResponseDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.Verify2FARequestDTO;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -26,4 +27,12 @@ public class AuthController {
         return ResponseEntity.ok(authResponseDTO);
         
     }
+
+    @PostMapping("/verify-2fa")
+    public ResponseEntity<AuthResponseDTO> verify2FA(@Valid @RequestBody Verify2FARequestDTO verify2FARequestDTO) {
+
+        AuthResponseDTO authResponseDTO = authService.verify2FA(verify2FARequestDTO);
+        return ResponseEntity.ok(authResponseDTO);
+        
+     }
 }
