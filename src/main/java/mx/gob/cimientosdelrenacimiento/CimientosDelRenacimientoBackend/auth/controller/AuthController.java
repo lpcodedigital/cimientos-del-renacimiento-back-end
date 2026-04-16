@@ -1,5 +1,8 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.Service.AuthService;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthResponseDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.Resend2FADTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.Verify2FARequestDTO;
 
 @RestController
@@ -34,5 +38,14 @@ public class AuthController {
         AuthResponseDTO authResponseDTO = authService.verify2FA(verify2FARequestDTO);
         return ResponseEntity.ok(authResponseDTO);
         
+     }
+
+     @PostMapping("/resend-2fa")
+     public ResponseEntity<Map<String, String>> resend2FA(@Valid @RequestBody Resend2FADTO resend2fadto) {
+        authService.resend2FACode(resend2fadto);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Código de verificación reenviado exitosamente");
+        return ResponseEntity.ok(response);
      }
 }
