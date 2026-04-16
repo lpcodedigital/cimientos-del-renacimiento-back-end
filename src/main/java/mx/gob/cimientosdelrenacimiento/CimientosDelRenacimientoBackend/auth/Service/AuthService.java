@@ -13,9 +13,11 @@ import lombok.RequiredArgsConstructor;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.Security.JwtUtils;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthResponseDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.Resend2FADTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.Verify2FARequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.mapper.AuthMapper;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.email.service.IEmailService;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.ResourceNotFoundException;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.UnauthorizedException;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthBasicUserResponseDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.model.UserModel;
@@ -88,7 +90,7 @@ public class AuthService {
 
     public AuthResponseDTO verify2FA(Verify2FARequestDTO request) {
         UserModel user = userRespository.findByEmail(request.getEmail())
-            .orElseThrow(() -> new UnauthorizedException("Credenciales inválidas"));
+            .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
         // 1. Validar si el código existe y coincidi
         if (user.getVerificationCode() == null || !user.getVerificationCode().toString().equals(request.getCode())) {
@@ -121,6 +123,23 @@ public class AuthService {
             .mfaRequired(false)
             .build();
 
+    }
+
+    public void resend2FACode(Resend2FADTO resend2fadto) {
+        UserModel user = userRespository.findByEmail(resend2fadto.getEmail())
+            .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+
+        if (Boolean.FALSE.equals(user.getTwoFactorEnabled())) {
+            throw new UnauthorizedException("El usuario no tiene habilitado la autenticación de dos factores");
+        }
+
+        String newVerificationCode = String.format("%06d", new Random().nextInt(1000000));
+        LocalDateTime codeExpiration = LocalDateTime.now().plusMinutes(5);
+        user.setVerificationCode(Integer.parseInt(newVerificationCode));
+        user.setCodeExpiration(codeExpiration);
+        userRespository.save(user);
+
+        sendVerificationCode2FA(user.getEmail(), user.getName(), newVerificationCode);
     }
 
     private void sendVerificationCode2FA(String email, String name, String code) {
