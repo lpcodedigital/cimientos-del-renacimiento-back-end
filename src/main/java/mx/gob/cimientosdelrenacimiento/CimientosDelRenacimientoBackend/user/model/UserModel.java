@@ -1,5 +1,7 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.model;
 
+import java.time.LocalDateTime;
+
 import org.hibernate.annotations.SQLRestriction;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -72,6 +74,9 @@ public class UserModel extends Auditable {
 
     @Column(nullable = true)
     private Integer verificationCode;
+
+    @Column(nullable = true)
+    private LocalDateTime codeExpiration;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", referencedColumnName = "idRole", nullable = false)
