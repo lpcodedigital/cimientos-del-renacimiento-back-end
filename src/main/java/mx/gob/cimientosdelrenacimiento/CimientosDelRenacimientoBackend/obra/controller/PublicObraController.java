@@ -31,7 +31,7 @@ public class PublicObraController {
     }
 
     @GetMapping("detail/{id}")
-    public ResponseEntity<ObraResponseDTO> getBEntity(@PathVariable Long id) {
+    public ResponseEntity<ObraResponseDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(obraService.findById(id));
     }
 

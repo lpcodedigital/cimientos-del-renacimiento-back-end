@@ -6,9 +6,16 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.model.MunicipioModel;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.repository.MunicipioRepository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.EstadoObraEnum;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraImageModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraModel;
@@ -23,6 +30,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.util.Pass
 
 @Configuration
 @RequiredArgsConstructor
+@Slf4j
 public class DataInitializer implements CommandLineRunner {
 
     @Autowired
@@ -35,12 +43,19 @@ public class DataInitializer implements CommandLineRunner {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private ObraRespository obraRepository;
+    @Autowired
+    private MunicipioRepository municipioRepository;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
         if (roleRepository.count() == 0) {
             seedDataBae();
+        }
+        if (municipioRepository.count() == 0) {
+            seedMunicipios();
         }
     }
 
@@ -188,4 +203,42 @@ public class DataInitializer implements CommandLineRunner {
         }
         System.out.println("✅ 15 obras con imágenes inicializadas.");
     }
+
+    public void seedMunicipios() {
+    try {
+        log.info("🌐 Sembrando municipios desde municipios.json...");
+        
+        // 1. Cargamos el archivo (asegúrate que esté en src/main/resources/)
+        JsonNode root = objectMapper.readTree(new ClassPathResource("municipios.json").getInputStream());
+        
+        // 2. IMPORTANTE: Accedemos al nodo "municipios" que contiene el array
+        // Si haces root.isArray() dará falso porque root es un objeto { "municipios": [...] }
+        JsonNode municipiosArray = root.path("municipios");
+
+        if (municipiosArray.isArray()) {
+            for (JsonNode node : municipiosArray) {
+                MunicipioModel municipio = MunicipioModel.builder()
+                        .name(node.path("nomgeo").asText())
+                        .cveGeo(node.path("cvegeo").asText())
+                        .cveEnt(node.path("cve_ent").asText())
+                        .cveMun(node.path("cve_mun").asText())
+                        .cveCab(node.path("cve_cab").asText())
+                        .pobMasculina(node.path("pob_masculina").asText())
+                        .pobFemenina(node.path("pob_femenina").asText())
+                        .pobTotal(node.path("pob_total").asText())
+                        .totalViviendas(node.path("total_viviendas_habitadas").asText())
+                        .build();
+                
+                municipioRepository.save(municipio);
+            }
+            log.info(" ✅ Carga completada: {} municipios insertados.", municipioRepository.count());
+        } else {
+            log.error(" ❌ No se encontró el array 'municipios' dentro del archivo JSON.");
+        }
+
+    } catch (Exception e) {
+        log.error(" ❌ Error crítico al cargar municipios: {}", e.getMessage());
+        e.printStackTrace();
+    }
+}
 }
