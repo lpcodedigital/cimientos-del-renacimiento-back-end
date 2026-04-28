@@ -1,6 +1,9 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.config;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.model.CursoImageModel;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.model.CursoModel;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.CursoRepository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.model.MunicipioModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.repository.MunicipioRepository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.EstadoObraEnum;
@@ -47,6 +53,8 @@ public class DataInitializer implements CommandLineRunner {
     private MunicipioRepository municipioRepository;
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private CursoRepository cursoRepository;
 
     @Override
     @Transactional
@@ -56,6 +64,15 @@ public class DataInitializer implements CommandLineRunner {
         }
         if (municipioRepository.count() == 0) {
             seedMunicipios();
+        }
+        // Sembrar cursos si la tabla está vacía
+        if (cursoRepository.count() == 0) {
+            // Buscamos al admin para asignarle la autoría de los registros
+            UserModel admin = userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
+                    .orElse(null);
+            if (admin != null) {
+                seedCursos(admin);
+            }
         }
     }
 
@@ -151,7 +168,8 @@ public class DataInitializer implements CommandLineRunner {
                 .role(guestRole)
                 .build());
 
-        // Sembrar obras de prueba solo si no existen para evitar duplicados en cada arranque
+        // Sembrar obras de prueba solo si no existen para evitar duplicados en cada
+        // arranque
         if (obraRepository.count() == 0) {
             seedObras(adminUser);
         }
@@ -205,40 +223,102 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     public void seedMunicipios() {
-    try {
-        log.info("🌐 Sembrando municipios desde municipios.json...");
-        
-        // 1. Cargamos el archivo (asegúrate que esté en src/main/resources/)
-        JsonNode root = objectMapper.readTree(new ClassPathResource("municipios.json").getInputStream());
-        
-        // 2. IMPORTANTE: Accedemos al nodo "municipios" que contiene el array
-        // Si haces root.isArray() dará falso porque root es un objeto { "municipios": [...] }
-        JsonNode municipiosArray = root.path("municipios");
+        try {
+            log.info("🌐 Sembrando municipios desde municipios.json...");
 
-        if (municipiosArray.isArray()) {
-            for (JsonNode node : municipiosArray) {
-                MunicipioModel municipio = MunicipioModel.builder()
-                        .name(node.path("nomgeo").asText())
-                        .cveGeo(node.path("cvegeo").asText())
-                        .cveEnt(node.path("cve_ent").asText())
-                        .cveMun(node.path("cve_mun").asText())
-                        .cveCab(node.path("cve_cab").asText())
-                        .pobMasculina(node.path("pob_masculina").asText())
-                        .pobFemenina(node.path("pob_femenina").asText())
-                        .pobTotal(node.path("pob_total").asText())
-                        .totalViviendas(node.path("total_viviendas_habitadas").asText())
-                        .build();
-                
-                municipioRepository.save(municipio);
+            // 1. Cargamos el archivo (asegúrate que esté en src/main/resources/)
+            JsonNode root = objectMapper.readTree(new ClassPathResource("municipios.json").getInputStream());
+
+            // 2. IMPORTANTE: Accedemos al nodo "municipios" que contiene el array
+            // Si haces root.isArray() dará falso porque root es un objeto { "municipios":
+            // [...] }
+            JsonNode municipiosArray = root.path("municipios");
+
+            if (municipiosArray.isArray()) {
+                for (JsonNode node : municipiosArray) {
+                    MunicipioModel municipio = MunicipioModel.builder()
+                            .name(node.path("nomgeo").asText())
+                            .cveGeo(node.path("cvegeo").asText())
+                            .cveEnt(node.path("cve_ent").asText())
+                            .cveMun(node.path("cve_mun").asText())
+                            .cveCab(node.path("cve_cab").asText())
+                            .pobMasculina(node.path("pob_masculina").asText())
+                            .pobFemenina(node.path("pob_femenina").asText())
+                            .pobTotal(node.path("pob_total").asText())
+                            .totalViviendas(node.path("total_viviendas_habitadas").asText())
+                            .build();
+
+                    municipioRepository.save(municipio);
+                }
+                log.info(" ✅ Carga completada: {} municipios insertados.", municipioRepository.count());
+            } else {
+                log.error(" ❌ No se encontró el array 'municipios' dentro del archivo JSON.");
             }
-            log.info(" ✅ Carga completada: {} municipios insertados.", municipioRepository.count());
-        } else {
-            log.error(" ❌ No se encontró el array 'municipios' dentro del archivo JSON.");
+
+        } catch (Exception e) {
+            log.error(" ❌ Error crítico al cargar municipios: {}", e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void seedCursos(UserModel creator) {
+        log.info("🎓 Sembrando cursos de capacitación de prueba...");
+
+        List<MunicipioModel> todosLosMunicipios = municipioRepository.findAll();
+        if (todosLosMunicipios.isEmpty()) {
+            log.warn("⚠️ No hay municipios para asignar a los cursos. Saltando seed.");
+            return;
         }
 
-    } catch (Exception e) {
-        log.error(" ❌ Error crítico al cargar municipios: {}", e.getMessage());
-        e.printStackTrace();
+        String[] temas = {
+            "Taller de Programación Web", 
+            "Carpintería Básica", 
+            "Introducción a la Electrónica", 
+            "Sostenibilidad Ambiental",
+            "Gestión de Proyectos Comunitarios",
+            "Primeros Auxilios",
+            "Corte y Confección"
+        };
+
+        Random random = new Random();
+
+        for (int i = 0; i < 12; i++) {
+            CursoModel curso = new CursoModel();
+            curso.setTitle(temas[i % temas.length] + " - Grupo " + (i + 1));
+            curso.setDescription("Este es un curso de prueba diseñado para fortalecer las habilidades técnicas de los ciudadanos en el estado de Yucatán. Sesión #" + i);
+            curso.setCourseDate(LocalDate.now().plusDays(random.nextInt(30)));
+            
+            // Asignar un municipio aleatorio de la lista ya cargada
+            curso.setMunicipality(todosLosMunicipios.get(random.nextInt(todosLosMunicipios.size())));
+
+            curso.setCreatedBy(creator);
+            curso.setUpdatedBy(creator);
+
+            // Agregar 3 imágenes por curso (la primera será la portada automáticamente por posición 0)
+            for (int j = 0; j < 3; j++) {
+                CursoImageModel img = new CursoImageModel();
+                // Usamos una semilla diferente para cada imagen para que no sean iguales
+                String seed = "curso-" + i + "-" + j;
+                img.setUrl("https://picsum.photos/seed/" + seed + "/800/600");
+                img.setThumbUrl("https://picsum.photos/seed/" + seed + "/300/300");
+                img.setProviderId("fake-r2-" + seed);
+                img.setMimeType("image/jpeg");
+                img.setSize("120KB");
+                img.setPosition(j);
+                img.setCreatedBy(creator);
+                img.setUpdatedBy(creator);
+
+                // Sincronización bidireccional
+                curso.addImage(img);
+
+                // ASIGNACIÓN DE PORTADA: Si es la posición 0, la marcamos como coverImage
+                if (j == 0) {
+                    curso.setCoverImage(img);
+                }
+            }
+
+            cursoRepository.save(curso);
+        }
+        log.info("✅ 12 cursos inicializados correctamente.");
     }
-}
 }
