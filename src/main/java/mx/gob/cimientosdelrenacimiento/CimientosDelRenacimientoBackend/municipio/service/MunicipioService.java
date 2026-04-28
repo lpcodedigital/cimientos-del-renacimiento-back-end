@@ -13,13 +13,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.dto.MunicipioResponseDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.mapper.MunicipioMapper;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.model.MunicipioModel;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.repository.MunicipioRepository;
 
 @Service
 @RequiredArgsConstructor
-public class MunicipioService {
+public class MunicipioService implements IMunicipioService {
 
     private final ObjectMapper objectMapper;
     private List<String> listaNombreMunicipios = new ArrayList<>();
+
+    private final MunicipioRepository municipioRepository;
+    private final MunicipioMapper municipioMapper;
 
     @PostConstruct
     public void init() {
@@ -43,6 +50,13 @@ public class MunicipioService {
 
     public List<String> getAllMunicipiosList() {
         return listaNombreMunicipios;
+    }
+
+    @Override
+    public List<MunicipioResponseDTO> findAll() {
+        return municipioRepository.findAll().stream()
+                .map(municipioMapper::toResponseDTO)
+                .collect(Collectors.toList());
     }
 
 

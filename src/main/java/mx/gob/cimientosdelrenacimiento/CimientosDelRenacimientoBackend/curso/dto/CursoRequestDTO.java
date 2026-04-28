@@ -16,6 +16,6 @@ public class CursoRequestDTO {
     private Long municipalityId;
     private LocalDate courseDate;
     private List<Long> keepImageIds;
-    @NotNull(message = "La imagen de portada es obligatoria")
+    //@NotNull(message = "La imagen de portada es obligatoria")
     private Long currentCoverImageId;
 }
