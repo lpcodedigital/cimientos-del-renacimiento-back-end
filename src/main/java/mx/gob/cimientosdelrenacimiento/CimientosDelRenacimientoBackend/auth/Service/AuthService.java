@@ -8,12 +8,15 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.Security.JwtUtils;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.AuthResponseDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.Resend2FADTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.ResetPasswordDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.dto.Verify2FARequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.auth.mapper.AuthMapper;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.email.service.IEmailService;
@@ -26,6 +29,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.util.Pass
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthService {
 
     @Autowired
@@ -172,6 +176,63 @@ public class AuthService {
             // Manejar el error de envío de correo electrónico
             System.err.println("Error al enviar el código 2FA: " + e.getMessage());
         }
+    }
+
+    @Transactional
+    public void forgotPassword(String email) {
+        UserModel user = userRespository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Si el correo existe, se enviará un código."));
+
+        // Bloqueo si está desactivado
+        if (Boolean.FALSE.equals(user.getActive())) {
+            throw new UnauthorizedException("Usuario desactivado.");
+        }
+
+        // Generar código de 6 dígitos (Reutilizamos la lógica de 2FA)
+        String recoveryCode = String.format("%06d", new Random().nextInt(1000000));
+        user.setVerificationCode(Integer.parseInt(recoveryCode));
+        user.setCodeExpiration(LocalDateTime.now().plusMinutes(5)); // Más tiempo que el MFA para leer el correo
+                                                                     // tranquilamente
+        userRespository.save(user);
+
+        // Enviar Email (Crea un nuevo template o reutiliza el de 2FA)
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("name", user.getName());
+        variables.put("code", recoveryCode);
+
+        try {
+            emailService.sendHtmlEmail(
+                    user.getEmail(),
+                    "Recuperación de Contraseña - SIB",
+                    "forgot-password-email", // Nombre de tu template HTML
+                    variables);
+        } catch (Exception e) {
+            log.error("Error enviando correo de recuperación: {}", e.getMessage());
+        }
+    }
+
+    @Transactional
+    public void resetPassword(ResetPasswordDTO dto) {
+        UserModel user = userRespository.findByEmail(dto.getEmail())
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+
+        // 1. Validar código
+        if (user.getVerificationCode() == null || !user.getVerificationCode().toString().equals(dto.getCode())) {
+            throw new UnauthorizedException("Código de recuperación inválido");
+        }
+
+        // 2. Validar expiración
+        if (user.getCodeExpiration() == null || user.getCodeExpiration().isBefore(LocalDateTime.now())) {
+            throw new UnauthorizedException("El código ha expirado");
+        }
+
+        // 3. Actualizar contraseña y limpiar flags
+        user.setPassword(passwordEncoder.encodePassword(dto.getNewPassword()));
+        user.setVerificationCode(null);
+        user.setCodeExpiration(null);
+        user.setIsFirstLogin(false); // Si era su primer login, ya lo cumplió al resetearla
+
+        userRespository.save(user);
     }
 
 }
