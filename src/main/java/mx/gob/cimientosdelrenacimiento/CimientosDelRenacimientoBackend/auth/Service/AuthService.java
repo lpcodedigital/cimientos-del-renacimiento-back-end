@@ -30,7 +30,7 @@ public class AuthService {
 
     @Autowired
     private UserRespository userRespository;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -45,11 +45,16 @@ public class AuthService {
 
     public AuthResponseDTO autenticate(AuthRequestDTO authRequestDTO) {
 
-    var user = userRespository.findByEmail(authRequestDTO.getEmail())
-        .orElseThrow(() -> new UnauthorizedException("Credenciales inválidas"));
+        var user = userRespository.findByEmail(authRequestDTO.getEmail())
+                .orElseThrow(() -> new UnauthorizedException("Credenciales inválidas"));
+
+        // Validar si el usuario se encuentra activo
+        if (Boolean.FALSE.equals(user.getActive())) {
+            throw new UnauthorizedException("El usuario se encuentra desactivado. Contacte al administrador.");
+        }
 
         // 1. Validar la contraseña
-        if( !passwordEncoder.matches(authRequestDTO.getPassword(), user.getPassword()) ) {
+        if (!passwordEncoder.matches(authRequestDTO.getPassword(), user.getPassword())) {
             throw new UnauthorizedException("Credenciales inválidas");
         }
 
@@ -65,32 +70,37 @@ public class AuthService {
             sendVerificationCode2FA(user.getEmail(), user.getName(), verificationCode);
 
             return AuthResponseDTO.builder()
-                .user(authMapper.toAuthBasicUserDTO(user))
-                .mfaRequired(true)
-                .token(null)
-                .build();
+                    .user(authMapper.toAuthBasicUserDTO(user))
+                    .mfaRequired(true)
+                    .token(null)
+                    .build();
         }
 
         Date expiresAt = jwtUtils.generateExpirationDate();
         String token = jwtUtils.generateJwtToken(
-            user.getIdUser(),
-            user.getEmail(),
-             user.getRole().getName(), 
-             expiresAt
-            );
+                user.getIdUser(),
+                user.getEmail(),
+                user.getRole().getName(),
+                user.getActive(),
+                expiresAt);
 
         AuthBasicUserResponseDTO authBasicUserResponseDTO = authMapper.toAuthBasicUserDTO(user);
 
         return AuthResponseDTO.builder()
-            .token(token)
-            .expiresAt(expiresAt)
-            .user(authBasicUserResponseDTO)
-            .build();
+                .token(token)
+                .expiresAt(expiresAt)
+                .user(authBasicUserResponseDTO)
+                .build();
     }
 
     public AuthResponseDTO verify2FA(Verify2FARequestDTO request) {
         UserModel user = userRespository.findByEmail(request.getEmail())
-            .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+
+        // Validar si el usuario se encuentra activo
+        if (Boolean.FALSE.equals(user.getActive())) {
+            throw new UnauthorizedException("El usuario se encuentra desactivado. Contacte al administrador.");
+        }
 
         // 1. Validar si el código existe y coincidi
         if (user.getVerificationCode() == null || !user.getVerificationCode().toString().equals(request.getCode())) {
@@ -98,36 +108,41 @@ public class AuthService {
         }
 
         // 2. Validar si el código ha expirado (Comparar ahora la contra codeExpiration)
-        if (user.getCodeExpiration() == null || user.getCodeExpiration().isBefore(LocalDateTime.now())){
+        if (user.getCodeExpiration() == null || user.getCodeExpiration().isBefore(LocalDateTime.now())) {
             throw new UnauthorizedException("Código de verificación expirado");
         }
 
-        // 3. Todo OK: Generar Token final 
+        // 3. Todo OK: Generar Token final
         Date expiresAt = jwtUtils.generateExpirationDate();
         String token = jwtUtils.generateJwtToken(
-            user.getIdUser(),
-            user.getEmail(),
-             user.getRole().getName(), 
-             expiresAt
-            );
-        
+                user.getIdUser(),
+                user.getEmail(),
+                user.getRole().getName(),
+                user.getActive(),
+                expiresAt);
+
         // 4. Limpiar el código de verificación y su expiración
         user.setVerificationCode(null);
         user.setCodeExpiration(null);
         userRespository.save(user);
 
         return AuthResponseDTO.builder()
-            .token(token)
-            .expiresAt(expiresAt)
-            .user(authMapper.toAuthBasicUserDTO(user))
-            .mfaRequired(false)
-            .build();
+                .token(token)
+                .expiresAt(expiresAt)
+                .user(authMapper.toAuthBasicUserDTO(user))
+                .mfaRequired(false)
+                .build();
 
     }
 
     public void resend2FACode(Resend2FADTO resend2fadto) {
         UserModel user = userRespository.findByEmail(resend2fadto.getEmail())
-            .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
+
+        // Validar si el usuario se encuentra activo
+        if (Boolean.FALSE.equals(user.getActive())) {
+            throw new UnauthorizedException("El usuario se encuentra desactivado. Contacte al administrador.");
+        }
 
         if (Boolean.FALSE.equals(user.getTwoFactorEnabled())) {
             throw new UnauthorizedException("El usuario no tiene habilitado la autenticación de dos factores");
@@ -149,10 +164,10 @@ public class AuthService {
 
         try {
             emailService.sendHtmlEmail(
-                email, 
-                "   Código de Verificación 2FA", 
-                "two-factor-code-email", 
-                variables);
+                    email,
+                    "   Código de Verificación 2FA",
+                    "two-factor-code-email",
+                    variables);
         } catch (Exception e) {
             // Manejar el error de envío de correo electrónico
             System.err.println("Error al enviar el código 2FA: " + e.getMessage());

@@ -43,6 +43,7 @@ public class UserMapper {
         user.setPhone(dto.getPhone());
         user.setEmail(dto.getEmail());
         user.setActive(dto.getActive());
+        user.setTwoFactorEnabled(Boolean.TRUE.equals(dto.getTwoFactorEnabled()));
         if (role != null ) user.setRole(role);
     }
 
