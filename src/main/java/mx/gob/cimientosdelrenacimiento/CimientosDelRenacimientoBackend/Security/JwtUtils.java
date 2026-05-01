@@ -23,11 +23,12 @@ public class JwtUtils {
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateJwtToken(Long userId, String email, String role, Date expiration) {
+    public String generateJwtToken(Long userId, String email, String role, boolean active, Date expiration) {
         return Jwts.builder()
             .setSubject(email)
             .claim("userId", userId)
             .claim("role", role)
+            .claim("active", active)
             .setIssuedAt(new Date())
             .setExpiration(expiration)
             .signWith(secretKey)
