@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.CursoRepository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dashboard.dto.DashboardStatsDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dashboard.mapper.DashboardMapper;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.ObraRespository;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.repository.UserRespository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.util.StringNormalizer;
 
 @Service
@@ -19,6 +21,9 @@ public class DashboardServiceImpl implements IDashboardService {
 
     private final DashboardMapper dashboardMapper;
     private final ObraRespository obraRespository;
+    private final UserRespository userRepository;
+    private final CursoRepository cursoRepository;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -39,6 +44,12 @@ public class DashboardServiceImpl implements IDashboardService {
             .averageProgress(obraRespository.getAverageProgress() != null ? obraRespository.getAverageProgress() : 0.0)
             .countByStatus(dashboardMapper.toCountMap(obraRespository.countObrasByStatus()))
             .countByMunicipality(normalizedMuni)
+            .totalUsers(userRepository.countTotalUsers())
+            .activeUsers(userRepository.countActiveUsers())
+            .totalCursos(cursoRepository.countActiveCourses())
+            .municipalitiesWithObras(obraRespository.countDistinctMunicipalitiesWithObras())
+            .countByAgency(dashboardMapper.toCountMap(obraRespository.countObrasByAgency()))
+            .totalAgency(obraRespository.countDistinctAgencies())
             .build();
     }
 

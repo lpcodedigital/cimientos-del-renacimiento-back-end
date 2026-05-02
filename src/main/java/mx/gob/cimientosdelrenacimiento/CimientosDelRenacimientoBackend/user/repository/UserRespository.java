@@ -10,11 +10,19 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.mode
 
 public interface UserRespository extends JpaRepository<UserModel, Long> {
 
-        Optional<UserModel> findByEmail(String email);
+    Optional<UserModel> findByEmail(String email);
 
-        // Verificar si existe un usuario con el email dado, sin importar su estado activo/inactivo excluyendo los eliminados por soft delete
-        @Query(value = "SELECT * FROM users WHERE email = :email", nativeQuery = true)
-        Optional<UserModel> findAnyByEmail(@Param("email") String email);
+    // Verificar si existe un usuario con el email dado, sin importar su estado
+    // activo/inactivo excluyendo los eliminados por soft delete
+    @Query(value = "SELECT * FROM users WHERE email = :email", nativeQuery = true)
+    Optional<UserModel> findAnyByEmail(@Param("email") String email);
 
+    // Conteo total de usuarios (no eliminados)
+    @Query("SELECT COUNT(u) FROM UserModel u WHERE u.deleted = false")
+    long countTotalUsers();
 
-    }
+    // Conteo de usuarios activos (no eliminados y active = true)
+    @Query("SELECT COUNT(u) FROM UserModel u WHERE u.deleted = false AND u.active = true")
+    long countActiveUsers();
+
+}
