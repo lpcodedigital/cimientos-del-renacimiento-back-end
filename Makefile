@@ -33,8 +33,9 @@ check-docker:
 # 🧩 Desarrollo (hot reload, puerto 8081)
 dev: check-docker
 	@echo "$(BLUE)🚧 Iniciando entorno de desarrollo...$(RESET)"
+	@docker network inspect my_network_cr >/dev/null 2>&1 || \
+		(echo "Creating network..." && docker network create my_network_cr)
 	@docker compose -f $(COMPOSE_BASE) -f $(COMPOSE_DEV) up
-
 
 # 🚀 Producción (JAR empaquetado, puerto 8080)
 prod: check-docker

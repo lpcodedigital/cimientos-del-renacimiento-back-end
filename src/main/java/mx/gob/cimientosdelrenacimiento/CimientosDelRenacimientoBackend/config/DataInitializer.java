@@ -40,6 +40,8 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.util.Pass
 public class DataInitializer implements CommandLineRunner {
 
     @Autowired
+    private org.springframework.core.env.Environment environment;
+    @Autowired
     private PermissionRepository permissionRepository;
     @Autowired
     private RoleRepository roleRepository;
@@ -59,24 +61,41 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
+        List<String> activeProfiles = List.of(environment.getActiveProfiles());
+        boolean isProd = activeProfiles.contains("prod");
+
         if (roleRepository.count() == 0) {
-            seedDataBae();
+            seedDataBase();
         }
         if (municipioRepository.count() == 0) {
             seedMunicipios();
         }
-        // Sembrar cursos si la tabla está vacía
-        if (cursoRepository.count() == 0) {
-            // Buscamos al admin para asignarle la autoría de los registros
-            UserModel admin = userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
-                    .orElse(null);
-            if (admin != null) {
-                seedCursos(admin);
+
+        // CARGA FORZADA DE CURSOS FAKE (Fuera del if !isProd)
+        //if (cursoRepository.count() == 0) {
+        //    log.info("🎓 Cargando cursos iniciales...");
+        //    userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
+        //            .ifPresent(this::seedCursos);
+        //}
+
+        // BLOQUE DE DATOS FAKE: Solo si NO es producción
+        if (!isProd) {
+            log.info("🧪 Entorno de desarrollo detectado. Sembrando datos de prueba...");
+            // Sembrar cursos si la tabla está vacía
+            if (cursoRepository.count() == 0) {
+                // Buscamos al admin para asignarle la autoría de los registros
+                UserModel admin = userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
+                        .orElse(null);
+                if (admin != null) {
+                    seedCursos(admin);
+                }
             }
+        } else {
+            log.info("🚀 Entorno de PRODUCCIÓN detectado. Saltando datos de prueba.");
         }
     }
 
-    private void seedDataBae() {
+    private void seedDataBase() {
 
         System.out.println("🚧 Inicializando datos base...");
 
@@ -271,13 +290,13 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         String[] temas = {
-            "Taller de Programación Web", 
-            "Carpintería Básica", 
-            "Introducción a la Electrónica", 
-            "Sostenibilidad Ambiental",
-            "Gestión de Proyectos Comunitarios",
-            "Primeros Auxilios",
-            "Corte y Confección"
+                "Taller de Programación Web",
+                "Carpintería Básica",
+                "Introducción a la Electrónica",
+                "Sostenibilidad Ambiental",
+                "Gestión de Proyectos Comunitarios",
+                "Primeros Auxilios",
+                "Corte y Confección"
         };
 
         Random random = new Random();
@@ -285,16 +304,19 @@ public class DataInitializer implements CommandLineRunner {
         for (int i = 0; i < 12; i++) {
             CursoModel curso = new CursoModel();
             curso.setTitle(temas[i % temas.length] + " - Grupo " + (i + 1));
-            curso.setDescription("Este es un curso de prueba diseñado para fortalecer las habilidades técnicas de los ciudadanos en el estado de Yucatán. Sesión #" + i);
+            curso.setDescription(
+                    "Este es un curso de prueba diseñado para fortalecer las habilidades técnicas de los ciudadanos en el estado de Yucatán. Sesión #"
+                            + i);
             curso.setCourseDate(LocalDate.now().plusDays(random.nextInt(30)));
-            
+
             // Asignar un municipio aleatorio de la lista ya cargada
             curso.setMunicipality(todosLosMunicipios.get(random.nextInt(todosLosMunicipios.size())));
 
             curso.setCreatedBy(creator);
             curso.setUpdatedBy(creator);
 
-            // Agregar 3 imágenes por curso (la primera será la portada automáticamente por posición 0)
+            // Agregar 3 imágenes por curso (la primera será la portada automáticamente por
+            // posición 0)
             for (int j = 0; j < 3; j++) {
                 CursoImageModel img = new CursoImageModel();
                 // Usamos una semilla diferente para cada imagen para que no sean iguales
