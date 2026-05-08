@@ -39,3 +39,7 @@ build/
 logs/
 *.log
 *.of
+
+# macOS system files
+.DS_Store
+*/.DS_Store
