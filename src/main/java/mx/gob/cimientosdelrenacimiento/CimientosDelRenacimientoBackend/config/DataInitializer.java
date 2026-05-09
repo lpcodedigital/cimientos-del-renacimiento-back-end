@@ -65,22 +65,34 @@ public class DataInitializer implements CommandLineRunner {
         boolean isProd = activeProfiles.contains("prod");
 
         if (roleRepository.count() == 0) {
-            seedDataBase();
+            seedPermissionsRolesUsers();
         }
+        
         if (municipioRepository.count() == 0) {
             seedMunicipios();
         }
 
         // CARGA FORZADA DE CURSOS FAKE (Fuera del if !isProd)
-        //if (cursoRepository.count() == 0) {
-        //    log.info("🎓 Cargando cursos iniciales...");
-        //    userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
-        //            .ifPresent(this::seedCursos);
-        //}
+        // if (cursoRepository.count() == 0) {
+        // log.info("🎓 Cargando cursos iniciales...");
+        // userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
+        // .ifPresent(this::seedCursos);
+        // }
 
         // BLOQUE DE DATOS FAKE: Solo si NO es producción
         if (!isProd) {
             log.info("🧪 Entorno de desarrollo detectado. Sembrando datos de prueba...");
+            
+            // Sembrar obras si la tabla está vacía
+            if (obraRepository.count() == 0) {
+                // Buscamos al admin para asignarle la autoría de los registros
+                UserModel admin = userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
+                        .orElse(null);
+                if (admin != null) {
+                    seedObras(admin);
+                }
+            }
+           
             // Sembrar cursos si la tabla está vacía
             if (cursoRepository.count() == 0) {
                 // Buscamos al admin para asignarle la autoría de los registros
@@ -95,7 +107,7 @@ public class DataInitializer implements CommandLineRunner {
         }
     }
 
-    private void seedDataBase() {
+    private void seedPermissionsRolesUsers() {
 
         System.out.println("🚧 Inicializando datos base...");
 
@@ -136,7 +148,7 @@ public class DataInitializer implements CommandLineRunner {
                 .build());
 
         // Crear un usuarios por defecto
-        UserModel adminUser = userRepository.save(UserModel.builder()
+        userRepository.save(UserModel.builder()
                 .name("Admin")
                 .middleName("Default")
                 .firstLastName("Default")
@@ -186,12 +198,6 @@ public class DataInitializer implements CommandLineRunner {
                 .codeExpiration(null)
                 .role(guestRole)
                 .build());
-
-        // Sembrar obras de prueba solo si no existen para evitar duplicados en cada
-        // arranque
-        if (obraRepository.count() == 0) {
-            seedObras(adminUser);
-        }
 
         System.out.println("✅ Datos iniciales creados correctamente.");
     }
