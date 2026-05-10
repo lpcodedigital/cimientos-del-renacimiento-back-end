@@ -19,7 +19,7 @@ RUN mvn clean package -DskipTests
 # ===============================
 # 🚀 Stage 2: Production
 # ===============================
-FROM eclipse-temurin:17-jdk-jammy
+FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
 # [CLEAN CODE] Creamos la carpeta de logs explícitamente
@@ -27,6 +27,9 @@ RUN mkdir -p logs && chmod 777 logs
 
 # Copiamos el .jar generado desde el build stage
 COPY --from=build /app/target/*.jar app.jar
+
+# Variable de entorno para optimizar la JVM en contenedores
+ENV JAVA_OPTS="-Xms256m -Xmx512m"
 
 # Exponemos el puerto que usa Spring Boot
 EXPOSE 8080
