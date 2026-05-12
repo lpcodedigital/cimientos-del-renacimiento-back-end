@@ -1,6 +1,9 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.config;
 
 import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -23,6 +26,9 @@ public class SecurityConfig {
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
     private final JwtAuthEntryPoint jwtAuthEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+
+    @Value("${ALLOWED_ORIGINS:http://localhost:3000}")
+    private List<String> allowedOrigins;
 
     public SecurityConfig(JwtAuthorizationFilter jwtAuthorizationFilter, JwtAuthEntryPoint jwtAuthEntryPoint, JwtAccessDeniedHandler jwtAccessDeniedHandler) {
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
@@ -91,15 +97,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // 1. Definir los orígenes permitidos (puedes ajustar esto según tus necesidades)
-        configuration.setAllowedOrigins(Arrays.asList(
-        "http://localhost:5173", // Front Público (Vite Dev)
-            "http://localhost:5174", // Front Admin (Refine Dev)
-            "http://127.0.0.1:5173", // Front Público (Vite Dev)
-            "http://127.0.0.1:5174", // Front Admin (Refine Dev)
-            "http://localhost:3000", // Front Público (Docker Prod)
-            "http://localhost:3001"  // Front Admin (Docker Prod) 
-
-        ));
+        configuration.setAllowedOrigins(allowedOrigins);
 
         // 2. Definir los metodos HTTP permitidos
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
