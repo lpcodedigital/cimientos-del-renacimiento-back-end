@@ -1,0 +1,44 @@
+name: 🤖 Actualizar Referencia en Repo Raíz
+
+on:
+  push:
+    branches:
+      - main # Se activa cuando haces merge o push a main en el Backend
+
+jobs:
+  update-root-reference:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descargar la Raíz
+      - name: Checkout del Repositorio Raíz
+        uses: actions/checkout@v4
+        with:
+          repository: 'lpcodedigital/SIB-CR-MONOREPO'
+          token: ${{ secrets.REPOS_TOKEN }}
+          submodules: false
+          fetch-depth: 0
+
+      # 2. Configurar Git del robot
+      - name: Configurar Git del Bot
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 3. Mover el puntero específico de la carpeta Backend
+      - name: Mover Puntero de Backend de forma nativa
+        run: |
+          git update-index --cacheinfo 160000,${{ github.sha }},Backend
+          git commit -m "chore: auto-actualizar referencia de Backend al commit ${{ github.sha }}" || echo "No hay cambios en el puntero"
+
+      # 4. Crear el Pull Request automático en la Raíz
+      - name: Crear Pull Request en la Raíz
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.REPOS_TOKEN }}
+          branch: "automation/update-backend"
+          title: "🤖 Auto-Update: Puntero de Backend"
+          body: |
+            Este es un Pull Request generado automáticamente por GitHub Actions.
+            Se actualizó el puntero de `Backend` al commit: ${{ github.sha }}
+          base: "main"
