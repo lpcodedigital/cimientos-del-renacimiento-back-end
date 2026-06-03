@@ -2,6 +2,7 @@ package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.email.se
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ public class EmailServiceImpl implements IEmailService {
     
     private final JavaMailSender mailSender;
     private final TemplateEngine templateEngine;
+
+    // 🔐 Inyectamos de forma dinámica el mismo correo que autentica tu SMTP
+    @Value("${spring.mail.username}")
+    private String fromEmail;
+    
     @Override
     public void sendHtmlEmail(String to, String subject, String templateName, Map<String, Object> variables) {
         try {
@@ -33,7 +39,7 @@ public class EmailServiceImpl implements IEmailService {
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(htmlContent, true);
-            helper.setFrom("cimientosdelrenacimiento@gmail.com");
+            helper.setFrom(fromEmail);
 
             mailSender.send(message);
         } catch (MessagingException e) {
