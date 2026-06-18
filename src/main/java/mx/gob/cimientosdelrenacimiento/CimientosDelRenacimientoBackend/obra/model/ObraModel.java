@@ -45,6 +45,9 @@ public class ObraModel extends Auditable {
     @Column(nullable = false)
     private String municipality;
 
+    @Column(nullable = true)
+    private String locality;
+
     @Column(nullable = false)
     private String agency;
     

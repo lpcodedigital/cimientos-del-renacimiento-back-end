@@ -11,6 +11,7 @@ public class ObraResponseDTO {
     private Long id;
     private String name;
     private String municipality;
+    private String locality;
     private String agency;
     private BigDecimal investment;
     private Integer progress;

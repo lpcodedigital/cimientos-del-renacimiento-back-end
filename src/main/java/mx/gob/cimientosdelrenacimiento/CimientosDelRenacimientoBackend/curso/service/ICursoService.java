@@ -8,6 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoResponseDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoLinkProjection;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.dto.MunicipioStadDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoMapaDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoPublicDTO;
 
 public interface ICursoService {
@@ -25,5 +28,14 @@ public interface ICursoService {
     void delete(Long id);
 
     // Método para obtener cursos en formato optimizado para el front-end público
+
+    // Mètodo para obtener cursos en formato optimizado para el front-end público, con datos mínimos necesarios para mostrar en el mapa
+    List<CursoMapaDTO> findAllForCursoMapa();
+
+    // Método para obtener cursos por municipio optimizados para la tabla pública
+    List<CursoLinkProjection> getCursosByMunicipioPublic(String municipio);
+
+    // Mètodo para contar cuantas obras hay por municipio, optimizados para la tabla pública
+    List<MunicipioStadDTO> countCursosByMunicipalityForPublicTable();
 
 }

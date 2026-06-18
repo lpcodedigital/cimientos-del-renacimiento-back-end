@@ -11,6 +11,7 @@ public class ObraResponseListDTO {
     private Long id;
     private String name;
     private String municipality;
+    private String locality;
     private String description;
     private String status;
     private Integer progress;

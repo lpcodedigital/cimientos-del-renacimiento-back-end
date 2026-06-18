@@ -20,6 +20,8 @@ public class ObraRequestDTO {
     @NotBlank(message = "El municipio es obligatorio")
     private String municipality;
 
+    private String locality;
+
     @NotBlank(message = "La ejecutora es obligatoria")
     private String agency;
 

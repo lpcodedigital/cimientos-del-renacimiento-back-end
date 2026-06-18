@@ -1,6 +1,7 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -13,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoMapaDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoPublicDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoResponseDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoLinkProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.service.ICursoService;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.dto.MunicipioStadDTO;
 
 @RestController
 @RequestMapping("/api/v1/public/curso")
@@ -46,6 +50,29 @@ public class PublicCursoController {
         @PathVariable Long id
     ) {
         return ResponseEntity.ok(cursoService.findById(id));
+    }
+
+    /**
+     * Endpoint público para obtener cursos en formato optimizado para el mapa.
+     */
+    @GetMapping("/mapa")
+    public ResponseEntity<List<CursoMapaDTO>> getAllForMap() {
+        return ResponseEntity.ok(cursoService.findAllForCursoMapa());
+    }
+
+    /*
+        Endpoint público para obtener cursos por municipio de la tabla.
+    */
+    @GetMapping("/municipio/{municipio}")
+    public ResponseEntity<List<CursoLinkProjection>> getCursosByMunicipio(@PathVariable String municipio) {
+        List<CursoLinkProjection> cursos = cursoService.getCursosByMunicipioPublic(municipio);
+        return ResponseEntity.ok(cursos);
+    }
+
+    @GetMapping("/municipio/stats")
+    public ResponseEntity<List<MunicipioStadDTO>> countCursosByMunicipalityForPublicTable() {
+        List<MunicipioStadDTO> stats = cursoService.countCursosByMunicipalityForPublicTable();
+        return ResponseEntity.ok(stats);
     }
 
 }

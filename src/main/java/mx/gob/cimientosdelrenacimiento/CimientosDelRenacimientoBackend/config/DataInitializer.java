@@ -3,6 +3,7 @@ package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.config;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -58,6 +59,21 @@ public class DataInitializer implements CommandLineRunner {
     @Autowired
     private CursoRepository cursoRepository;
 
+    // 💡 Diccionario estático de coordenadas reales del centro de municipios clave en Yucatán
+    // Esto garantiza que el marcador caiga exactamente dentro del municipio correspondiente
+    private static final Map<String, double[]> COORDENADAS_MUNICIPIOS = Map.of(
+        "Mérida", new double[]{20.96737, -89.59258},
+        "Progreso", new double[]{21.28277, -89.66361},
+        "Kanasín", new double[]{20.93333, -89.55833},
+        "Valladolid", new double[]{20.68944, -88.20138},
+        "Tizimín", new double[]{21.14222, -88.14944},
+        "Umán", new double[]{20.88333, -89.75000},
+        "Motul", new double[]{21.09500, -89.28388},
+        "Izamal", new double[]{20.93111, -88.84972},
+        "Oxkutzcab", new double[]{20.30416, -89.41777},
+        "Tekax", new double[]{20.20166, -89.28444}
+    );
+
     @Override
     @Transactional
     public void run(String... args) throws Exception {
@@ -72,20 +88,10 @@ public class DataInitializer implements CommandLineRunner {
             seedMunicipios();
         }
 
-        // CARGA FORZADA DE CURSOS FAKE (Fuera del if !isProd)
-        // if (cursoRepository.count() == 0) {
-        // log.info("🎓 Cargando cursos iniciales...");
-        // userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
-        // .ifPresent(this::seedCursos);
-        // }
-
-        // BLOQUE DE DATOS FAKE: Solo si NO es producción
         if (!isProd) {
             log.info("🧪 Entorno de desarrollo detectado. Sembrando datos de prueba...");
             
-            // Sembrar obras si la tabla está vacía
             if (obraRepository.count() == 0) {
-                // Buscamos al admin para asignarle la autoría de los registros
                 UserModel admin = userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
                         .orElse(null);
                 if (admin != null) {
@@ -93,9 +99,7 @@ public class DataInitializer implements CommandLineRunner {
                 }
             }
            
-            // Sembrar cursos si la tabla está vacía
             if (cursoRepository.count() == 0) {
-                // Buscamos al admin para asignarle la autoría de los registros
                 UserModel admin = userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
                         .orElse(null);
                 if (admin != null) {
@@ -108,125 +112,60 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void seedPermissionsRolesUsers() {
-
         System.out.println("🚧 Inicializando datos base...");
 
-        // Crear permisos basicos
-        PermissionModel create = permissionRepository.save(PermissionModel.builder()
-                .name("CREATE")
-                .description("Puede crear registros")
-                .build());
-        PermissionModel read = permissionRepository.save(PermissionModel.builder()
-                .name("READ")
-                .description("Puede leer registros")
-                .build());
-        PermissionModel update = permissionRepository.save(PermissionModel.builder()
-                .name("UPDATE")
-                .description("Puede actualizar registros")
-                .build());
-        PermissionModel delete = permissionRepository.save(PermissionModel.builder()
-                .name("DELETE")
-                .description("Puede eliminar registros")
-                .build()
+        PermissionModel create = permissionRepository.save(PermissionModel.builder().name("CREATE").description("Puede crear registros").build());
+        PermissionModel read = permissionRepository.save(PermissionModel.builder().name("READ").description("Puede leer registros").build());
+        PermissionModel update = permissionRepository.save(PermissionModel.builder().name("UPDATE").description("Puede actualizar registros").build());
+        PermissionModel delete = permissionRepository.save(PermissionModel.builder().name("DELETE").description("Puede eliminar registros").build());
 
-        );
-        // Roles basicos
-        RoleModel adminRole = roleRepository.save(RoleModel.builder()
-                .name("ROLE_ADMIN")
-                .description("Rol de administrador con todos los permisos")
-                .permissions(Set.of(create, read, update, delete))
-                .build());
-        RoleModel userRole = roleRepository.save(RoleModel.builder()
-                .name("ROLE_USER")
-                .description("Rol de usuario con permisos limitados")
-                .permissions(Set.of(create, read, update))
-                .build());
-        RoleModel guestRole = roleRepository.save(RoleModel.builder()
-                .name("ROLE_GUEST")
-                .description("Rol de invitado con permisos muy limitados")
-                .permissions(Set.of(read))
-                .build());
+        RoleModel adminRole = roleRepository.save(RoleModel.builder().name("ROLE_ADMIN").description("Rol de administrador con todos los permisos").permissions(Set.of(create, read, update, delete)).build());
+        RoleModel userRole = roleRepository.save(RoleModel.builder().name("ROLE_USER").description("Rol de usuario con permisos limitados").permissions(Set.of(create, read, update)).build());
+        RoleModel guestRole = roleRepository.save(RoleModel.builder().name("ROLE_GUEST").description("Rol de invitado con permisos muy limitados").permissions(Set.of(read)).build());
 
-        // Crear un usuarios por defecto
-        userRepository.save(UserModel.builder()
-                .name("Admin")
-                .middleName("Default")
-                .firstLastName("Default")
-                .secondLastName("User")
-                .phone("5555555555")
-                .email("admin@cimientosdelrenacimiento.gob.mx")
-                .password(passwordEncoder.encodePassword("Admin_2025"))
-                .active(true)
-                .isFirstLogin(false)
-                .twoFactorEnabled(false)
-                .twoFactorSecret(null)
-                .verificationCode(null)
-                .codeExpiration(null)
-                .role(adminRole)
-                .build());
-
-        userRepository.save(UserModel.builder()
-                .name("User")
-                .middleName("Default")
-                .firstLastName("Default")
-                .secondLastName("User")
-                .phone("5555555551")
-                .email("user@cimientosdelrenacimiento.gob.mx")
-                .password(passwordEncoder.encodePassword("User_2025"))
-                .active(true)
-                .isFirstLogin(false)
-                .twoFactorEnabled(false)
-                .twoFactorSecret(null)
-                .verificationCode(null)
-                .codeExpiration(null)
-                .role(userRole)
-                .build());
-
-        userRepository.save(UserModel.builder()
-                .name("Guest")
-                .middleName("Default")
-                .firstLastName("Default")
-                .secondLastName("Guest")
-                .phone("5555555552")
-                .email("guest@cimientosdelrenacimiento.gob.mx")
-                .password(passwordEncoder.encodePassword("Guest_2025"))
-                .active(false)
-                .isFirstLogin(false)
-                .twoFactorEnabled(false)
-                .twoFactorSecret(null)
-                .verificationCode(null)
-                .codeExpiration(null)
-                .role(guestRole)
-                .build());
+        userRepository.save(UserModel.builder().name("Admin").middleName("Default").firstLastName("Default").secondLastName("User").phone("5555555555").email("admin@cimientosdelrenacimiento.gob.mx").password(passwordEncoder.encodePassword("Admin_2025")).active(true).isFirstLogin(false).twoFactorEnabled(false).role(adminRole).build());
+        userRepository.save(UserModel.builder().name("User").middleName("Default").firstLastName("Default").secondLastName("User").phone("5555555551").email("user@cimientosdelrenacimiento.gob.mx").password(passwordEncoder.encodePassword("User_2025")).active(true).isFirstLogin(false).twoFactorEnabled(false).role(userRole).build());
+        userRepository.save(UserModel.builder().name("Guest").middleName("Default").firstLastName("Default").secondLastName("Guest").phone("5555555552").email("guest@cimientosdelrenacimiento.gob.mx").password(passwordEncoder.encodePassword("Guest_2025")).active(false).isFirstLogin(false).twoFactorEnabled(false).role(guestRole).build());
 
         System.out.println("✅ Datos iniciales creados correctamente.");
     }
 
     private void seedObras(UserModel creator) {
-        System.out.println("🏗️ Generando obras de prueba con imágenes fake...");
+        System.out.println("🏗️ Generando obras de prueba con campo locality...");
 
         String[] municipios = { "Mérida", "Progreso", "Kanasín", "Valladolid", "Tizimín", "Umán" };
+        
+        // 💡 Diccionario correlativo de localidades ficticias/comunes asociadas a los municipios anteriores
+        String[] localidades = { "Centro", "Chicxulub Puerto", "San Haroldo", "Nachi Cocom", "El Palmar", "Itzincab" };
+        
         EstadoObraEnum[] estados = EstadoObraEnum.values();
 
         for (int i = 1; i <= 15; i++) {
+            int index = i % municipios.length;
+            String nombreMunicipio = municipios[index];
+            
             ObraModel obra = new ObraModel();
             obra.setName("Proyecto de Infraestructura #" + i);
-            obra.setMunicipality(municipios[i % municipios.length]);
+            obra.setMunicipality(nombreMunicipio);
+            
+            // 💡 ASIGNACIÓN DEL NUEVO CAMPO LOCALITY CORRESPONDIENTE
+            obra.setLocality(localidades[index]);
+            
             obra.setAgency("Secretaría del Bienestar - Delegación " + i);
             obra.setInvestment(new BigDecimal("250000.00").multiply(new BigDecimal(i)));
             obra.setProgress(i * 6);
-            obra.setDescription("Esta es una descripción de prueba para la obra número " + i
-                    + ". Se enfoca en la mejora de servicios públicos.");
-            obra.setLatitude(20.96737);
-            obra.setLongitude(-89.59258);
+            obra.setDescription("Esta es una descripción de prueba para la obra número " + i + ". Se enfoca en la mejora de servicios públicos.");
+            
+            // 💡 Alineamos también las coordenadas de las obras con su municipio para evitar desajustes en el mapa
+            double[] coords = COORDENADAS_MUNICIPIOS.getOrDefault(nombreMunicipio, new double[]{20.96737, -89.59258});
+            obra.setLatitude(coords[0] + (i * 0.002)); // Pequeña dispersión para que no se encimen exactamente
+            obra.setLongitude(coords[1] + (i * 0.002));
+            
             obra.setStatus(estados[i % estados.length]);
 
-            // Asignación manual de auditoría ya que JPA Auditing no detecta usuario en el
-            // arranque
             obra.setCreatedBy(creator);
             obra.setUpdatedBy(creator);
 
-            // 5. Agregar Imágenes Fake (2 por obra para probar la relación)
             for (int j = 1; j <= 2; j++) {
                 ObraImageModel img = new ObraImageModel();
                 img.setUrl("https://picsum.photos/seed/" + i + j + "/800/600");
@@ -238,25 +177,18 @@ public class DataInitializer implements CommandLineRunner {
                 img.setCreatedBy(creator);
                 img.setUpdatedBy(creator);
 
-                // Usamos tu método helper addImage para mantener la sincronía bidireccional
                 obra.addImage(img);
             }
 
             obraRepository.save(obra);
         }
-        System.out.println("✅ 15 obras con imágenes inicializadas.");
+        System.out.println("✅ 15 obras inicializadas con localidades mapeadas.");
     }
 
     public void seedMunicipios() {
         try {
             log.info("🌐 Sembrando municipios desde municipios.json...");
-
-            // 1. Cargamos el archivo (asegúrate que esté en src/main/resources/)
             JsonNode root = objectMapper.readTree(new ClassPathResource("municipios.json").getInputStream());
-
-            // 2. IMPORTANTE: Accedemos al nodo "municipios" que contiene el array
-            // Si haces root.isArray() dará falso porque root es un objeto { "municipios":
-            // [...] }
             JsonNode municipiosArray = root.path("municipios");
 
             if (municipiosArray.isArray()) {
@@ -279,7 +211,6 @@ public class DataInitializer implements CommandLineRunner {
             } else {
                 log.error(" ❌ No se encontró el array 'municipios' dentro del archivo JSON.");
             }
-
         } catch (Exception e) {
             log.error(" ❌ Error crítico al cargar municipios: {}", e.getMessage());
             e.printStackTrace();
@@ -287,21 +218,17 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void seedCursos(UserModel creator) {
-        log.info("🎓 Sembrando cursos de capacitación de prueba...");
+        log.info("🎓 Sembrando cursos alineados geográficamente con su municipio...");
 
         List<MunicipioModel> todosLosMunicipios = municipioRepository.findAll();
         if (todosLosMunicipios.isEmpty()) {
-            log.warn("⚠️ No hay municipios para asignar a los cursos. Saltando seed.");
+            log.warn("⚠️ No hay municipios en la base de datos. Saltando seed.");
             return;
         }
 
         String[] temas = {
-                "Taller de Programación Web",
-                "Carpintería Básica",
-                "Introducción a la Electrónica",
-                "Sostenibilidad Ambiental",
-                "Gestión de Proyectos Comunitarios",
-                "Primeros Auxilios",
+                "Taller de Programación Web", "Carpintería Básica", "Introducción a la Electrónica",
+                "Sostenibilidad Ambiental", "Gestión de Proyectos Comunitarios", "Primeros Auxilios",
                 "Corte y Confección"
         };
 
@@ -310,22 +237,40 @@ public class DataInitializer implements CommandLineRunner {
         for (int i = 0; i < 12; i++) {
             CursoModel curso = new CursoModel();
             curso.setTitle(temas[i % temas.length] + " - Grupo " + (i + 1));
-            curso.setDescription(
-                    "Este es un curso de prueba diseñado para fortalecer las habilidades técnicas de los ciudadanos en el estado de Yucatán. Sesión #"
-                            + i);
+            curso.setDescription("Este es un curso de prueba diseñado para fortalecer las habilidades técnicas de los ciudadanos en el estado de Yucatán. Sesión #" + i);
             curso.setCourseDate(LocalDate.now().plusDays(random.nextInt(30)));
 
-            // Asignar un municipio aleatorio de la lista ya cargada
-            curso.setMunicipality(todosLosMunicipios.get(random.nextInt(todosLosMunicipios.size())));
+            // 💡 ASIGNACIÓN ALEATORIA DEL MUNICIPIO DESDE LA BASE DE DATOS
+            MunicipioModel municipioAsignado = todosLosMunicipios.get(random.nextInt(todosLosMunicipios.size()));
+            curso.setMunicipality(municipioAsignado);
+
+            // 💡 CORRELACIÓN GEOGRÁFICA STRICTA:
+            // Buscamos si el nombre del municipio asignado tiene coordenadas cargadas en nuestro diccionario de control.
+            // Si no está listado en el Map, usamos el centro de Mérida como respaldo seguro.
+            double[] coordsBase = COORDENADAS_MUNICIPIOS.get(municipioAsignado.getName());
+            if (coordsBase == null) {
+                // Si es un municipio del interior no listado, forzamos uno conocido para asegurar coincidencia visual en las capas
+                municipioAsignado = todosLosMunicipios.stream()
+                        .filter(m -> COORDENADAS_MUNICIPIOS.containsKey(m.getName()))
+                        .findFirst()
+                        .orElse(municipioAsignado);
+                curso.setMunicipality(municipioAsignado);
+                coordsBase = COORDENADAS_MUNICIPIOS.get(municipioAsignado.getName());
+            }
+
+            // Aplicamos una microdispersión matemática muy leve (rango de 500 metros) 
+            // para que si se generan dos cursos en el mismo municipio, no queden exactamente encimados.
+            double dispersionLat = (random.nextDouble() - 0.5) * 0.009;
+            double dispersionLng = (random.nextDouble() - 0.5) * 0.009;
+            
+            curso.setLatitude(coordsBase[0] + dispersionLat);
+            curso.setLongitude(coordsBase[1] + dispersionLng);
 
             curso.setCreatedBy(creator);
             curso.setUpdatedBy(creator);
 
-            // Agregar 3 imágenes por curso (la primera será la portada automáticamente por
-            // posición 0)
             for (int j = 0; j < 3; j++) {
                 CursoImageModel img = new CursoImageModel();
-                // Usamos una semilla diferente para cada imagen para que no sean iguales
                 String seed = "curso-" + i + "-" + j;
                 img.setUrl("https://picsum.photos/seed/" + seed + "/800/600");
                 img.setThumbUrl("https://picsum.photos/seed/" + seed + "/300/300");
@@ -336,10 +281,8 @@ public class DataInitializer implements CommandLineRunner {
                 img.setCreatedBy(creator);
                 img.setUpdatedBy(creator);
 
-                // Sincronización bidireccional
                 curso.addImage(img);
 
-                // ASIGNACIÓN DE PORTADA: Si es la posición 0, la marcamos como coverImage
                 if (j == 0) {
                     curso.setCoverImage(img);
                 }
@@ -347,6 +290,6 @@ public class DataInitializer implements CommandLineRunner {
 
             cursoRepository.save(curso);
         }
-        log.info("✅ 12 cursos inicializados correctamente.");
+        log.info("✅ 12 cursos inicializados y georreferenciados correctamente con sus municipios.");
     }
 }
