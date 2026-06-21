@@ -17,6 +17,8 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repo
 
 public interface ObraRespository extends JpaRepository<ObraModel, Long> {
 
+        /*** QUERIES PARA USAR EN EL MODULO DE OBRAS DEL FRONTEND ADMIN ***/
+
         // Verificar si existe una obra con el nombre dado, incluyendo las eliminadas
         // por soft delete
         @Query(value = "SELECT * FROM obras WHERE name = ?1", nativeQuery = true)
@@ -36,10 +38,19 @@ public interface ObraRespository extends JpaRepository<ObraModel, Long> {
         @Query("SELECT o.id as id, o.name as name, o.municipality as municipality, o.description as description, o.status as status, o.progress as progress, o.createdAt as createdAt"
                         +
                         " FROM ObraModel o WHERE o.deleted = false")
-        Page<ObraPaginationProjection> findAllPaginated(Pageable pageable); // Spring Data JPA generará la consulta
-                                                                            // automáticamente
+        Page<ObraPaginationProjection> findAllPaginated(Pageable pageable);
 
-        /*** Querys para usar en el Dashboard ***/
+        // Consulta para búsqueda de texto completo usando la columna search_vector
+        @Query(value = "SELECT o.id as id, o.name as name, o.municipality as municipality, " +
+               "o.description as description, o.status as status, o.progress as progress, o.created_at as createdAt " +
+               "FROM obras o " +
+               "WHERE o.deleted = false " +
+               "AND (:search IS NULL OR o.search_vector @@ to_tsquery('es_unaccent', :search)) " +
+               "ORDER BY o.id ASC", 
+       countQuery = "SELECT COUNT(*) FROM obras o WHERE o.deleted = false AND (:search IS NULL OR o.search_vector @@ to_tsquery('es_unaccent', :search))",
+       nativeQuery = true)
+        Page<ObraPaginationProjection> findAllByFullTextSearch(@Param("search") String search, Pageable pageable);
+        /*** QUERIES PARA USAR EN EL MODULO DEL DASHBOARD DEL FRONTEND PUBLIC ***/
 
         // TotaL invertido en obras
         @Query("SELECT SUM(o.investment) FROM ObraModel o WHERE o.deleted = false")
@@ -57,10 +68,10 @@ public interface ObraRespository extends JpaRepository<ObraModel, Long> {
         @Query("SELECT UPPER(o.municipality), COUNT(o) FROM ObraModel o WHERE o.deleted = false GROUP BY UPPER(o.municipality)")
         List<Object[]> countObrasByMunicipality();
 
-        /*** Querys para usar en el Dashboard ***/
+        /*** QUERYS PARA USAR EN FRONTEND PUBLICO ***/
 
-        /**
-         * * Query para la Tabla Pública de Municipios.
+        /** 
+         * Query para la Tabla Pública de Municipios.
          * Agrupa respetando el formato original del nombre para el match con el
          * GeoJSON.
          */

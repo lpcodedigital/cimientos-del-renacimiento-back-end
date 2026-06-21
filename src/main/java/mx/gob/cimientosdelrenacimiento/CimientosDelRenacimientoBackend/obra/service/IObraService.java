@@ -29,7 +29,7 @@ public interface IObraService {
     void delete(Long id);
 
     // Para obtener una lista paginada de obras usando la proyección personalizada
-    Page<ObraResponseListDTO> findAllPaginated(int page, int size);
+    Page<ObraResponseListDTO> findAllPaginated(int page, int size, String search);
 
     // Para obtener obras por municipio optimizadas para la tabla pública
     List<ObraLinkProjection> getObrasByMunicipioPublic(String municipio);

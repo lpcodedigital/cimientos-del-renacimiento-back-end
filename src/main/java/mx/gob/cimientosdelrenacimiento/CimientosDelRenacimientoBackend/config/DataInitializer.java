@@ -33,6 +33,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.role.repo
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.model.UserModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.user.repository.UserRespository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.util.PasswordEncoder;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 @RequiredArgsConstructor
@@ -56,6 +57,8 @@ public class DataInitializer implements CommandLineRunner {
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
     private CursoRepository cursoRepository;
 
     @Override
@@ -64,10 +67,16 @@ public class DataInitializer implements CommandLineRunner {
         List<String> activeProfiles = List.of(environment.getActiveProfiles());
         boolean isProd = activeProfiles.contains("prod");
 
+        // 1. CONFIGURACIÓN AUTOMÁTICA DE FULL-TEXT SEARCH NATIVO
+        log.info("🔍 Inicializando y verificando soporte Full-Text Search (FTS)...");
+        setupFullTextSearch();
+
+        // 2. SEMBRADO DE DATOS BÁSICOS: PERMISOS, ROLES, USUARIOS
+        log.info("🔑 Sembrando datos de seguridad (permisos, roles y usuarios)...");
         if (roleRepository.count() == 0) {
             seedPermissionsRolesUsers();
         }
-        
+
         if (municipioRepository.count() == 0) {
             seedMunicipios();
         }
@@ -82,7 +91,7 @@ public class DataInitializer implements CommandLineRunner {
         // BLOQUE DE DATOS FAKE: Solo si NO es producción
         if (!isProd) {
             log.info("🧪 Entorno de desarrollo detectado. Sembrando datos de prueba...");
-            
+
             // Sembrar obras si la tabla está vacía
             if (obraRepository.count() == 0) {
                 // Buscamos al admin para asignarle la autoría de los registros
@@ -92,7 +101,7 @@ public class DataInitializer implements CommandLineRunner {
                     seedObras(admin);
                 }
             }
-           
+
             // Sembrar cursos si la tabla está vacía
             if (cursoRepository.count() == 0) {
                 // Buscamos al admin para asignarle la autoría de los registros
@@ -105,6 +114,121 @@ public class DataInitializer implements CommandLineRunner {
         } else {
             log.info("🚀 Entorno de PRODUCCIÓN detectado. Saltando datos de prueba.");
         }
+    }
+
+    private void setupFullTextSearch() {
+        // Este método se puede usar para ejecutar scripts SQL que configuren el
+        // search_vector
+        // en PostgreSQL, creando índices GIN, etc. Se puede llamar desde el run() o
+        // ejecutarse
+        // manualmente después de desplegar la aplicación.
+
+        try {
+
+            // 1. Crear la extensión unaccent si no existe (Requiere permisos de
+            // superusuario en la DB local/VPS)
+            jdbcTemplate.execute("CREATE EXTENSION IF NOT EXISTS unaccent");
+
+            // 2. CORRECCIÓN CRÍTICA: Validar si la configuración de búsqueda ya existe en
+            // el catálogo de Postgres
+            Boolean configExists = jdbcTemplate.queryForObject(
+                    "SELECT EXISTS (SELECT 1 FROM pg_ts_config WHERE cfgname = 'es_unaccent')",
+                    Boolean.class);
+
+            // 3. Si no existe, crear la configuración personalizada basada en Spanish pero
+            // con unaccent
+            if (Boolean.FALSE.equals(configExists)) {
+                log.info("✨ Creando configuración de búsqueda personalizada 'es_unaccent'...");
+                jdbcTemplate.execute("CREATE TEXT SEARCH CONFIGURATION es_unaccent (COPY = spanish)");
+                jdbcTemplate.execute(
+                        "ALTER TEXT SEARCH CONFIGURATION es_unaccent ALTER MAPPING FOR hword, hword_part, word WITH unaccent, spanish_stem");
+                log.info("✅ Configuración de búsqueda 'es_unaccent' creada con éxito.");
+            } else {
+                log.info("✅ La configuración de búsqueda 'es_unaccent' ya existe. Omitiendo creación.");
+            }
+
+            // === CONFIGURACIÓN PARA OBRAS ===
+            Boolean obraColExists = jdbcTemplate.queryForObject(
+                    "SELECT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='obras' AND column_name='search_vector')",
+                    Boolean.class);
+
+            if (Boolean.FALSE.equals(obraColExists)) {
+                log.info("🏗️ Agregando columna calculada search_vector a la tabla 'obras'...");
+                jdbcTemplate.execute(
+                        "ALTER TABLE obras ADD COLUMN search_vector tsvector " +
+                                "GENERATED ALWAYS AS (" +
+                                "  to_tsvector('es_unaccent', COALESCE(name, '') || ' ' || COALESCE(municipality, '') || ' ' || COALESCE(description, ''))"
+                                +
+                                ") STORED");
+
+                log.info("⚡ Creando índice GIN para búsquedas sobre 'obras'...");
+                jdbcTemplate.execute(
+                        "CREATE INDEX IF NOT EXISTS obras_search_vector_idx ON obras USING gin(search_vector)");
+                log.info("✅ Columna generada e índice GIN creados para obras.");
+            } else {
+                log.info("✅ La columna search_vector ya existe en obras. Omitiendo configuración.");
+            }
+
+            // === CONFIGURACIÓN PARA CURSOS ===
+            // 1. La función PL/pgSQL siempre se puede reemplazar (Mantenimiento ágil sin
+            // DROP)
+            // === CONFIGURACIÓN PARA CURSOS ===
+            log.info("🎓 Verificando/Actualizando función de búsqueda relacional para cursos...");
+
+            // Esta funcion se puede ejecutar directamente en la BD si se hace alguna modificación, no requiere DROP ni afecta los datos existentes
+            jdbcTemplate.execute(
+                    "CREATE OR REPLACE FUNCTION trigger_update_cursos_search_vector() " +
+                            "RETURNS trigger AS $$ " +
+                            "DECLARE " +
+                            "    v_municipio_name TEXT := ''; " +
+                            "BEGIN " +
+                            "    IF NEW.municipio_id IS NOT NULL THEN " +
+                            "        SELECT COALESCE(name, '') INTO v_municipio_name " +
+                            "        FROM municipios WHERE id = NEW.municipio_id; " +
+                            "    END IF; " +
+                            " " +
+                            "    NEW.search_vector := to_tsvector('es_unaccent', " +
+                            "        COALESCE(NEW.title, '') || ' ' || " +
+                            "        COALESCE(NEW.description, '') || ' ' || " +
+                            "        COALESCE(v_municipio_name, '') " +
+                            "    ); " +
+                            "    RETURN NEW; " +
+                            "END; " +
+                            "$$ LANGUAGE plpgsql;" // Así, pegado al END; anterior sin saltos de línea intermedios
+            );
+
+            // 2. La columna, el índice y el Trigger solo se configuran si la columna no
+            // existe
+            Boolean cursosColExist = jdbcTemplate.queryForObject(
+                    "SELECT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='cursos' AND column_name='search_vector')",
+                    Boolean.class);
+
+            if (Boolean.FALSE.equals(cursosColExist)) {
+                log.info("🎓 Creando columna física, índice GIN y Trigger para la tabla 'cursos'...");
+
+                jdbcTemplate.execute("ALTER TABLE cursos ADD COLUMN search_vector tsvector");
+                jdbcTemplate.execute("CREATE INDEX idx_cursos_search_vector ON cursos USING GIN(search_vector)");
+
+                // Atamos el disparador a la tabla
+                jdbcTemplate.execute(
+                        "CREATE TRIGGER trg_cursos_search_vector " +
+                                "BEFORE INSERT OR UPDATE ON cursos " +
+                                "FOR EACH ROW EXECUTE FUNCTION trigger_update_cursos_search_vector();");
+
+                // Forzamos un update rápido para calcular el vector en los datos que se
+                // siembren en el arranque
+                // Con este query despus de ejecutar la función en la BD que actualiza el search_vector se puede ejutar esto en BD para forzar a despertar el trigger y asi aplicar 
+                // la nueva logica en los datos viejos
+                jdbcTemplate.execute("UPDATE cursos SET title = title;");
+            }
+
+            log.info("✅ Arquitectura mixta Full-Text Search (Obras + Cursos) lista.");
+
+        } catch (Exception e) {
+            log.error("❌ Error al configurar búsqueda de texto completo: {}", e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
     private void seedPermissionsRolesUsers() {

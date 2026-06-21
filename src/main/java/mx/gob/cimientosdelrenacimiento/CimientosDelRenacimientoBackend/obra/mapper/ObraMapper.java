@@ -11,8 +11,10 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraMapaDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraResponseDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.dto.ObraResponseListDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraImageModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.ObraModel;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraPaginationProjection;
 
 // Con este decorador se indica que es un mapper de MapStruct y cuando se genera la clase que implementa esta interfaz, se registre como un @component de Spring.
 // Gracias a esto se puede inyectar directamente en los controladores o servicios.
@@ -53,4 +55,7 @@ public interface ObraMapper {
             return img;
         }).collect(Collectors.toList());
     }
+
+    // Método para convertir la proyección personalizada a DTO de respuesta
+    public abstract ObraResponseListDTO projectionToResponseDTO(ObraPaginationProjection projection);
 }

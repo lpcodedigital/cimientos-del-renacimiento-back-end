@@ -34,21 +34,13 @@ public class CursoController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'GUEST')") 
     @GetMapping("/list")
-    public ResponseEntity<Map<String, Object>> getAllAdmin(
+    public ResponseEntity<Page<CursoResponseDTO>> getAllAdmin(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size
+        @RequestParam(defaultValue = "10") int size,
+        @RequestParam(required = false) String search
+
     ) {
-
-        // El servicio devuelve una página de CursoResponseDTO, que contiene la lista de cursos y el total de elementos.
-        Page<CursoResponseDTO> cursoPage = cursoService.findAllAdmin(PageRequest.of(page, size));
-        
-        // Estandarización de la respuesta para el front-end refine
-        // Enviamos 'data' y 'total' para que el dataprovider no
-        Map<String, Object> response = new HashMap<>();
-        response.put("data", cursoPage.getContent());
-        response.put("total", cursoPage.getTotalElements());
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(cursoService.findAllAdmin(page, size, search));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'GUEST')")
