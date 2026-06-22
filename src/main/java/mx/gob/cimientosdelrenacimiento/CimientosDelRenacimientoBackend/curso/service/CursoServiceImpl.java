@@ -27,6 +27,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.mod
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.CursoRepository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoLinkProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoMapaProjections;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoPaginationProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.ResourceNotFoundException;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.dto.MunicipioStadDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.service.MunicipioService;
