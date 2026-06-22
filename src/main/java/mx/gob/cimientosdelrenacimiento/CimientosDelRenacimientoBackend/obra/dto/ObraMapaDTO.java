@@ -10,4 +10,5 @@ public class ObraMapaDTO {
     private Double latitude;
     private Double longitude;
     private String municipality;
+    private String locality;
 }

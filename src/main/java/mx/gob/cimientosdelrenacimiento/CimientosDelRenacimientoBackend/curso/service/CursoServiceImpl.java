@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Sort;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoMapaDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoPublicDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoRequestDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.dto.CursoResponseDTO;
@@ -23,8 +25,11 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.map
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.model.CursoImageModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.model.CursoModel;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.CursoRepository;
-import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoPaginationProjection;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoLinkProjection;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoMapaProjections;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.exception.ResourceNotFoundException;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.dto.MunicipioStadDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.municipio.service.MunicipioService;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.storage.dto.ImageStorageResponse;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.storage.service.IImageStorageService;
 
@@ -36,6 +41,7 @@ public class CursoServiceImpl implements ICursoService {
     private final CursoRepository cursoRepository;
     private final CursoMapper cursoMapper;
     private final IImageStorageService imageStorageService;
+    private final MunicipioService municipioService;
 
     @Override
     @Transactional(readOnly = true)
@@ -228,5 +234,45 @@ public class CursoServiceImpl implements ICursoService {
             log.error("Error al eliminar la imagen del storage remoto {}: {}", image.getProviderId(), e.getMessage());
         }
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CursoMapaDTO> findAllForCursoMapa() {
+        
+        List<CursoMapaProjections> projections = cursoRepository.findAllForMap();
+        return projections.stream().map(cursoMapaProjections -> {
+            CursoMapaDTO dto = new CursoMapaDTO();
+            dto.setId(cursoMapaProjections.getId());
+            dto.setTitle(cursoMapaProjections.getTitle());
+            dto.setLatitude(cursoMapaProjections.getLatitude());
+            dto.setLongitude(cursoMapaProjections.getLongitude());
+            dto.setMunicipalityName(cursoMapaProjections.getMunicipalityName());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CursoLinkProjection> getCursosByMunicipioPublic(String municipio) {
+        return cursoRepository.findCursosByMunicipalityLight(municipio);
+    }
+
+    @Override
+    public List<MunicipioStadDTO> countCursosByMunicipalityForPublicTable() {
+        
+        List<Object[]> result = cursoRepository.countCursosByMunicipalityForPublicTable();
+
+        Map<String, Long> count = result.stream()
+                .collect(
+                        Collectors.toMap(
+                                res -> ((String) res[0]).trim(),
+                                res -> (Long) res[1],
+                                (existing, replacement) -> existing // En caso de duplicados, mantener el existente
+                        ));
+        return municipioService.getAllMunicipiosList().stream()
+                .map(name ->  new MunicipioStadDTO(name, count.getOrDefault(name, 0L)))
+                .collect(Collectors.toList());
+    }
+
+    
 
 }

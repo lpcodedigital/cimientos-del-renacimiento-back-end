@@ -15,6 +15,17 @@ public class CursoRequestDTO {
     private String description;
     private Long municipalityId;
     private LocalDate courseDate;
+    
+    @NotNull(message = "La latitud es obligatoria")
+    @Min(value = -90, message = "Latitud inválida")
+    @Max(value = 90, message = "Latitud inválida")
+    private Double latitude;
+
+    @NotNull(message = "La longitud es obligatoria")
+    @Min(value = -180, message = "Longitud inválida")
+    @Max(value = 180, message = "Longitud inválida")    
+    private Double longitude;
+
     private List<Long> keepImageIds;
     //@NotNull(message = "La imagen de portada es obligatoria")
     private Long currentCoverImageId;

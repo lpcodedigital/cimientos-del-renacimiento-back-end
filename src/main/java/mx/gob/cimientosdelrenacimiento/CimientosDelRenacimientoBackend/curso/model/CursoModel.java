@@ -38,6 +38,12 @@ public class CursoModel extends Auditable {
     @Column(nullable = true)
     private LocalDate courseDate;
 
+    @Column(nullable = false)
+    private Double latitude;
+
+    @Column(nullable = false)
+    private Double longitude;
+
     // Relación para la galería de imágenes
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude

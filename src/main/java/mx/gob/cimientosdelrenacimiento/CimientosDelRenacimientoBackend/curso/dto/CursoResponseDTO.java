@@ -11,6 +11,10 @@ public class CursoResponseDTO {
     private String title;
     private String description;
     private LocalDate courseDate;
+    
+    private Double latitude;
+    private Double longitude;
+    
     private String municipalityName;
     private Long municipalityId;
     

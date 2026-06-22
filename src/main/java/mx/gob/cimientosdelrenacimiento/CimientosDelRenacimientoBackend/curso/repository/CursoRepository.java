@@ -1,5 +1,6 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -7,8 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.model.CursoModel;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoLinkProjection;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoMapaProjections;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.repository.projections.CursoPaginationProjection;
 
 public interface CursoRepository extends JpaRepository<CursoModel, Long> {
@@ -81,5 +85,20 @@ public interface CursoRepository extends JpaRepository<CursoModel, Long> {
                      "LEFT JOIN c.coverImage img " +
                      "WHERE c.deleted = false")
        Page<CursoPaginationProjection> findAllPublicPaginated(Pageable pageable);
+
+    // Consulta optimizada para el mapa: Solo los campos necesarios y la URL de la portada
+    @Query("SELECT c.id as id, c.title as title, c.latitude as latitude, c.longitude as longitude, m.name as municipalityName " +
+           "FROM CursoModel c JOIN c.municipality m WHERE c.deleted = false")
+    List<CursoMapaProjections> findAllForMap();
+
+    /*
+       Consulta para obtener solo el id y el título de los cursos, optimizada para la tabla pública.
+    */
+   @Query("SELECT c.id as id, c.title as title FROM CursoModel c JOIN c.municipality m WHERE c.deleted = false AND m.name = :municipio")
+    List<CursoLinkProjection> findCursosByMunicipalityLight(@Param("municipio") String municipio);
+
+    // Consulta para contar cuántos cursos hay por municipio, optimizada para la tabla pública
+    @Query("SELECT m.name, COUNT(c) FROM CursoModel c JOIN c.municipality m WHERE c.deleted = false GROUP BY m.name")
+    List<Object[]> countCursosByMunicipalityForPublicTable();
 
 }
