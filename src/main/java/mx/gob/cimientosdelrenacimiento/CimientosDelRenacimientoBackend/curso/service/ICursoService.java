@@ -17,7 +17,7 @@ public interface ICursoService {
     
     Page<CursoPublicDTO> findAllPublic(Pageable pageable);
     
-    Page<CursoResponseDTO> findAllAdmin(Pageable pageable);
+    Page<CursoResponseDTO> findAllAdmin(int page, int size, String search);
     
     CursoResponseDTO findById(Long id);
     

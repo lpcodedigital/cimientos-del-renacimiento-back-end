@@ -2,11 +2,14 @@ package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.se
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,10 +53,22 @@ public class CursoServiceImpl implements ICursoService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<CursoResponseDTO> findAllAdmin(Pageable pageable) {
+    public Page<CursoResponseDTO> findAllAdmin(int page, int size, String search) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
 
-        return cursoRepository.findAllAdminPaginated(pageable)
-                .map(cursoMapper::toResponseDTO);
+        String formatedSearch = null;
+
+        if (search != null && !search.isEmpty()) {
+            formatedSearch = Arrays.stream(search.trim().split("\\s+"))
+                    .map(term -> term + ":*") // Agrega el operador de búsqueda de prefijo para cada término
+                    .collect(Collectors.joining(" & ")); // Combina losérminos con el operador AND para la consulta de texto completo
+        }
+
+        //3. Ejecutamos la búsqueda avanzada con FTS
+        Page<CursoPaginationProjection> projections = cursoRepository.findAllAdminByFullTextSearch(formatedSearch, pageable);
+
+        //4. Convertimos la página de proyecciones a página de DTOs
+        return projections.map(cursoMapper::projectionToResponseDTO);
     }
 
     @Override

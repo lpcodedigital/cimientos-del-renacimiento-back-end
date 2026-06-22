@@ -84,9 +84,10 @@ public class ObraController {
     @GetMapping("/list")
     public ResponseEntity<Page<ObraResponseListDTO>> getAllPaginated(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size
+        @RequestParam(defaultValue = "10") int size,
+        @RequestParam(required = false) String search
     ) {
-        return ResponseEntity.ok(obraService.findAllPaginated(page, size));
+        return ResponseEntity.ok(obraService.findAllPaginated(page, size, search));
     }
     
 }

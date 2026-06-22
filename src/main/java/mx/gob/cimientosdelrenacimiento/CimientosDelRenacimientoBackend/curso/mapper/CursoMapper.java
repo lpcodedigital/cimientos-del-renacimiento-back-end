@@ -89,4 +89,11 @@ public abstract class CursoMapper {
         return municipioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Municipio no encontrado con ID: " + id));
     }
+
+    // Proyección a Response DTO (Optimizado para la tabla de administración con datos cruzados)
+@Mapping(source = "municipioName", target = "municipalityName")
+@Mapping(source = "municipioId", target = "municipalityId")
+@Mapping(target = "coverImage", ignore = true) // Como es una vista de lista paginada en tabla, se suelen ignorar o cargar ligeras si Refine lo requiere
+@Mapping(target = "images", ignore = true)
+    public abstract CursoResponseDTO projectionToResponseDTO(CursoPaginationProjection projection);
 }
