@@ -143,6 +143,7 @@ public class ObraServiceImpl implements IObraService {
         obra.setName(request.getName());
         obra.setAgency(request.getAgency());
         obra.setMunicipality(request.getMunicipality());
+        obra.setLocality(request.getLocality());
         obra.setInvestment(request.getInvestment());
         obra.setProgress(request.getProgress());
         obra.setDescription(request.getDescription());
