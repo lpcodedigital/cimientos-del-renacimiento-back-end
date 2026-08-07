@@ -79,9 +79,9 @@ public interface ObraRespository extends JpaRepository<ObraModel, Long> {
         @Query("SELECT o.municipality, COUNT(o) FROM ObraModel o WHERE o.deleted = false GROUP BY o.municipality")
         List<Object[]> countObrasByMunicipalityForPublicTable();
 
-        // Consulta para obtener solo id y nombre de obras por municipio, optimizada
+        // Consulta para obtener solo id, nombre y descripcion de obras por municipio, optimizada
         // para la tabla pública
-        @Query("SELECT o.id as id, o.name as name FROM ObraModel o WHERE o.deleted = false AND o.municipality = :municipio")
+        @Query("SELECT o.id as id, o.name as name, o.description as description FROM ObraModel o WHERE o.deleted = false AND o.municipality = :municipio")
         List<ObraLinkProjection> findObrasByMunicipalityLight(@Param("municipio") String municipio);
 
         // Contar cuántos municipios distintos tienen obras (cobertura)
