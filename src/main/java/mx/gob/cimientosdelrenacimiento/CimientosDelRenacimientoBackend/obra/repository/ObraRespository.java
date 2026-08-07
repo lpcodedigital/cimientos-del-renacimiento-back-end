@@ -26,7 +26,8 @@ public interface ObraRespository extends JpaRepository<ObraModel, Long> {
 
         // Consulta para optimizar el mapa
         @Query("SELECT o.id as id, o.name as name, o.latitude as latitude, " +
-                        "o.longitude as longitude, o.municipality as municipality " +
+                        "o.longitude as longitude, o.municipality as municipality, " +
+                        "o.locality as locality, o.description as description " +
                         "FROM ObraModel o")
         List<ObraMapaProjection> findAllForMap();
 

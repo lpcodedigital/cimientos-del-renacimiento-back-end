@@ -108,6 +108,8 @@ public class ObraServiceImpl implements IObraService {
             dto.setLatitude(p.getLatitude());
             dto.setLongitude(p.getLongitude());
             dto.setMunicipality(p.getMunicipality());
+            dto.setLocality(p.getLocality());
+            dto.setDescription(p.getDescription());
             return dto;
         }).collect(Collectors.toList());
     }
