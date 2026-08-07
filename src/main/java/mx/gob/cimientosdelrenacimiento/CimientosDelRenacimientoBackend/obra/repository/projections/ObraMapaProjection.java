@@ -7,4 +7,6 @@ public interface ObraMapaProjection {
     Double getLatitude();
     Double getLongitude();
     String getMunicipality();
+    String getLocality();
+    String getDescription();
 }
