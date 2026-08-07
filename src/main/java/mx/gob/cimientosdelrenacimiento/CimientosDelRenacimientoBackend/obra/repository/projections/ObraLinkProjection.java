@@ -3,4 +3,5 @@ package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.rep
 public interface ObraLinkProjection {
     Long getId();
     String getName();
+    String getDescription();
 }
