@@ -1,5 +1,7 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dashboard.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dashboard.dto.DashboardStatsDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dashboard.dto.MunicipioResumenDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.dashboard.service.IDashboardService;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("/api/v1/dashboard")
@@ -21,5 +26,12 @@ public class DashboardController {
     public ResponseEntity<DashboardStatsDTO> getStats() {
         return ResponseEntity.ok(dashboardService.getStats());
     }
+
+    @GetMapping("/mapa-home")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'GUEST')")
+    public ResponseEntity<List<MunicipioResumenDTO>> getResumenPorMunicipioMapaApp() {
+        return ResponseEntity.ok(dashboardService.getResumenGlobalPorMunicipioApp());
+    }
+    
 
 }

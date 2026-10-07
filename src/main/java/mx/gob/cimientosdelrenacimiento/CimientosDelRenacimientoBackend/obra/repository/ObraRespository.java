@@ -14,6 +14,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.mode
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraLinkProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraMapaProjection;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraPaginationProjection;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repository.projections.ObraStatsProjectionForApp;
 
 public interface ObraRespository extends JpaRepository<ObraModel, Long> {
 
@@ -43,14 +44,14 @@ public interface ObraRespository extends JpaRepository<ObraModel, Long> {
 
         // Consulta para búsqueda de texto completo usando la columna search_vector
         @Query(value = "SELECT o.id as id, o.name as name, o.municipality as municipality, " +
-               "o.description as description, o.status as status, o.progress as progress, o.created_at as createdAt " +
-               "FROM obras o " +
-               "WHERE o.deleted = false " +
-               "AND (:search IS NULL OR o.search_vector @@ to_tsquery('es_unaccent', :search)) " +
-               "ORDER BY o.id ASC", 
-       countQuery = "SELECT COUNT(*) FROM obras o WHERE o.deleted = false AND (:search IS NULL OR o.search_vector @@ to_tsquery('es_unaccent', :search))",
-       nativeQuery = true)
+                        "o.description as description, o.status as status, o.progress as progress, o.created_at as createdAt "
+                        +
+                        "FROM obras o " +
+                        "WHERE o.deleted = false " +
+                        "AND (:search IS NULL OR o.search_vector @@ to_tsquery('es_unaccent', :search)) " +
+                        "ORDER BY o.id ASC", countQuery = "SELECT COUNT(*) FROM obras o WHERE o.deleted = false AND (:search IS NULL OR o.search_vector @@ to_tsquery('es_unaccent', :search))", nativeQuery = true)
         Page<ObraPaginationProjection> findAllByFullTextSearch(@Param("search") String search, Pageable pageable);
+
         /*** QUERIES PARA USAR EN EL MODULO DEL DASHBOARD DEL FRONTEND PUBLIC ***/
 
         // TotaL invertido en obras
@@ -71,7 +72,7 @@ public interface ObraRespository extends JpaRepository<ObraModel, Long> {
 
         /*** QUERYS PARA USAR EN FRONTEND PUBLICO ***/
 
-        /** 
+        /**
          * Query para la Tabla Pública de Municipios.
          * Agrupa respetando el formato original del nombre para el match con el
          * GeoJSON.
@@ -79,7 +80,8 @@ public interface ObraRespository extends JpaRepository<ObraModel, Long> {
         @Query("SELECT o.municipality, COUNT(o) FROM ObraModel o WHERE o.deleted = false GROUP BY o.municipality")
         List<Object[]> countObrasByMunicipalityForPublicTable();
 
-        // Consulta para obtener solo id, nombre y descripcion de obras por municipio, optimizada
+        // Consulta para obtener solo id, nombre y descripcion de obras por municipio,
+        // optimizada
         // para la tabla pública
         @Query("SELECT o.id as id, o.name as name, o.description as description FROM ObraModel o WHERE o.deleted = false AND o.municipality = :municipio")
         List<ObraLinkProjection> findObrasByMunicipalityLight(@Param("municipio") String municipio);
@@ -95,4 +97,14 @@ public interface ObraRespository extends JpaRepository<ObraModel, Long> {
         // Conteo de ejecutoras distintas
         @Query("SELECT COUNT(DISTINCT o.agency) FROM ObraModel o WHERE o.deleted = false")
         long countDistinctAgencies();
+
+        // Query para obtener los stats de las obras para el home de la app
+        @Query("SELECT o.municipality AS municipality, COUNT(o.id) AS totalObras, " +
+                        "SUM(o.investment) AS totalInversion, " +
+                        "SUM(CASE WHEN o.status = 'FINALIZADA' THEN 1 ELSE 0 END) AS finalizadas, " +
+                        "SUM(CASE WHEN o.status = 'EN_PROCESO' THEN 1 ELSE 0 END) AS enProceso, " +
+                        "MAX(o.latitude) AS latitude, MAX(o.longitude) AS longitude " +
+                        "FROM ObraModel o WHERE o.deleted = false " +
+                        "GROUP BY o.municipality")
+        List<ObraStatsProjectionForApp> getResumenObrasPorMunicipio();
 }
