@@ -62,20 +62,21 @@ public class DataInitializer implements CommandLineRunner {
     @Autowired
     private CursoRepository cursoRepository;
 
-    // 💡 Diccionario estático de coordenadas reales del centro de municipios clave en Yucatán
-    // Esto garantiza que el marcador caiga exactamente dentro del municipio correspondiente
+    // 💡 Diccionario estático de coordenadas reales del centro de municipios clave
+    // en Yucatán
+    // Esto garantiza que el marcador caiga exactamente dentro del municipio
+    // correspondiente
     private static final Map<String, double[]> COORDENADAS_MUNICIPIOS = Map.of(
-        "Mérida", new double[]{20.96737, -89.59258},
-        "Progreso", new double[]{21.28277, -89.66361},
-        "Kanasín", new double[]{20.93333, -89.55833},
-        "Valladolid", new double[]{20.68944, -88.20138},
-        "Tizimín", new double[]{21.14222, -88.14944},
-        "Umán", new double[]{20.88333, -89.75000},
-        "Motul", new double[]{21.09500, -89.28388},
-        "Izamal", new double[]{20.93111, -88.84972},
-        "Oxkutzcab", new double[]{20.30416, -89.41777},
-        "Tekax", new double[]{20.20166, -89.28444}
-    );
+            "Mérida", new double[] { 20.96737, -89.59258 },
+            "Progreso", new double[] { 21.28277, -89.66361 },
+            "Kanasín", new double[] { 20.93333, -89.55833 },
+            "Valladolid", new double[] { 20.68944, -88.20138 },
+            "Tizimín", new double[] { 21.14222, -88.14944 },
+            "Umán", new double[] { 20.88333, -89.75000 },
+            "Motul", new double[] { 21.09500, -89.28388 },
+            "Izamal", new double[] { 20.93111, -88.84972 },
+            "Oxkutzcab", new double[] { 20.30416, -89.41777 },
+            "Tekax", new double[] { 20.20166, -89.28444 });
 
     @Override
     @Transactional
@@ -99,7 +100,7 @@ public class DataInitializer implements CommandLineRunner {
 
         if (!isProd) {
             log.info("🧪 Entorno de desarrollo detectado. Sembrando datos de prueba...");
-            
+
             if (obraRepository.count() == 0) {
                 UserModel admin = userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
                         .orElse(null);
@@ -107,7 +108,7 @@ public class DataInitializer implements CommandLineRunner {
                     seedObras(admin);
                 }
             }
-           
+
             if (cursoRepository.count() == 0) {
                 UserModel admin = userRepository.findByEmail("admin@cimientosdelrenacimiento.gob.mx")
                         .orElse(null);
@@ -161,8 +162,13 @@ public class DataInitializer implements CommandLineRunner {
                 jdbcTemplate.execute(
                         "ALTER TABLE obras ADD COLUMN search_vector tsvector " +
                                 "GENERATED ALWAYS AS (" +
-                                "  to_tsvector('es_unaccent', COALESCE(name, '') || ' ' || COALESCE(municipality, '') || ' ' || COALESCE(description, ''))"
-                                +
+                                "  to_tsvector('es_unaccent', " +
+                                "    COALESCE(name, '') || ' ' || " +
+                                "    COALESCE(municipality, '') || ' ' || " +
+                                "    COALESCE(locality, '') || ' ' || " +
+                                "    COALESCE(REPLACE(status, '_', ' '), '') || ' ' || " +
+                                "    COALESCE(description, '')" +
+                                "  )" +
                                 ") STORED");
 
                 log.info("⚡ Creando índice GIN para búsquedas sobre 'obras'...");
@@ -179,7 +185,8 @@ public class DataInitializer implements CommandLineRunner {
             // === CONFIGURACIÓN PARA CURSOS ===
             log.info("🎓 Verificando/Actualizando función de búsqueda relacional para cursos...");
 
-            // Esta funcion se puede ejecutar directamente en la BD si se hace alguna modificación, no requiere DROP ni afecta los datos existentes
+            // Esta funcion se puede ejecutar directamente en la BD si se hace alguna
+            // modificación, no requiere DROP ni afecta los datos existentes
             jdbcTemplate.execute(
                     "CREATE OR REPLACE FUNCTION trigger_update_cursos_search_vector() " +
                             "RETURNS trigger AS $$ " +
@@ -221,7 +228,9 @@ public class DataInitializer implements CommandLineRunner {
 
                 // Forzamos un update rápido para calcular el vector en los datos que se
                 // siembren en el arranque
-                // Con este query despus de ejecutar la función en la BD que actualiza el search_vector se puede ejutar esto en BD para forzar a despertar el trigger y asi aplicar 
+                // Con este query despus de ejecutar la función en la BD que actualiza el
+                // search_vector se puede ejutar esto en BD para forzar a despertar el trigger y
+                // asi aplicar
                 // la nueva logica en los datos viejos
                 jdbcTemplate.execute("UPDATE cursos SET title = title;");
             }
@@ -238,18 +247,36 @@ public class DataInitializer implements CommandLineRunner {
     private void seedPermissionsRolesUsers() {
         System.out.println("🚧 Inicializando datos base...");
 
-        PermissionModel create = permissionRepository.save(PermissionModel.builder().name("CREATE").description("Puede crear registros").build());
-        PermissionModel read = permissionRepository.save(PermissionModel.builder().name("READ").description("Puede leer registros").build());
-        PermissionModel update = permissionRepository.save(PermissionModel.builder().name("UPDATE").description("Puede actualizar registros").build());
-        PermissionModel delete = permissionRepository.save(PermissionModel.builder().name("DELETE").description("Puede eliminar registros").build());
+        PermissionModel create = permissionRepository
+                .save(PermissionModel.builder().name("CREATE").description("Puede crear registros").build());
+        PermissionModel read = permissionRepository
+                .save(PermissionModel.builder().name("READ").description("Puede leer registros").build());
+        PermissionModel update = permissionRepository
+                .save(PermissionModel.builder().name("UPDATE").description("Puede actualizar registros").build());
+        PermissionModel delete = permissionRepository
+                .save(PermissionModel.builder().name("DELETE").description("Puede eliminar registros").build());
 
-        RoleModel adminRole = roleRepository.save(RoleModel.builder().name("ROLE_ADMIN").description("Rol de administrador con todos los permisos").permissions(Set.of(create, read, update, delete)).build());
-        RoleModel userRole = roleRepository.save(RoleModel.builder().name("ROLE_USER").description("Rol de usuario con permisos limitados").permissions(Set.of(create, read, update)).build());
-        RoleModel guestRole = roleRepository.save(RoleModel.builder().name("ROLE_GUEST").description("Rol de invitado con permisos muy limitados").permissions(Set.of(read)).build());
+        RoleModel adminRole = roleRepository
+                .save(RoleModel.builder().name("ROLE_ADMIN").description("Rol de administrador con todos los permisos")
+                        .permissions(Set.of(create, read, update, delete)).build());
+        RoleModel userRole = roleRepository
+                .save(RoleModel.builder().name("ROLE_USER").description("Rol de usuario con permisos limitados")
+                        .permissions(Set.of(create, read, update)).build());
+        RoleModel guestRole = roleRepository.save(RoleModel.builder().name("ROLE_GUEST")
+                .description("Rol de invitado con permisos muy limitados").permissions(Set.of(read)).build());
 
-        userRepository.save(UserModel.builder().name("Admin").middleName("Default").firstLastName("Default").secondLastName("User").phone("5555555555").email("admin@cimientosdelrenacimiento.gob.mx").password(passwordEncoder.encodePassword("Admin_2025")).active(true).isFirstLogin(false).twoFactorEnabled(false).role(adminRole).build());
-        userRepository.save(UserModel.builder().name("User").middleName("Default").firstLastName("Default").secondLastName("User").phone("5555555551").email("user@cimientosdelrenacimiento.gob.mx").password(passwordEncoder.encodePassword("User_2025")).active(true).isFirstLogin(false).twoFactorEnabled(false).role(userRole).build());
-        userRepository.save(UserModel.builder().name("Guest").middleName("Default").firstLastName("Default").secondLastName("Guest").phone("5555555552").email("guest@cimientosdelrenacimiento.gob.mx").password(passwordEncoder.encodePassword("Guest_2025")).active(false).isFirstLogin(false).twoFactorEnabled(false).role(guestRole).build());
+        userRepository.save(UserModel.builder().name("Admin").middleName("Default").firstLastName("Default")
+                .secondLastName("User").phone("5555555555").email("admin@cimientosdelrenacimiento.gob.mx")
+                .password(passwordEncoder.encodePassword("Admin_2025")).active(true).isFirstLogin(false)
+                .twoFactorEnabled(false).role(adminRole).build());
+        userRepository.save(UserModel.builder().name("User").middleName("Default").firstLastName("Default")
+                .secondLastName("User").phone("5555555551").email("user@cimientosdelrenacimiento.gob.mx")
+                .password(passwordEncoder.encodePassword("User_2025")).active(true).isFirstLogin(false)
+                .twoFactorEnabled(false).role(userRole).build());
+        userRepository.save(UserModel.builder().name("Guest").middleName("Default").firstLastName("Default")
+                .secondLastName("Guest").phone("5555555552").email("guest@cimientosdelrenacimiento.gob.mx")
+                .password(passwordEncoder.encodePassword("Guest_2025")).active(false).isFirstLogin(false)
+                .twoFactorEnabled(false).role(guestRole).build());
 
         System.out.println("✅ Datos iniciales creados correctamente.");
     }
@@ -258,33 +285,37 @@ public class DataInitializer implements CommandLineRunner {
         System.out.println("🏗️ Generando obras de prueba con campo locality...");
 
         String[] municipios = { "Mérida", "Progreso", "Kanasín", "Valladolid", "Tizimín", "Umán" };
-        
-        // 💡 Diccionario correlativo de localidades ficticias/comunes asociadas a los municipios anteriores
+
+        // 💡 Diccionario correlativo de localidades ficticias/comunes asociadas a los
+        // municipios anteriores
         String[] localidades = { "Centro", "Chicxulub Puerto", "San Haroldo", "Nachi Cocom", "El Palmar", "Itzincab" };
-        
+
         EstadoObraEnum[] estados = EstadoObraEnum.values();
 
         for (int i = 1; i <= 15; i++) {
             int index = i % municipios.length;
             String nombreMunicipio = municipios[index];
-            
+
             ObraModel obra = new ObraModel();
             obra.setName("Proyecto de Infraestructura #" + i);
             obra.setMunicipality(nombreMunicipio);
-            
+
             // 💡 ASIGNACIÓN DEL NUEVO CAMPO LOCALITY CORRESPONDIENTE
             obra.setLocality(localidades[index]);
-            
+
             obra.setAgency("Secretaría del Bienestar - Delegación " + i);
             obra.setInvestment(new BigDecimal("250000.00").multiply(new BigDecimal(i)));
             obra.setProgress(i * 6);
-            obra.setDescription("Esta es una descripción de prueba para la obra número " + i + ". Se enfoca en la mejora de servicios públicos.");
-            
-            // 💡 Alineamos también las coordenadas de las obras con su municipio para evitar desajustes en el mapa
-            double[] coords = COORDENADAS_MUNICIPIOS.getOrDefault(nombreMunicipio, new double[]{20.96737, -89.59258});
+            obra.setDescription("Esta es una descripción de prueba para la obra número " + i
+                    + ". Se enfoca en la mejora de servicios públicos.");
+
+            // 💡 Alineamos también las coordenadas de las obras con su municipio para
+            // evitar desajustes en el mapa
+            double[] coords = COORDENADAS_MUNICIPIOS.getOrDefault(nombreMunicipio,
+                    new double[] { 20.96737, -89.59258 });
             obra.setLatitude(coords[0] + (i * 0.002)); // Pequeña dispersión para que no se encimen exactamente
             obra.setLongitude(coords[1] + (i * 0.002));
-            
+
             obra.setStatus(estados[i % estados.length]);
 
             obra.setCreatedBy(creator);
@@ -361,7 +392,9 @@ public class DataInitializer implements CommandLineRunner {
         for (int i = 0; i < 12; i++) {
             CursoModel curso = new CursoModel();
             curso.setTitle(temas[i % temas.length] + " - Grupo " + (i + 1));
-            curso.setDescription("Este es un curso de prueba diseñado para fortalecer las habilidades técnicas de los ciudadanos en el estado de Yucatán. Sesión #" + i);
+            curso.setDescription(
+                    "Este es un curso de prueba diseñado para fortalecer las habilidades técnicas de los ciudadanos en el estado de Yucatán. Sesión #"
+                            + i);
             curso.setCourseDate(LocalDate.now().plusDays(random.nextInt(30)));
 
             // 💡 ASIGNACIÓN ALEATORIA DEL MUNICIPIO DESDE LA BASE DE DATOS
@@ -369,11 +402,14 @@ public class DataInitializer implements CommandLineRunner {
             curso.setMunicipality(municipioAsignado);
 
             // 💡 CORRELACIÓN GEOGRÁFICA STRICTA:
-            // Buscamos si el nombre del municipio asignado tiene coordenadas cargadas en nuestro diccionario de control.
-            // Si no está listado en el Map, usamos el centro de Mérida como respaldo seguro.
+            // Buscamos si el nombre del municipio asignado tiene coordenadas cargadas en
+            // nuestro diccionario de control.
+            // Si no está listado en el Map, usamos el centro de Mérida como respaldo
+            // seguro.
             double[] coordsBase = COORDENADAS_MUNICIPIOS.get(municipioAsignado.getName());
             if (coordsBase == null) {
-                // Si es un municipio del interior no listado, forzamos uno conocido para asegurar coincidencia visual en las capas
+                // Si es un municipio del interior no listado, forzamos uno conocido para
+                // asegurar coincidencia visual en las capas
                 municipioAsignado = todosLosMunicipios.stream()
                         .filter(m -> COORDENADAS_MUNICIPIOS.containsKey(m.getName()))
                         .findFirst()
@@ -382,11 +418,12 @@ public class DataInitializer implements CommandLineRunner {
                 coordsBase = COORDENADAS_MUNICIPIOS.get(municipioAsignado.getName());
             }
 
-            // Aplicamos una microdispersión matemática muy leve (rango de 500 metros) 
-            // para que si se generan dos cursos en el mismo municipio, no queden exactamente encimados.
+            // Aplicamos una microdispersión matemática muy leve (rango de 500 metros)
+            // para que si se generan dos cursos en el mismo municipio, no queden
+            // exactamente encimados.
             double dispersionLat = (random.nextDouble() - 0.5) * 0.009;
             double dispersionLng = (random.nextDouble() - 0.5) * 0.009;
-            
+
             curso.setLatitude(coordsBase[0] + dispersionLat);
             curso.setLongitude(coordsBase[1] + dispersionLng);
 
