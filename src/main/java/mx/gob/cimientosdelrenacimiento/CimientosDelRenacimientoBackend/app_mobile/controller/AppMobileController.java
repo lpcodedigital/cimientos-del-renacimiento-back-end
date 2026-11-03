@@ -1,5 +1,7 @@
 package mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.dto.AppMobileCursoDetailDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.dto.AppMobileGlobalSearchCardDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.dto.AppMobileObraDetailDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.dto.AppMobileLightResponseDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.service.IAppMobileService;
 
 @RestController
@@ -43,6 +46,12 @@ public class AppMobileController {
     @GetMapping("/curso/{id}")
     public ResponseEntity<AppMobileCursoDetailDTO> getCursoDetail(@PathVariable Long id) {
         return ResponseEntity.ok(IAppMobileService.getCursoDetail(id));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER', 'GUEST')")
+    @GetMapping("/map-items/{municipality}")
+    public ResponseEntity<List<AppMobileLightResponseDTO>> getMapItemsByMunicipality(@PathVariable String municipality) {
+        return ResponseEntity.ok(IAppMobileService.getMapItemsByMunicipality(municipality));
     }
 
 }
