@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.dto.AppMobileCursoDetailDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.dto.AppMobileGlobalSearchCardDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.dto.AppMobileObraDetailDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.dto.AppMobileLightResponseDTO;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.mapper.AppMobileMapper;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.repository.AppMobileRepository;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.curso.model.CursoModel;
@@ -27,7 +27,7 @@ import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.repo
 @RequiredArgsConstructor
 public class AppMobileServiceImpl implements IAppMobileService {
 
-   private final AppMobileRepository globalSearchRepository;
+   private final AppMobileRepository appMobileRepository;
    private final ObraRespository obraRepository;
    private final CursoRepository cursoRepository;
    private final AppMobileMapper appMobileMapper;
@@ -44,13 +44,13 @@ public class AppMobileServiceImpl implements IAppMobileService {
         params.addValue("limit", size);
         params.addValue("offset", pageRequest.getOffset());
 
-        Long total = globalSearchRepository.countTotalResults(params);
+        Long total = appMobileRepository.countTotalResults(params);
 
         if (total == null || total == 0) {
             return new PageImpl<>(List.of(), pageRequest, 0);
         }
 
-        List<AppMobileGlobalSearchCardDTO> results = globalSearchRepository.findPaginatedResults(params);
+        List<AppMobileGlobalSearchCardDTO> results = appMobileRepository.findPaginatedResults(params);
 
         return new PageImpl<>(results, pageRequest, total);
     }
@@ -80,6 +80,16 @@ public class AppMobileServiceImpl implements IAppMobileService {
                 .orElseThrow(() -> new RuntimeException("Curso not found with id: " + cursoId));
 
         return appMobileMapper.toAppMobileCursoDetailDTO(curso);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AppMobileLightResponseDTO> getMapItemsByMunicipality(String municipality) {
+        
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("municipality", municipality);
+
+        return appMobileRepository.findMapResultsByMunicipio(params);
     }
 
 }

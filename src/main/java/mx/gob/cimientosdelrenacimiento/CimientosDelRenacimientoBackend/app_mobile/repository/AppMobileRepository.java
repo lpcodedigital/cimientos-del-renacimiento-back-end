@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import lombok.RequiredArgsConstructor;
 import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.dto.AppMobileGlobalSearchCardDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.app_mobile.dto.AppMobileLightResponseDTO;
+import mx.gob.cimientosdelrenacimiento.CimientosDelRenacimientoBackend.obra.model.EstadoObraEnum;
 
 @Repository
 @RequiredArgsConstructor
@@ -84,4 +86,77 @@ public class AppMobileRepository {
                 .build());
     }
 
+    public List<AppMobileLightResponseDTO> findMapResultsByMunicipio(MapSqlParameterSource params) {
+    String dataSql = """
+                SELECT * FROM (
+                    -- BLOQUE OBRAS
+                    SELECT 
+                        'OBRA' as tipo,
+                        o.id as id,
+                        o.name as name,
+                        o.description as description,
+                        o.latitude as latitude,
+                        o.longitude as longitude,
+                        o.municipality as municipality,
+                        o.locality as locality,
+                        o.agency as agency,
+                        o.investment as investment,
+                        o.status as status,
+                        o.progress as progress,
+                        o.created_at as createdAt,
+                        o.updated_at as updatedAt,
+                        o.deleted_at as deletedAt
+                    FROM obras o
+                    WHERE o.deleted = false
+                      -- Se normaliza la columna y el parámetro a minúsculas y sin acentos
+                      AND unaccent(lower(o.municipality)) = unaccent(lower(:municipality))
+
+                    UNION ALL
+
+                    -- BLOQUE CURSOS
+                    SELECT 
+                        'CURSO' as tipo,
+                        c.id as id,
+                        c.title as name,
+                        c.description as description,
+                        c.latitude as latitude,
+                        c.longitude as longitude,
+                        m.name as municipality,
+                        NULL as locality,
+                        NULL as agency,
+                        NULL as investment,
+                        NULL as status,
+                        NULL as progress,
+                        c.created_at as createdAt,
+                        c.updated_at as updatedAt,
+                        c.deleted_at as deletedAt
+                    FROM cursos c
+                    LEFT JOIN municipios m ON c.municipio_id = m.id
+                    WHERE c.deleted = false
+                      -- Se normaliza la columna y el parámetro a minúsculas y sin acentos
+                      AND unaccent(lower(m.name)) = unaccent(lower(:municipality))
+                ) as map_search
+                ORDER BY createdAt DESC
+            """;
+
+    return jdbcTemplate.query(dataSql, params, (rs, rowNum) -> new AppMobileLightResponseDTO(
+            rs.getString("tipo"),
+            rs.getLong("id"),
+            rs.getString("name"),
+            rs.getString("description"),
+            rs.getDouble("latitude"),
+            rs.getDouble("longitude"),
+            rs.getString("municipality"),
+            rs.getString("locality"),
+            rs.getString("agency"),
+            rs.getBigDecimal("investment"),
+            // Convierte el String del SQL al Enum de forma segura si no es nulo
+            rs.getString("status") != null ? EstadoObraEnum.valueOf(rs.getString("status")) : null,
+            rs.getObject("progress") != null ? rs.getInt("progress") : null,
+            // Conversión de Timestamp a LocalDateTime
+            rs.getTimestamp("createdAt") != null ? rs.getTimestamp("createdAt").toLocalDateTime() : null,
+            rs.getTimestamp("updatedAt") != null ? rs.getTimestamp("updatedAt").toLocalDateTime() : null,
+            rs.getTimestamp("deletedAt") != null ? rs.getTimestamp("deletedAt").toLocalDateTime() : null
+    ));
+}
 }
